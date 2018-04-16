@@ -7,7 +7,12 @@ import {
 	NavbarBrand,
 	Nav,
 	NavItem,
-	NavLink
+	NavLink,
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter
 } from 'reactstrap';
 
 export class NavBar extends React.Component {
@@ -15,8 +20,11 @@ export class NavBar extends React.Component {
 		super(props);
 		this.toggle = this.toggle.bind(this);
 		this.state = {
-			isOpen: false
+			isOpen: false,
+      modal: false
 		};
+    this.toggle = this.toggle.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
 	}
 
 	toggle() {
@@ -24,6 +32,12 @@ export class NavBar extends React.Component {
 			isOpen: !this.state.isOpen
 		});
 	}
+
+  toggleModal(){
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
 
 	render() {
 		return (
@@ -46,13 +60,16 @@ export class NavBar extends React.Component {
             {(this.state.validLogin)?
             <NavLink href="/" onClick={(e)=>this.handleLogout(e)}>Log Out</NavLink>
             :
-            <NavLink href="/" >Log In/Sign Up <loginRegister/></NavLink>
+            <NavLink onClick={(e)=>this.toggleModal()}>Log In/Sign Up
+              <Modal isOpen={this.state.modal}>
+                <ModalHeader toggle={this.toggleModal}>Log In</ModalHeader>
+                  <ModalBody>
+                    <h3>Register</h3>
+                  </ModalBody>
+              </Modal>
+            </NavLink>
 
             }
-
-         
-
-
           </NavItem>
         </Nav>
         </Collapse>
