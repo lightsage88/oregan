@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import Landing from './landing';
 import NavBar from './navBar';
 import About from './about';
+import Register from './register';
 export default class App extends Component {
   render() {
     return (
@@ -14,6 +15,7 @@ export default class App extends Component {
           <NavBar/>
           <Route exact path='/' component={Landing} />
           <Route exact path='/about' component={About} />
+          <Route exact path='/register' component={Register}/>
         </main>
       </Router>
     );

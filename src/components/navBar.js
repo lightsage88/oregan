@@ -1,3 +1,7 @@
+//need to use a dropdown element from reactstrap to make a dropdown for the various types of products
+
+
+
 import React from 'react';
 import {connect} from 'react-redux';
 import {
@@ -14,6 +18,9 @@ import {
   ModalBody,
   ModalFooter
 } from 'reactstrap';
+
+
+import Login from './login';
 
 export class NavBar extends React.Component {
 	constructor(props) {
@@ -51,6 +58,9 @@ export class NavBar extends React.Component {
             <NavLink href="/">Home</NavLink>
           </NavItem>
           <NavItem>
+            <NavLink>Products</NavLink>
+          </NavItem>
+          <NavItem>
             <NavLink href="/about">About</NavLink>
           </NavItem>
           <NavItem>
@@ -64,7 +74,8 @@ export class NavBar extends React.Component {
               <Modal isOpen={this.state.modal}>
                 <ModalHeader toggle={this.toggleModal}>Log In</ModalHeader>
                   <ModalBody>
-                    <h3>Register</h3>
+                    <Login/>
+                    <NavLink href='/register'>Register</NavLink>
                   </ModalBody>
               </Modal>
             </NavLink>
