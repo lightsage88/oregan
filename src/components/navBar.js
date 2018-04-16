@@ -16,11 +16,15 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Dropdown, 
+  DropdownToggle, 
+  DropdownMenu, 
+  DropdownItem
 } from 'reactstrap';
 
-
 import Login from './login';
+import '../staticAssets/shoppingCart.png';
 
 export class NavBar extends React.Component {
 	constructor(props) {
@@ -28,10 +32,12 @@ export class NavBar extends React.Component {
 		this.toggle = this.toggle.bind(this);
 		this.state = {
 			isOpen: false,
-      modal: false
+      modal: false,
+      dropdown: false
 		};
     this.toggle = this.toggle.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.toggleDropdown = this.toggleDropdown.bind(this);
 	}
 
 	toggle() {
@@ -46,6 +52,12 @@ export class NavBar extends React.Component {
     });
   }
 
+  toggleDropdown(){
+    this.setState({
+      dropdown: !this.state.dropdown
+    });
+  }
+
 	render() {
 		return (
       <div>
@@ -57,9 +69,20 @@ export class NavBar extends React.Component {
           <NavItem>
             <NavLink href="/">Home</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink>Products</NavLink>
-          </NavItem>
+          
+          <Dropdown isOpen={this.state.dropdown}
+                    toggle={this.toggleDropdown}>
+            <DropdownToggle caret>
+              Products
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem>Specials</DropdownItem>
+              <DropdownItem>Clothing</DropdownItem>
+              <DropdownItem>Food</DropdownItem>
+              <DropdownItem>Alcohol</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+
           <NavItem>
             <NavLink href="/about">About</NavLink>
           </NavItem>
