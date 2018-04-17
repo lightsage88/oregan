@@ -11,10 +11,12 @@ const initialState = {
 const user = (state=initialState, action) => {
 	switch(action.type) {
 		case 'REGISTER_USER_SUCCESS':
-			return {
-				
-			}
+			return {}
+
+		default:
+			return {}
+			
 	}
 }
 
-export default user
+export default user;
