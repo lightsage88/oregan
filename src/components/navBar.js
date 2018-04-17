@@ -1,5 +1,7 @@
-//need to use a dropdown element from reactstrap to make a dropdown for the various types of products
-
+//should set up a product page and based on subject picked, will populate from database of objects with things that we have
+//for sale, along with 
+//PICTURE, QUANTITY AVAILABLE, DESCRIPTION, PRICE, COLOR(s)
+//need to use the more abstract parts of React-router to accomplish this, look over Thinkful curriculum again!
 
 
 import React from 'react';

@@ -3,14 +3,18 @@ const initialState = {
 	firstName: '',
 	lastName: '',
 	emailAddress: '',
-	phoneNumber: '',
+	cellNumber: '',
 	_id: '',
-	username: '',
 	validLogin: ''
 }
 
 const user = (state=initialState, action) => {
-	return {}
+	switch(action.type) {
+		case 'REGISTER_USER_SUCCESS':
+			return {
+				
+			}
+	}
 }
 
 export default user
