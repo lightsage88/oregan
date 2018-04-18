@@ -15,6 +15,11 @@ const user = (state=initialState, action) => {
 				validRegistration: true
 			})
 
+		case 'REGISTER_USER_FAIL' :
+			return Object.assign({}, state, {
+				validRegistration: false
+			})	
+
 		case 'LOGIN_USER_SUCCESS':
 			return Object.assign({}, state, {
 				token: action.token,

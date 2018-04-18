@@ -22,11 +22,6 @@ class Register extends React.Component {
 			const firstName = e.target.firstName.value;
 			const lastName = e.target.lastName.value;
 			const cellNumber = e.target.cellNumber.value;
-			console.log(emailAddress);
-			console.log(firstName);
-			console.log(lastName);
-			console.log(cellNumber);
-			console.log(password);
 			this.props.dispatch(registerUser(emailAddress, password, firstName, lastName, cellNumber));
 
 		}
@@ -40,12 +35,10 @@ class Register extends React.Component {
 				pwStrength: 'STRONG'
 			})
 		} else if(mediumRegex.test(passwordString)){
-			console.log('medium');
 			this.setState({
 				pwStrength: 'MEDIUM'
 			});
 		} else if(passwordString === '' || !(mediumRegex.test(passwordString))){
-			console.log('nope');
 			this.setState({
 				pwStrength: ''
 			});
@@ -56,7 +49,6 @@ class Register extends React.Component {
 	onChange(e){
 		console.log(e.target);
 		if(e.target.name == 'password') {
-			console.log('kendo');
 			let passwordString = e.target.value;
 			this.checkPasswordStrength(passwordString);
 			this.setState({
@@ -75,13 +67,9 @@ class Register extends React.Component {
 
 
 	render(){
-		console.log(this.props);
-		
-
 	return (
 		<div>
-			{this.props.validRegistration === true && !undefined ? (<span>Registration Successful</span>):(<span>Registration Error</span>)}
-
+			{this.props.validRegistration === true ? (<span>Registration Successful</span>): (this.props.validRegistration === false) ? (<span>Registration Error</span>) : (<span>Please fill the form below</span>)}
 			<h2>Register</h2>
 				<section>
 					<form onSubmit={(e)=>this.handleSubmit(e)}>

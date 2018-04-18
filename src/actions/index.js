@@ -6,6 +6,10 @@ export const registerUserSuccess = (user) => ({
 	user
 });
 
+export const registerUserFail = ()=> ({
+	type: 'REGISTER_USER_FAIL'
+});
+
 export const registerUser = (emailAddress, password, firstName, lastName, cellNumber) => {
 	return (dispatch) => {
 		fetch(`${API_BASE_URL}/api/users/`,
@@ -20,13 +24,15 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 		.then(response => response.json())
 		.then(json => {
 			if(json.code === 422) {
-				// dispatch(loginFail());
+				dispatch(registerUserFail());
 				return;
 			} else {
 				console.log(json);
 				console.log('success');
 				dispatch(registerUserSuccess(json));
-				// window.location = '/';
+				setTimeout(()=>{
+					window.location = '/';
+				}, 2000);
 			}
 		})
 		.catch(error=> {
