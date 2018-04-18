@@ -18,6 +18,7 @@ class Register extends React.Component {
 			console.log('register!');
 			console.log(e.target);
 			const emailAddress = e.target.emailAddress.value;
+			const password = e.target.password.value;
 			const firstName = e.target.firstName.value;
 			const lastName = e.target.lastName.value;
 			const cellNumber = e.target.cellNumber.value;
@@ -25,6 +26,8 @@ class Register extends React.Component {
 			console.log(firstName);
 			console.log(lastName);
 			console.log(cellNumber);
+			console.log(password);
+
 		}
 
 	checkPasswordStrength(passwordString){
@@ -40,8 +43,11 @@ class Register extends React.Component {
 			this.setState({
 				pwStrength: 'MEDIUM'
 			});
-		} else {
+		} else if(passwordString === '' || !(mediumRegex.test(passwordString))){
 			console.log('nope');
+			this.setState({
+				pwStrength: ''
+			});
 		}
 	}
 
@@ -62,6 +68,7 @@ class Register extends React.Component {
 				});
 			}
 		}
+
 
 	}
 
@@ -93,12 +100,12 @@ class Register extends React.Component {
 						</fieldset>
 						<fieldset>
 							<label htmlFor='password'>Password</label>
-							
+							{(this.state.pwStrength === 'MEDIUM')?(<span> {this.state.pwStrength} PASSWORD</span>): (this.state.pwStrength === 'STRONG')?(<span> {this.state.pwStrength} PASSWORD</span>):(<span> </span>)}
 							<Field onChange={(e)=>this.onChange(e)} component='input' className='form-control' type='password' name='password' id='password' required/>
 						</fieldset>
 						<fieldset>
 							<label htmlFor='passwordCheck'>Retype Password</label>
-							<Field onChange={(e)=>this.onChange(e)} component='input' className='form-control' type='text' name='passwordCheck' id='passwordCheck' required/>
+							<Field onChange={(e)=>this.onChange(e)} component='input' className='form-control' type='password' name='passwordCheck' id='passwordCheck' required/>
 						</fieldset>
 						{(this.state.pw === this.state.pw2) ? 
 						  (<button type='submit' className='submitButton' color='info'>Register</button>)

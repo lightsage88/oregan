@@ -24,7 +24,7 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 			} else {
 				console.log(json);
 				dispatch(registerUserSuccess(json));
-				window.location = '/';
+				// window.location = '/';
 			}
 		})
 		.catch(error=> {
