@@ -14,6 +14,7 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 			headers: {
 				'Content-Type':'application/json'
 			},
+			dataType: 'json',
 			body: JSON.stringify({emailAddress, password, firstName, lastName, cellNumber})
 		})
 		.then(response => response.json())
@@ -23,7 +24,8 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 				return;
 			} else {
 				console.log(json);
-				dispatch(registerUserSuccess(json));
+				console.log('success');
+				// dispatch(registerUserSuccess(json));
 				// window.location = '/';
 			}
 		})

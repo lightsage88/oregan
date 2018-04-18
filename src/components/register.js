@@ -27,6 +27,7 @@ class Register extends React.Component {
 			console.log(lastName);
 			console.log(cellNumber);
 			console.log(password);
+			this.props.dispatch(registerUser(emailAddress, password, firstName, lastName, cellNumber));
 
 		}
 
