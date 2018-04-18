@@ -13,6 +13,18 @@ const user = (state=initialState, action) => {
 		case 'REGISTER_USER_SUCCESS':
 			return {}
 
+		case 'LOGIN_USER_SUCCESS':
+			return Object.assign({}, state, {
+				token: action.token,
+				firstName: action.firstName ,
+				lastName: action.lastName ,
+				emailAddress: action.emailAddress ,
+				cellNumber: action.cellNumber ,
+				_id: action._id ,
+				validLogin: true
+
+			})
+
 		default:
 			return {}
 			
