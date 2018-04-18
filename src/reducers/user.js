@@ -11,7 +11,9 @@ const initialState = {
 const user = (state=initialState, action) => {
 	switch(action.type) {
 		case 'REGISTER_USER_SUCCESS':
-			return {}
+			return Object.assign({}, state, {
+				validRegistration: true
+			})
 
 		case 'LOGIN_USER_SUCCESS':
 			return Object.assign({}, state, {

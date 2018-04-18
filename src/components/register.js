@@ -75,11 +75,13 @@ class Register extends React.Component {
 
 
 	render(){
-
+		console.log(this.props);
 		
 
 	return (
 		<div>
+			{this.props.validRegistration === true && !undefined ? (<span>Registration Successful</span>):(<span>Registration Error</span>)}
+
 			<h2>Register</h2>
 				<section>
 					<form onSubmit={(e)=>this.handleSubmit(e)}>
@@ -123,5 +125,9 @@ class Register extends React.Component {
 	}
 }
 
-//Register = connect(mapStateToProps)(Register);
+const mapStateToProps = state => ({
+	validRegistration : state.app.user.validRegistration
+});
+
+Register = connect(mapStateToProps)(Register);
 export default reduxForm({form: 'register'})(Register);
