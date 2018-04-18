@@ -28,12 +28,20 @@ class Register extends React.Component {
 		}
 
 	checkPasswordStrength(passwordString){
-		let strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})");
-									// ("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+		let strongRegex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{10,})");
+		let mediumRegex = new RegExp("^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{8,})");
 		if(strongRegex.test(passwordString)) {
 			console.log('bazinga!');
+			this.setState({
+				pwStrength: 'STRONG'
+			})
+		} else if(mediumRegex.test(passwordString)){
+			console.log('medium');
+			this.setState({
+				pwStrength: 'MEDIUM'
+			});
 		} else {
-			console.log('not yet');
+			console.log('nope');
 		}
 	}
 
@@ -85,6 +93,7 @@ class Register extends React.Component {
 						</fieldset>
 						<fieldset>
 							<label htmlFor='password'>Password</label>
+							
 							<Field onChange={(e)=>this.onChange(e)} component='input' className='form-control' type='password' name='password' id='password' required/>
 						</fieldset>
 						<fieldset>
