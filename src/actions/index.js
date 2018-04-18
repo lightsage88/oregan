@@ -41,3 +41,27 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 		})
 	}
 }
+
+
+
+export const loginUser = (emailAddress, password) => {
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/auth/login/`,
+		{
+			method:'POST',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({emailAddress, password})
+		})
+		.then(response => response.json())
+		.then(json => {
+			console.log('go mandrake go!');
+			console.log(json);
+		})
+		.catch(error => {
+			console.error(error);
+			console.log(error);
+		});
+	}
+}
