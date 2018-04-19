@@ -15,12 +15,11 @@ class Login extends React.Component {
 	attemptLogin(e){
 		e.preventDefault();
 		console.log('submit');
-		let emailAddress = e.target.emailAddress.value;
+		let username = e.target.username.value;
 		let password = e.target.password.value;
-		// console.log(emailAddress);
-		// console.log(password);
-		// console.log(typeof(emailAddress));
-		// this.props.dispatch(loginUser(emailAddress, password));
+		console.log(username);
+		console.log(password);
+		this.props.dispatch(loginUser(username, password));
 		//we need to create an action to be dispatched here
 		//that will get information from a database and populate
 		//our reduxState so the user can have a more personalized 
@@ -36,8 +35,8 @@ class Login extends React.Component {
 					<section>
 						<form onSubmit={(e)=>this.attemptLogin(e)}>
 							<fieldset>
-								<label htmlFor='emailAddress'>Email</label>
-								<Field component='input' className='form-control' type='email' name='emailAddress' id='emailAddress' required/>
+								<label htmlFor='username'>Username</label>
+								<Field component='input' className='form-control' type='text' name='username' id='username' required/>
 							</fieldset>
 							<fieldset>
 								<label htmlFor='password'>Password</label>

@@ -4,9 +4,7 @@ import {connect} from 'react-redux';
 export class Landing extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
 
-		}
 	}
 
 	componentDidMount(){
@@ -20,8 +18,8 @@ export class Landing extends Component {
 //
 		return (
 			<div>
-
-			<h1>Hello{(this.state.firstName === undefined) ? ', friend': (this.state.firstName)}</h1>
+			<h1>Hello, {(this.props.firstName === undefined) ? ' friend': (this.props.firstName)}</h1>
+			{this.props.firstName===undefined ? <span>sign in for a better experience</span> : <span>welcome back!</span>}
 			</div>
 			);
 

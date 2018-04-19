@@ -11,7 +11,34 @@ export const registerUserFail = ()=> ({
 	type: 'REGISTER_USER_FAIL'
 });
 
-export const registerUser = (emailAddress, password, firstName, lastName, cellNumber) => {
+export const loginUserSuccess = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber) => ({
+	type: 'LOGIN_USER_SUCCESS',
+	_id,
+	authToken,
+	username,
+	emailAddress,
+	firstName,
+	lastName,
+	cellNumber
+});
+
+export const persistUserData = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber) => ({
+	type: 'PERSIST_USER_DATA',
+	_id,
+	authToken,
+	username,
+	emailAddress,
+	firstName,
+	lastName,
+	cellNumber
+});
+
+
+export const logOut = () => ({
+	type: 'LOG_OUT'
+});
+
+export const registerUser = (username, emailAddress, password, firstName, lastName, cellNumber) => {
 	return (dispatch) => {
 		fetch(`${API_BASE_URL}/api/users`,
 		{
@@ -20,7 +47,7 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 				'Content-Type':'application/json'
 			},
 			dataType: 'json',
-			body: JSON.stringify({emailAddress, password, firstName, lastName, cellNumber})
+			body: JSON.stringify({username, emailAddress, password, firstName, lastName, cellNumber})
 		})
 		.then(response => response.json())
 		.then(json => {
@@ -42,4 +69,77 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 		})
 	}
 }
+
+
+
+export const loginUser = (username, password) => {
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/auth/login`,
+		{
+			method:'POST',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({username, password})
+		})
+		.then(response => response.json())
+		.then(json => {
+			console.log('go mandrake go!');
+			console.log(json);
+			const {authToken} = json;
+			const {userData} = json;
+			const username = userData.username;
+			const firstName = userData.firstName;
+			const lastName = userData.lastName;
+			const cellNumber = userData.cellNumber;
+			const emailAddress = userData.emailAddress;
+			const _id = userData._id;
+			localStorage.setItem('authToken', authToken);
+			localStorage.setItem('username', username);
+			localStorage.setItem('firstName', firstName);
+			localStorage.setItem('lastName', lastName);
+			localStorage.setItem('emailAddress', emailAddress);
+			localStorage.setItem('cellNumber', cellNumber);
+			localStorage.setItem('_id', _id);
+			localStorage.setItem('validLogin', true);
+			dispatch(loginUserSuccess(_id, authToken, username, emailAddress, firstName, lastName, cellNumber));
+			window.location = '/';
+		})
+		.catch(error => {
+			console.error(error);
+			console.log(error);
+		});
+	}
+}
+
+export const persistData = (_id) => {
+	console.log('persistData running from action index');
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/users/persist/`, 
+			{
+			method: 'POST',
+			headers:{
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({_id})
+		})
+		.then(response => response.json())
+		.then(json => {
+			const userData = json;
+			const authToken = localStorage.getItem('authToken');
+			const firstName = userData.firstName;
+			const lastName = userData.lastName;
+			const cellNumber = userData.cellNumber;
+			const emailAddress = userData.emailAddress;
+			const _id = userData._id;
+			const username = userData.username;
+			dispatch(persistUserData(_id, authToken, username, emailAddress, firstName, lastName, cellNumber));
+		})
+		.catch(error => console.log(error));
+	}
+}
+
+//we need a simple action that will set the state to include
+//what was pulled from the database and also set the
+//validLogin to true, so that the logout button will appear
 

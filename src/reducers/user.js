@@ -1,5 +1,6 @@
 const initialState = {
 	token: '',
+	username: '',
 	firstName: '',
 	lastName: '',
 	emailAddress: '',
@@ -22,15 +23,30 @@ const user = (state=initialState, action) => {
 
 		case 'LOGIN_USER_SUCCESS':
 			return Object.assign({}, state, {
-				token: action.token,
+				_id: action._id,
+				authToken: action.authToken,
+				username: action.username,
+				emailAddress: action.emailAddress,
 				firstName: action.firstName ,
 				lastName: action.lastName ,
-				emailAddress: action.emailAddress ,
 				cellNumber: action.cellNumber ,
-				_id: action._id ,
 				validLogin: true
-
 			})
+
+		case 'PERSIST_USER_DATA':
+			return Object.assign({}, state, {
+				_id: action._id,
+				authToken: action.authToken,
+				username: action.username,
+				emailAddress: action.emailAddress,
+				firstName: action.firstName ,
+				lastName: action.lastName ,
+				cellNumber: action.cellNumber ,
+				validLogin: true
+			})
+
+		case 'LOG_OUT':
+			return {}
 
 		default:
 			return {}

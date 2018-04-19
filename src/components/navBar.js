@@ -24,7 +24,8 @@ import {
   DropdownMenu, 
   DropdownItem
 } from 'reactstrap';
-
+import {persistData} from '../actions/index';
+import {logOut} from '../actions/index';
 import Login from './login';
 import '../staticAssets/shoppingCart.png';
 
@@ -42,6 +43,17 @@ export class NavBar extends React.Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
 	}
 
+  componentDidMount(){
+    if(localStorage.getItem('_id')) {
+      console.log('theres an id here, yo');
+      let id = localStorage.getItem('_id');
+      console.log(id);
+      this.props.dispatch(persistData(id));
+    } else {
+      console.log('no id ');
+    }
+  }
+
 	toggle() {
 		this.setState({
 			isOpen: !this.state.isOpen
@@ -58,6 +70,10 @@ export class NavBar extends React.Component {
     this.setState({
       dropdown: !this.state.dropdown
     });
+  }
+
+  handleLogout(e) {
+    localStorage.clear();
   }
 
 	render() {
@@ -88,11 +104,21 @@ export class NavBar extends React.Component {
           <NavItem>
             <NavLink href="/about">About</NavLink>
           </NavItem>
+          {
+            localStorage.getItem('validLogin') ?
+             <NavItem> 
+              <NavLink>
+                Account
+              </NavLink>
+             </NavItem>
+             :
+             null
+          }
           <NavItem>
             <NavLink href="/cart">Cart</NavLink>
           </NavItem>
           <NavItem>
-            {(this.state.validLogin)?
+            {localStorage.getItem('validLogin') ?
             <NavLink href="/" onClick={(e)=>this.handleLogout(e)}>Log Out</NavLink>
             :
             <NavLink onClick={(e)=>this.toggleModal()}>Log In/Sign Up
@@ -114,9 +140,5 @@ export class NavBar extends React.Component {
     );
 	}
 }
-
-const mapStateToProps = state => ({
-  validLogin: state.app.user.validLogin
-});
 
 export default connect()(NavBar);

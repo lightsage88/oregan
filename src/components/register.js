@@ -17,12 +17,14 @@ class Register extends React.Component {
 			e.preventDefault();
 			console.log('register!');
 			console.log(e.target);
+			const username = e.target.username.value;
 			const emailAddress = e.target.emailAddress.value;
 			const password = e.target.password.value;
 			const firstName = e.target.firstName.value;
 			const lastName = e.target.lastName.value;
 			const cellNumber = e.target.cellNumber.value;
-			this.props.dispatch(registerUser(emailAddress, password, firstName, lastName, cellNumber));
+			console.log(username);
+			this.props.dispatch(registerUser(username, emailAddress, password, firstName, lastName, cellNumber));
 
 		}
 
@@ -88,6 +90,10 @@ class Register extends React.Component {
 						<fieldset>
 							<label htmlFor='emailAddress'>Email Address</label>
 							<Field component='input' className='form-control' type='email' name='emailAddress' id='emailAddress' required/>
+						</fieldset>
+						<fieldset>
+							<label htmlFor='username'>Username</label>
+							<Field component='input' className='form-control' type='text' name='username' id='username' required/>
 						</fieldset>
 						<fieldset>
 							<label htmlFor='password'>Password</label>
