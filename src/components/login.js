@@ -17,10 +17,10 @@ class Login extends React.Component {
 		console.log('submit');
 		let emailAddress = e.target.emailAddress.value;
 		let password = e.target.password.value;
-		console.log(emailAddress);
-		console.log(password);
-		console.log(typeof(emailAddress));
-		this.props.dispatch(loginUser(emailAddress, password));
+		// console.log(emailAddress);
+		// console.log(password);
+		// console.log(typeof(emailAddress));
+		// this.props.dispatch(loginUser(emailAddress, password));
 		//we need to create an action to be dispatched here
 		//that will get information from a database and populate
 		//our reduxState so the user can have a more personalized 

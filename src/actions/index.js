@@ -1,6 +1,7 @@
 require('es6-promise').polyfill();
 const {API_BASE_URL} = require('../config');
 
+
 export const registerUserSuccess = (user) => ({
 	type: 'REGISTER_USER_SUCCESS',
 	user
@@ -12,7 +13,7 @@ export const registerUserFail = ()=> ({
 
 export const registerUser = (emailAddress, password, firstName, lastName, cellNumber) => {
 	return (dispatch) => {
-		fetch(`${API_BASE_URL}/api/users/`,
+		fetch(`${API_BASE_URL}/api/users`,
 		{
 			method: 'POST',
 			headers: {
@@ -42,26 +43,3 @@ export const registerUser = (emailAddress, password, firstName, lastName, cellNu
 	}
 }
 
-
-
-export const loginUser = (emailAddress, password) => {
-	return (dispatch) => {
-		fetch(`${API_BASE_URL}/api/auth/login/`,
-		{
-			method:'POST',
-			headers: {
-				'Content-Type':'application/json'
-			},
-			body: JSON.stringify({emailAddress, password})
-		})
-		.then(response => response.json())
-		.then(json => {
-			console.log('go mandrake go!');
-			console.log(json);
-		})
-		.catch(error => {
-			console.error(error);
-			console.log(error);
-		});
-	}
-}
