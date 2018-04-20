@@ -8,7 +8,7 @@ import NavBar from './navBar';
 import About from './about';
 import Register from './register';
 import Account from './account';
-
+import ProductList from './productList';
 export default class App extends Component {
  
   
@@ -22,6 +22,7 @@ export default class App extends Component {
           <Route exact path='/about' component={About} />
           <Route exact path='/register' component={Register}/>
           <Route exact path='/account' component={Account}/>
+          <Route path='/products/:productId' component={ProductList}/>
         </main>
       </Router>
     );

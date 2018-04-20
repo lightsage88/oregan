@@ -94,10 +94,10 @@ export class NavBar extends React.Component {
               Products
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem>Specials</DropdownItem>
-              <DropdownItem>Clothing</DropdownItem>
-              <DropdownItem>Food</DropdownItem>
-              <DropdownItem>Alcohol</DropdownItem>
+              <DropdownItem href='/products/specials'>Specials</DropdownItem>
+              <DropdownItem href='/products/clothing'>Clothing</DropdownItem>
+              <DropdownItem href='/products/food'>Food</DropdownItem>
+              <DropdownItem href='/products/alcohol'>Alcohol</DropdownItem>
             </DropdownMenu>
           </Dropdown>
 
