@@ -115,7 +115,7 @@ export const loginUser = (username, password) => {
 export const persistData = (_id) => {
 	console.log('persistData running from action index');
 	return (dispatch) => {
-		fetch(`${API_BASE_URL}/api/users/persist/`, 
+		fetch(`${API_BASE_URL}/api/users/persist`, 
 			{
 			method: 'POST',
 			headers:{
@@ -139,7 +139,30 @@ export const persistData = (_id) => {
 	}
 }
 
-//we need a simple action that will set the state to include
-//what was pulled from the database and also set the
-//validLogin to true, so that the logout button will appear
+//a thunk action that sends a request with the productType from the productList.js file
+//to 
+//productType and pageType have an interchangeable relationship at the moment below
+export const retrieveProducts = (productType) => {
+	console.log('retrieveProducts running...');
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/products/retrieve`,
+		{
+			method: "POST",
+			headers: {
+				'Content-Type' : 'application/json'
+			},
+			body: JSON.stringify({productType})
+		})
+		.then(response => response.json())
+		.then(json =>{
+			console.log(json);
+		})
+		.catch(err =>{
+			console.log(err);
+			console.error(err);
+
+		})
+	}
+}
+
 

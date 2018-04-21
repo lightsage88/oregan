@@ -1,35 +1,28 @@
 import React from 'react';
 //pagination from reactstrap
 import ProductCard from './productCard';
+import {retrieveProducts} from '../actions/index';
+import {connect} from 'react-redux';
 
-export default class ProductList extends React.Component {
+export class ProductList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			search : false
-		}
+		};
+		// this.determineSearchType = this.determineSearchType.bind(this);
 	}
 
 	componentDidMount(){
-		// this.addProductCards(); need a component that helps differentiate whether this is a search or a category find
-		this.determineSearchType();
-	}
-
-	determineSearchType(){
 		if(this.props.match.params.productId) {
-			this.addProductCards();
+			console.log(this.props);
+					let pageType = this.props.match.params.productId;
+					this.props.dispatch(retrieveProducts(pageType));
 		} else {
 			//do the searchType
 		}
-
 	}
 
-	addProductCards(){
-		console.log('addProductCards running...');
-		let pageType = this.props.match.params.productId;
-		console.log(pageType);
-		//dispatch an action to get the kinds of products you want in the reduxState
-	}
 
 	render(){
 		console.log(this.props);
@@ -41,3 +34,7 @@ export default class ProductList extends React.Component {
 		);
 	}
 }
+
+
+
+export default connect()(ProductList);

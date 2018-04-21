@@ -48,6 +48,7 @@ export class NavBar extends React.Component {
       console.log('theres an id here, yo');
       let id = localStorage.getItem('_id');
       console.log(id);
+      console.log(this.props);
       this.props.dispatch(persistData(id));
     } else {
       console.log('no id ');
