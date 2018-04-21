@@ -33,7 +33,7 @@ const user = (state=initialState, action) => {
 				validLogin: true
 			})
 
-		case 'PERSIST_USER_DATA':
+		case 'PERSIST_USER_DATA' || 'STOCK_SHELF':
 			return Object.assign({}, state, {
 				_id: action._id,
 				authToken: action.authToken,

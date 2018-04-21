@@ -33,6 +33,11 @@ export const persistUserData = (_id, authToken, username, emailAddress, firstNam
 	cellNumber
 });
 
+export const stockShelf = (set) => ({
+	type: 'STOCK_SHELF',
+	set
+});
+
 
 export const logOut = () => ({
 	type: 'LOG_OUT'
@@ -156,6 +161,8 @@ export const retrieveProducts = (productType) => {
 		.then(response => response.json())
 		.then(json =>{
 			console.log(json);
+			let set = json;
+			dispatch(stockShelf(set));
 		})
 		.catch(err =>{
 			console.log(err);
