@@ -11,7 +11,7 @@ export const registerUserFail = ()=> ({
 	type: 'REGISTER_USER_FAIL'
 });
 
-export const loginUserSuccess = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber) => ({
+export const loginUserSuccess = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases) => ({
 	type: 'LOGIN_USER_SUCCESS',
 	_id,
 	authToken,
@@ -19,10 +19,12 @@ export const loginUserSuccess = (_id, authToken, username, emailAddress, firstNa
 	emailAddress,
 	firstName,
 	lastName,
-	cellNumber
+	cellNumber,
+	cart,
+	pastPurchases
 });
 
-export const persistUserData = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber) => ({
+export const persistUserData = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases) => ({
 	type: 'PERSIST_USER_DATA',
 	_id,
 	authToken,
@@ -30,12 +32,19 @@ export const persistUserData = (_id, authToken, username, emailAddress, firstNam
 	emailAddress,
 	firstName,
 	lastName,
-	cellNumber
+	cellNumber,
+	cart,
+	pastPurchases
 });
 
 export const stockShelf = (set) => ({
 	type: 'STOCK_SHELF',
 	set
+});
+
+export const putItemInCart = (item) => ({
+	type: 'PUT_ITEM_IN_CART',
+	item
 });
 
 
@@ -99,6 +108,8 @@ export const loginUser = (username, password) => {
 			const cellNumber = userData.cellNumber;
 			const emailAddress = userData.emailAddress;
 			const _id = userData._id;
+			const cart = userData.cart;
+			const pastPurchases = userData.pastPurchases;
 			localStorage.setItem('authToken', authToken);
 			localStorage.setItem('username', username);
 			localStorage.setItem('firstName', firstName);
@@ -107,7 +118,7 @@ export const loginUser = (username, password) => {
 			localStorage.setItem('cellNumber', cellNumber);
 			localStorage.setItem('_id', _id);
 			localStorage.setItem('validLogin', true);
-			dispatch(loginUserSuccess(_id, authToken, username, emailAddress, firstName, lastName, cellNumber));
+			dispatch(loginUserSuccess(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases));
 			window.location = '/';
 		})
 		.catch(error => {
@@ -138,7 +149,9 @@ export const persistData = (_id) => {
 			const emailAddress = userData.emailAddress;
 			const _id = userData._id;
 			const username = userData.username;
-			dispatch(persistUserData(_id, authToken, username, emailAddress, firstName, lastName, cellNumber));
+			const cart = userData.cart;
+			const pastPurchases = userData.pastPurchases;
+			dispatch(persistUserData(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases));
 		})
 		.catch(error => console.log(error));
 	}
@@ -171,5 +184,6 @@ export const retrieveProducts = (productType) => {
 		})
 	}
 }
+
 
 

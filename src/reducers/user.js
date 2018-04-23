@@ -6,7 +6,9 @@ const initialState = {
 	emailAddress: '',
 	cellNumber: '',
 	_id: '',
-	validLogin: ''
+	validLogin: '',
+	cart: [],
+	pastPurchases: []
 }
 
 const user = (state=initialState, action) => {
@@ -30,7 +32,9 @@ const user = (state=initialState, action) => {
 				firstName: action.firstName ,
 				lastName: action.lastName ,
 				cellNumber: action.cellNumber ,
-				validLogin: true
+				validLogin: true,
+				cart : action.cart,
+				pastPurchases: action.pastPurchases
 			})
 
 		case 'PERSIST_USER_DATA' || 'STOCK_SHELF':
@@ -42,8 +46,14 @@ const user = (state=initialState, action) => {
 				firstName: action.firstName ,
 				lastName: action.lastName ,
 				cellNumber: action.cellNumber ,
-				validLogin: true
+				validLogin: true,
+				cart: action.cart,
+				pastPurchases: action.pastPurchases
+				
 			})
+
+		// case 'PUT_ITEM_IN_CART':
+		// 	return  Object.assign({}, state, {...state, cart: action.item})
 
 		case 'LOG_OUT':
 			return {}

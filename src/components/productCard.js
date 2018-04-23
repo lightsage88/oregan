@@ -1,69 +1,92 @@
 import React from 'react';
-import {Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, CardLink, Button} from 'reactstrap';
+import {Card, 
+	CardImg, 
+	CardText, 
+	CardBody,
+  CardTitle, 
+  CardSubtitle, 
+  CardLink, 
+  Button,
+Form,
+FormGroup,
+Label,
+Input} from 'reactstrap';
 
-export default function ProductCard(props){
-	const amounts = props.details.productStock;
-	console.log(amounts);
+import {connect} from 'react-redux';
 
-	console.log('help me obiwan');
-	console.log(props);
-	
+import {putItemInCart} from '../actions/index';
+
+export class ProductCard extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			quantity: 0,
+			product: ''
+		}
+	}
+
+	onChange(e){
+		console.log('onChange running');
+		console.log(e.target.value);
+		this.setState({
+			quantity : e.target.value,
+			product: this.props.details
+		});
+	}
+
+	addToCart(e, quantityChoice, productInfo){
+		// e.preventDefault();
+		console.log('addToCart running');
+		console.log(quantityChoice);
+		console.log(productInfo);
+		//must dispatch an action that will populate the cart with our goods!
+		let item = [];
+		item.push(quantityChoice);
+		item.push(productInfo);
+		console.log(item);
+		this.props.dispatch(putItemInCart(item));
+
+
+				
+
+	}
+
+
+	render(){
+		let quantityChoice = this.state.quantity;
+		let productInfo = this.state.product;
+		console.log(quantityChoice);
 		return (
 		<div>
 			<Card>
 				<CardBody>
-					<CardTitle>{props.details.productName}</CardTitle>
-					<CardSubtitle>{props.details.companyName}</CardSubtitle>
+					<CardTitle>{this.props.details.productName}</CardTitle>
+					<CardSubtitle>{this.props.details.companyName}</CardSubtitle>
 					<CardImg src='../staticAssets/shoppingCard.png'/>
 					<CardText>
-						{props.details.productDescription}
+						{this.props.details.productDescription}
 					</CardText>
 					<ul>
-							<li>COST: <span>{props.details.productPrice}</span></li>
-							<li>SHIPPING: <span>{props.details.shippingPrice}</span></li>
-							<li>STOCK: <span>{props.details.productStock}</span></li>
+							<li>COST: <span>{this.props.details.productPrice}</span></li>
+							<li>SHIPPING: <span>{this.props.details.shippingPrice}</span></li>
+							<li>STOCK: <span>{this.props.details.productStock}</span></li>
 						</ul>
-					<section>
-					<label for='quantity'>Qty: </label>
-					<input id='quantity' placeholder='1' min=
-					'1' max={props.details.productStock} type='number'></input>
-					<Button>add to cart</Button>
-					</section>
+					<Form>
+						<FormGroup>
+						<Label for='quantity'>Qty: </Label>
+						<Input onChange={(e)=>this.onChange(e)} id='quantity' name='quantity' placeholder='1' min=
+						'1' max={this.props.details.productStock} type='number'></Input>
+						
+						</FormGroup>
+
+						<Button onClick={(e)=>this.addToCart(e, quantityChoice, productInfo)}>add to cart</Button>
+					</Form>
 				</CardBody>
 			</Card>
 		</div>
 	);
+ }
 }
 
 
-// export default class ProductCard extends React.Component {
-// 	constructor(props) {
-// 		super(props);
-// 	}
-
-
-// 	render() {
-
-// 	console.log('help me obiwan');
-// 	console.log(this.props);
-// 		return (
-// 		<div>
-// 			<Card>
-// 				<CardBody>
-// 					<CardTitle>Title of the product ${this.props.productName}</CardTitle>
-// 					<CardSubtitle>name of the product's company</CardSubtitle>
-// 					<CardImg src='../staticAssets/shoppingCard.png'/>
-// 					<CardText>
-// 						product description
-// 						<span>productPrice</span>
-// 						<span>shippingPrice</span>
-// 						<span>productStock</span>
-// 					</CardText>
-// 					<Button>add to cart</Button>
-// 				</CardBody>
-// 			</Card>
-// 		</div>
-// 		);
-// 	}
-// }
+export default connect()(ProductCard);
