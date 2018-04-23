@@ -3,10 +3,12 @@ import {Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, CardLink, Button} from 'reactstrap';
 
 export default function ProductCard(props){
-	
+	const amounts = props.details.productStock;
+	console.log(amounts);
 
 	console.log('help me obiwan');
 	console.log(props);
+	
 		return (
 		<div>
 			<Card>
@@ -16,13 +18,18 @@ export default function ProductCard(props){
 					<CardImg src='../staticAssets/shoppingCard.png'/>
 					<CardText>
 						{props.details.productDescription}
-						<ul>
+					</CardText>
+					<ul>
 							<li>COST: <span>{props.details.productPrice}</span></li>
 							<li>SHIPPING: <span>{props.details.shippingPrice}</span></li>
 							<li>STOCK: <span>{props.details.productStock}</span></li>
 						</ul>
-					</CardText>
+					<section>
+					<label for='quantity'>Qty: </label>
+					<input id='quantity' placeholder='1' min=
+					'1' max={props.details.productStock} type='number'></input>
 					<Button>add to cart</Button>
+					</section>
 				</CardBody>
 			</Card>
 		</div>
