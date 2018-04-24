@@ -3,7 +3,7 @@ node_js: node
 deploy:
   provider: heroku
   api_key:
-    secure: bb53dccb-5bd5-410a-83ef-33444eb056c7
+    secure: 1d3439cc-0634-4b97-be9a-a3e053b03b76
   app: afternoon-thicket-53540
   on:
     repo: lightsage88/oregan
