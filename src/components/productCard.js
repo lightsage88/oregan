@@ -13,9 +13,10 @@ Label,
 Input} from 'reactstrap';
 
 import {connect} from 'react-redux';
+import {retrieveProducts} from '../actions/index';
 
-import {putItemInCart} from '../actions/index';
-
+import {putItemInCart2} from '../actions/index';
+import {putItemInCart1} from '../actions/index';
 export class ProductCard extends React.Component{
 	constructor(props){
 		super(props);
@@ -35,16 +36,20 @@ export class ProductCard extends React.Component{
 	}
 
 	addToCart(e, quantityChoice, productInfo){
-		// e.preventDefault();
+		e.preventDefault();
+		console.log(this.props);
 		console.log('addToCart running');
 		console.log(quantityChoice);
 		console.log(productInfo);
 		//must dispatch an action that will populate the cart with our goods!
+		let pageType = this.props.pageType;
 		let item = [];
 		item.push(quantityChoice);
 		item.push(productInfo);
 		console.log(item);
-		this.props.dispatch(putItemInCart(item));
+		let _id= localStorage.getItem('_id');
+		this.props.dispatch(putItemInCart1(_id, item));
+		this.props.dispatch(retrieveProducts(pageType));
 
 
 				

@@ -8,15 +8,19 @@ export class ProductList extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			search : false
+			search : false,
+			pageType: this.props.match.params.productId
 		};
 		// this.determineSearchType = this.determineSearchType.bind(this);
 	}
 
 	componentDidMount(){
 		if(this.props.match.params.productId) {
+			console.log('you came to a section');
 			console.log(this.props);
-					let pageType = this.props.match.params.productId;
+					
+					let pageType= this.state.pageType;
+					console.log(pageType);
 					this.props.dispatch(retrieveProducts(pageType));
 		} else {
 			//do the searchType
@@ -35,7 +39,7 @@ export class ProductList extends React.Component {
 		console.log(inventory);
 		const items = inventory.map((item, index)=>
 			<div key={index}>
-				<ProductCard details={item}/>
+				<ProductCard details={item} pageType={this.state.pageType}/>
 			</div>
 		);
 		

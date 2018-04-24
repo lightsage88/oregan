@@ -37,7 +37,7 @@ const user = (state=initialState, action) => {
 				pastPurchases: action.pastPurchases
 			})
 
-		case 'PERSIST_USER_DATA' || 'STOCK_SHELF':
+		case 'PERSIST_USER_DATA':
 			return Object.assign({}, state, {
 				_id: action._id,
 				authToken: action.authToken,
@@ -52,8 +52,11 @@ const user = (state=initialState, action) => {
 				
 			})
 
-		// case 'PUT_ITEM_IN_CART':
-		// 	return  Object.assign({}, state, {...state, cart: action.item})
+		case 'PUT_ITEM_IN_CART2':
+			return  {...state, cart: this.cart.push(action.item)}
+
+		case 'STOCK_SHELF':
+			return {...state}
 
 		case 'LOG_OUT':
 			return {}

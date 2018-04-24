@@ -50,9 +50,11 @@ export class NavBar extends React.Component {
       console.log(id);
       console.log(this.props);
       this.props.dispatch(persistData(id));
+
     } else {
       console.log('no id ');
     }
+
   }
 
 	toggle() {

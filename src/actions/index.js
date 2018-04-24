@@ -42,8 +42,8 @@ export const stockShelf = (set) => ({
 	set
 });
 
-export const putItemInCart = (item) => ({
-	type: 'PUT_ITEM_IN_CART',
+export const putItemInCart2 = (item) => ({
+	type: 'PUT_ITEM_IN_CART2',
 	item
 });
 
@@ -185,5 +185,29 @@ export const retrieveProducts = (productType) => {
 	}
 }
 
+export const putItemInCart1 = (_id, item) => {
+	console.log('putItemInCart1 running...');
 
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/users/itemIntoCart`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({_id, item})
+		})
+		.then(response => response.json())
+		.then(json=> {
+			console.log(json);
+
+			dispatch(putItemInCart2(_id))
+			//mocho!
+		})
+		.catch(err => {
+			console.log(err);
+			console.error(err);
+		})
+	}
+}
 
