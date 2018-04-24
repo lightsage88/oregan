@@ -201,6 +201,9 @@ export const putItemInCart1 = (_id, item, pageType) => {
 			console.log(json);
 			dispatch(persistData(_id));
 			// dispatch(putItemInCart2(item));
+			
+		})
+		.then(()=>{
 			dispatch(retrieveProducts(pageType));
 		})
 		.catch(err => {

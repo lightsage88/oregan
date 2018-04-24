@@ -11,7 +11,7 @@ const shelf = (state=initialState, action) => {
 			// console.log(action.set);
 			// return Object.assign({}, ...state, action.set)
 			return 	action.set
-		case 'PUT_ITEM_IN_CART2' || 'PERSIST_USER_DATA':
+		case 'PERSIST_USER_DATA':
 			return {...state}
 
 
