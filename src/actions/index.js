@@ -185,9 +185,8 @@ export const retrieveProducts = (productType) => {
 	}
 }
 
-export const putItemInCart1 = (_id, item) => {
+export const putItemInCart1 = (_id, item, pageType) => {
 	console.log('putItemInCart1 running...');
-
 	return (dispatch) => {
 		fetch(`${API_BASE_URL}/api/users/itemIntoCart`,
 		{
@@ -200,9 +199,9 @@ export const putItemInCart1 = (_id, item) => {
 		.then(response => response.json())
 		.then(json=> {
 			console.log(json);
-
-			dispatch(putItemInCart2(_id))
-			//mocho!
+			dispatch(persistData(_id));
+			// dispatch(putItemInCart2(item));
+			dispatch(retrieveProducts(pageType));
 		})
 		.catch(err => {
 			console.log(err);

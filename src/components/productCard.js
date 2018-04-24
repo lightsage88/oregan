@@ -48,8 +48,8 @@ export class ProductCard extends React.Component{
 		item.push(productInfo);
 		console.log(item);
 		let _id= localStorage.getItem('_id');
-		this.props.dispatch(putItemInCart1(_id, item));
-		this.props.dispatch(retrieveProducts(pageType));
+		this.props.dispatch(putItemInCart1(_id, item, pageType));
+		// this.props.dispatch(retrieveProducts(pageType), 10);
 
 
 				
