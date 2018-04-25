@@ -52,8 +52,8 @@ const user = (state=initialState, action) => {
 				
 			})
 
-		case 'PUT_ITEM_IN_CART2':
-			return  {...state, cart: this.cart.push(action.item)}
+		// case 'PUT_ITEM_IN_CART2':
+		// 	return  {...state, cart: this.cart.push(action.item)}
 
 		case 'STOCK_SHELF':
 			return {...state}

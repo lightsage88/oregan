@@ -42,10 +42,10 @@ export const stockShelf = (set) => ({
 	set
 });
 
-export const putItemInCart2 = (item) => ({
-	type: 'PUT_ITEM_IN_CART2',
-	item
-});
+// export const putItemInCart2 = (item) => ({
+// 	type: 'PUT_ITEM_IN_CART2',
+// 	item
+// });
 
 
 export const logOut = () => ({
@@ -185,8 +185,9 @@ export const retrieveProducts = (productType) => {
 	}
 }
 
-export const putItemInCart1 = (_id, item, pageType) => {
+export const putItemInCart1 = (cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType) => {
 	console.log('putItemInCart1 running...');
+
 	return (dispatch) => {
 		fetch(`${API_BASE_URL}/api/users/itemIntoCart`,
 		{
@@ -194,14 +195,41 @@ export const putItemInCart1 = (_id, item, pageType) => {
 			headers: {
 				'Content-Type':'application/json'
 			},
-			body: JSON.stringify({_id, item})
+			body: JSON.stringify({cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType})
 		})
 		.then(response => response.json())
 		.then(json=> {
 			console.log(json);
-			dispatch(persistData(_id));
+			dispatch(persistData(userid));
 			// dispatch(putItemInCart2(item));
 			
+		})
+		.then(()=>{
+			dispatch(retrieveProducts(pageType));
+		})
+		.catch(err => {
+			console.log(err);
+			console.error(err);
+		})
+	}
+}
+
+export const putItemInCart2 = (cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType) => {
+	console.log('putItemInCart2 running...');
+	
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/users/followingItems`,
+		{
+			method: 'PUT',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType})
+		})
+		.then(response => response.json())
+		.then(json=> {
+			console.log(json);
+			dispatch(persistData(userid));
 		})
 		.then(()=>{
 			dispatch(retrieveProducts(pageType));

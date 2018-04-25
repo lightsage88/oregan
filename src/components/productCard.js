@@ -21,8 +21,18 @@ export class ProductCard extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			quantity: 0,
-			product: ''
+			quantityOrdered: 0,
+			companyName: '',
+			productName: '',
+			productDescription: '',
+			productRating: '',
+			productPrice: '',
+			shippingPrice:'',
+			productStock:'',
+			productType: '',
+			id: '',
+			quantityUnavailable: false
+
 		}
 	}
 
@@ -30,26 +40,55 @@ export class ProductCard extends React.Component{
 		console.log('onChange running');
 		console.log(e.target.value);
 		this.setState({
-			quantity : e.target.value,
-			product: this.props.details
+			quantityOrdered : e.target.value,
+			companyName: this.props.details.companyName,
+			id: this.props.details.id,
+			productDescription: this.props.details.productDescription,
+			productName: this.props.details.productName,
+			productPrice: this.props.details.productPrice,
+			shippingPrice: this.props.details.shippingPrice,
+			productRating: this.props.details.productRating,
+			productStock: this.props.details.productStock,
+			productType: this.props.details.productType
 		});
+		if(e.target.value > this.props.details.productStock) {
+			console.log('too much, hooman');
+			this.setState({
+				quantityUnavailable: true
+			});
+		} else {
+			this.setState({
+				quantityUnavailable: false
+			});
+		}
+
 	}
 
-	addToCart(e, quantityChoice, productInfo){
+	addToCart(e){
 		e.preventDefault();
-		console.log(this.props);
-		console.log('addToCart running');
-		console.log(quantityChoice);
-		console.log(productInfo);
-		//must dispatch an action that will populate the cart with our goods!
+		let cart = this.props.currentCart;
+
+		let cartLength = cart.length;
 		let pageType = this.props.pageType;
-		let item = [];
-		item.push(quantityChoice);
-		item.push(productInfo);
-		console.log(item);
-		let _id= localStorage.getItem('_id');
-		this.props.dispatch(putItemInCart1(_id, item, pageType));
-		// this.props.dispatch(retrieveProducts(pageType), 10);
+		let userid= localStorage.getItem('_id');
+		let quantityOrdered = this.state.quantityOrdered;
+		let companyName = this.props.details.companyName;
+		let id = this.props.details.id;
+		let productDescription= this.props.details.productDescription;
+		let productName= this.props.details.productName;
+		let productPrice= this.props.details.productPrice;
+		let shippingPrice= this.props.details.shippingPrice;
+		let productRating= this.props.details.productRating;
+		let productStock= this.props.details.productStock;
+		let productType= this.props.details.productType;
+
+		if(cartLength === 0){
+		this.props.dispatch(putItemInCart1(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType));
+		} else {
+			console.log('cartLength is more than zero');
+		this.props.dispatch(putItemInCart2(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType))	
+		}
+		// // this.props.dispatch(retrieveProducts(pageType), 10);
 
 
 				
@@ -58,9 +97,9 @@ export class ProductCard extends React.Component{
 
 
 	render(){
-		let quantityChoice = this.state.quantity;
-		let productInfo = this.state.product;
-		console.log(quantityChoice);
+		// let quantityChoice = this.state.quantityOrdered;
+		// let productInfo = this.state.product;
+		// console.log(quantityChoice);
 		return (
 		<div>
 			<Card>
@@ -83,8 +122,12 @@ export class ProductCard extends React.Component{
 						'1' max={this.props.details.productStock} type='number'></Input>
 						
 						</FormGroup>
-
-						<Button onClick={(e)=>this.addToCart(e, quantityChoice, productInfo)}>add to cart</Button>
+						{
+						!this.state.quantityUnavailable ? 
+						(<Button onClick={(e)=>this.addToCart(e)}>add to cart</Button>)
+						:
+						(<Button disabled>unavailable</Button>)
+						}
 					</Form>
 				</CardBody>
 			</Card>
@@ -93,5 +136,7 @@ export class ProductCard extends React.Component{
  }
 }
 
-
-export default connect()(ProductCard);
+const mapStateToProps = state => ({
+	currentCart : state.app.user.cart
+});
+export default connect(mapStateToProps)(ProductCard);
