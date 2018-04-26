@@ -82,14 +82,45 @@ export class ProductCard extends React.Component{
 		let productStock= this.props.details.productStock;
 		let productType= this.props.details.productType;
 
-		// if(cartLength === 0){
-		this.props.dispatch(putItemInCart1(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType));
-		// } else {
-		// 	console.log('cartLength is more than zero');
-		// this.props.dispatch(putItemInCart2(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType))	
-		// }
-		// // this.props.dispatch(retrieveProducts(pageType), 10);
+		let item = {quantityOrdered, 
+			companyName,
+			id,
+			productDescription,
+			productName,
+			productPrice,
+			shippingPrice,
+			productRating,
+			productStock,
+			productType
+		};
 
+		console.log(cart);
+		console.log(item);
+		if(cart.length === 0){
+			cart.push(item)
+		}
+
+
+	if(cart.length > 0) {
+		for(let i = 0; i<=cart.length-1; i++){
+			console.log('cycling thru, we dont play');
+			if(cart[i].id === item.id) {
+				console.log(cart[i]);
+				console.log(item);	
+				cart.splice(i, 1);
+				console.log(cart);			
+			}
+		}
+		cart.push(item);
+		console.log('newcart?');
+		console.log(cart);
+	} else {
+		console.log('NEWB');
+		cart.push(item);
+		console.log(cart);
+		// this.props.dispatch(putItemInCart1(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType));
+	}
+		
 
 				
 
