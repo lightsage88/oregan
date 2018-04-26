@@ -82,12 +82,12 @@ export class ProductCard extends React.Component{
 		let productStock= this.props.details.productStock;
 		let productType= this.props.details.productType;
 
-		if(cartLength === 0){
+		// if(cartLength === 0){
 		this.props.dispatch(putItemInCart1(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType));
-		} else {
-			console.log('cartLength is more than zero');
-		this.props.dispatch(putItemInCart2(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType))	
-		}
+		// } else {
+		// 	console.log('cartLength is more than zero');
+		// this.props.dispatch(putItemInCart2(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType))	
+		// }
 		// // this.props.dispatch(retrieveProducts(pageType), 10);
 
 
