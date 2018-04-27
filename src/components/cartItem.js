@@ -132,7 +132,20 @@ export class CartItem extends React.Component{
 removeFromCart(e){
 	console.log('removeFromCart running...');
 	e.preventDefault();
-	console.log(e);
+	let id = this.props.details.id;
+	let userid = localStorage.getItem('_id');
+	console.log(e.target);
+	let cart = this.props.currentCart;
+	console.log(cart);
+	console.log(id);
+	for(let i=0; i<cart.length; i++){
+		if(cart[i].id===id) {
+			console.log('chopchop');
+			cart.splice(i,1);
+		}
+	}
+	console.log(cart);
+	this.props.dispatch(putItemInCart1(cart,userid));
 }
 
 
