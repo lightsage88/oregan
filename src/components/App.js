@@ -9,11 +9,12 @@ import About from './about';
 import Register from './register';
 import Account from './account';
 import ProductList from './productList';
-export default class App extends Component {
- 
-  
-  
-  render() {
+import Cart from './cart';
+export class App extends Component {
+
+
+
+ render() {
     return (
       <Router> 
         <main>
@@ -23,6 +24,7 @@ export default class App extends Component {
           <Route exact path='/register' component={Register}/>
           <Route exact path='/account' component={Account}/>
           <Route path='/products/:productId' component={ProductList}/>
+          <Route exact path='/cart' render={()=><Cart currentCart={this.props.currentCart}/>}/>
         </main>
       </Router>
     );
@@ -33,6 +35,10 @@ export default class App extends Component {
 
 }
 
+const mapStateToProps = state => ({
+  currentCart : state.app.user.cart
+});
+export default connect(mapStateToProps)(App);
 
 
 

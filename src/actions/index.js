@@ -185,7 +185,7 @@ export const retrieveProducts = (productType) => {
 	}
 }
 
-export const putItemInCart1 = (cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType) => {
+export const putItemInCart1 = (cart, userid, pageType) => {
 	console.log('putItemInCart1 running...');
 
 	return (dispatch) => {
@@ -195,7 +195,8 @@ export const putItemInCart1 = (cart, cartLength, pageType, userid, quantityOrder
 			headers: {
 				'Content-Type':'application/json'
 			},
-			body: JSON.stringify({cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType})
+			// body: JSON.stringify({cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType})
+			body: JSON.stringify({cart, userid, pageType})
 		})
 		.then(response => response.json())
 		.then(json=> {

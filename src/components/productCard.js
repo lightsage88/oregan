@@ -68,6 +68,7 @@ export class ProductCard extends React.Component{
 		e.preventDefault();
 		let cart = this.props.currentCart;
 
+		let dateToCart = new Date;
 		let cartLength = cart.length;
 		let pageType = this.props.pageType;
 		let userid= localStorage.getItem('_id');
@@ -82,7 +83,8 @@ export class ProductCard extends React.Component{
 		let productStock= this.props.details.productStock;
 		let productType= this.props.details.productType;
 
-		let item = {quantityOrdered, 
+		let item = {quantityOrdered,
+			dateToCart, 
 			companyName,
 			id,
 			productDescription,
@@ -118,13 +120,14 @@ export class ProductCard extends React.Component{
 		console.log('NEWB');
 		cart.push(item);
 		console.log(cart);
-		// this.props.dispatch(putItemInCart1(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType));
+
 	}
 		
 
-				
+	// this.props.dispatch(putItemInCart1(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType));
+	this.props.dispatch(putItemInCart1(cart, userid, pageType));		
 
-	}
+}
 
 
 	render(){
