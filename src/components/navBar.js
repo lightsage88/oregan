@@ -28,6 +28,7 @@ import {persistData} from '../actions/index';
 import {logOut} from '../actions/index';
 import Login from './login';
 import '../staticAssets/shoppingCart.png';
+import './navBar.css';
 
 export class NavBar extends React.Component {
 	constructor(props) {
@@ -84,28 +85,28 @@ export class NavBar extends React.Component {
       <div>
         <Navbar color="faded" light expand="md">
         <NavbarToggler onClick={this.toggle} className='mr-2'/>
-        <NavbarBrand href="/home">OREGĂN</NavbarBrand>
+        <NavbarBrand href="/home" className='brandType'>OREGĂN</NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink href="/">Home</NavLink>
+            <NavLink className='navClickables' href="/">Home</NavLink>
           </NavItem>
           
           <Dropdown isOpen={this.state.dropdown}
                     toggle={this.toggleDropdown}>
-            <DropdownToggle caret>
+            <DropdownToggle className='navClickables' caret>
               Products
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem href='/products/specials'>Specials</DropdownItem>
-              <DropdownItem href='/products/clothing'>Clothing</DropdownItem>
-              <DropdownItem href='/products/food'>Food</DropdownItem>
-              <DropdownItem href='/products/alcohol'>Alcohol</DropdownItem>
+              <DropdownItem className='navClickables' href='/products/specials'>Specials</DropdownItem>
+              <DropdownItem className='navClickables' href='/products/clothing'>Clothing</DropdownItem>
+              <DropdownItem className='navClickables' href='/products/food'>Food</DropdownItem>
+              <DropdownItem className='navClickables' href='/products/alcohol'>Alcohol</DropdownItem>
             </DropdownMenu>
           </Dropdown>
 
           <NavItem>
-            <NavLink href="/about">About</NavLink>
+            <NavLink className='navClickables' href="/about">About</NavLink>
           </NavItem>
           {
             localStorage.getItem('validLogin') ?
@@ -118,15 +119,15 @@ export class NavBar extends React.Component {
              null
           }
           <NavItem>
-            <NavLink href="/cart">Cart</NavLink>
+            <NavLink className='navClickables' href="/cart">Cart</NavLink>
           </NavItem>
           <NavItem>
             {localStorage.getItem('validLogin') ?
-            <NavLink href="/" onClick={(e)=>this.handleLogout(e)}>Log Out</NavLink>
+            <NavLink className='navClickables' href="/" onClick={(e)=>this.handleLogout(e)}>Log Out</NavLink>
             :
-            <NavLink onClick={(e)=>this.toggleModal()}>Log In/Sign Up
+            <NavLink className='navClickables' onClick={(e)=>this.toggleModal()}>Log In/Sign Up
               <Modal isOpen={this.state.modal}>
-                <ModalHeader toggle={this.toggleModal}>Log In</ModalHeader>
+                <ModalHeader className='navClickables' toggle={this.toggleModal}>Log In</ModalHeader>
                   <ModalBody>
                     <Login/>
                     <NavLink href='/register'>Register</NavLink>

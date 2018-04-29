@@ -26,3 +26,14 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+@font-face {
+    font-family: 'Zeichen';
+    src: url(../uxResources/TTF/Zeichen.ttf) format('truetype');
+    
+  }
+
+@font-face{
+  font-family: 'Zeichen Sans';
+  src: url(../uxResources/TTF/zeichen sans.ttf) format('truetype');
+}
