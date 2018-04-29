@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Fugaz+One|Gugi');
+
 .App {
   text-align: center;
 }
@@ -34,6 +36,6 @@
   }
 
 @font-face{
-  font-family: 'Zeichen Sans';
+  font-family: 'Zeichen2';
   src: url(../uxResources/TTF/zeichen sans.ttf) format('truetype');
 }

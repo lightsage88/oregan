@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import CartItem from './cartItem';
 import {Button} from 'reactstrap';
+import './cart.css';
 export default class Cart extends React.Component {
 	constructor(props){
 		super(props);
@@ -37,7 +38,7 @@ export default class Cart extends React.Component {
 			);
 		return (
 			<div>
-				<h3>Cart</h3>
+				<h3 className='sectionBrand'>Cart</h3>
 				{items}
 				<Button color='primary'>Checkout</Button>
 			</div>

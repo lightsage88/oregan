@@ -111,7 +111,7 @@ export class NavBar extends React.Component {
           {
             localStorage.getItem('validLogin') ?
              <NavItem> 
-              <NavLink>
+              <NavLink className='navClickables'>
                 Account
               </NavLink>
              </NavItem>
