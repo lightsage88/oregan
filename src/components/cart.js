@@ -37,10 +37,11 @@ export default class Cart extends React.Component {
 			</div>
 			);
 		return (
-			<div>
+			<div className='cartMain'>
 				<h3 className='sectionBrand'>Cart</h3>
-				{items}
 				<Button color='primary'>Checkout</Button>
+
+				{items}
 			</div>
 			);
 	}

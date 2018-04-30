@@ -2,3 +2,22 @@
 	background: #ace894;
 	height: 100vh;
 }
+
+.landingMain h1{
+	position: absolute;
+	top: 12%;
+}
+
+.landingMain span {
+	position: absolute;
+	top: 19%;
+}
+
+@media only screen and (min-width: 750px) {
+	.landingMain h1 {
+		top: 20%;
+	}
+	.landingMain span {
+		top: 28%;
+	}
+}

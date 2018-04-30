@@ -93,7 +93,7 @@ export class NavBar extends React.Component {
 
 	render() {
         console.log(this.state.currentCart);
-
+        let cartLength = this.state.currentCart.length;
 		return (
       <div>
 
@@ -133,7 +133,7 @@ export class NavBar extends React.Component {
              null
           }
           <NavItem>
-          {this.state.currentCart.length === 0 ?
+          {cartLength === 0 ?
             <NavLink className='navClickables' href="/cart">Cart</NavLink>
             :
             <NavLink className='navClickables' href="/cart">Cart ({this.state.currentCart.length})</NavLink>
@@ -149,12 +149,15 @@ export class NavBar extends React.Component {
                 <ModalHeader className='navClickables' toggle={this.toggleModal}>Log In</ModalHeader>
                   <ModalBody>
                     <Login/>
-                    <NavLink href='/register'>Register</NavLink>
+                    <NavLink href='/register'><button className='loginRegisterLink'>Register</button></NavLink>
                   </ModalBody>
               </Modal>
             </NavLink>
 
             }
+          </NavItem>
+          <NavItem>
+            <input className='form-control' type='search' placeholder="Search Under Construction"/>
           </NavItem>
         </Nav>
         </Collapse>

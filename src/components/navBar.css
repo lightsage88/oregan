@@ -1,9 +1,14 @@
 .brandType {
 	font-family: 'Poiret One', serif;
+	font-weight: 800;
 }
 
 .navClickables {
 	font-family: 'Do Hyeon', sans-serif;
+}
+
+.navClickables:hover {
+	color: #ACE894;
 }
 
 /*.cartImageSection {
@@ -16,5 +21,17 @@
 	width: 100%;
 	z-index: 1;
 	background: #8cada7;
+}
+
+.loginRegisterLink {
+	position: relative;
+	margin: 1vh 30%;
+	min-width: 40%;
+	border-radius: 1.5vw;
+}
+
+.loginRegisterLink:hover{
+	background: #1F363D;
+	color: #8CADA7;
 }
 

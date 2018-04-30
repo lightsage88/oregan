@@ -16,3 +16,15 @@ h5.modal-title {
 .form-control {
 	background: whitesmoke;
 }
+
+.submitButton {
+	position: relative;
+	margin: 1vh 30%;
+	min-width: 40%;
+	border-radius: 1.5vw;
+}
+
+.submitButton:hover{
+	background: #1F363D;
+	color: #8CADA7;
+}
