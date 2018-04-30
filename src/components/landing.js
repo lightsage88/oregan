@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import './landing.css';
 export class Landing extends Component {
 	constructor(props) {
 		super(props);
@@ -17,7 +17,7 @@ export class Landing extends Component {
 	render() {
 //
 		return (
-			<div>
+			<div className='landingMain'>
 			<h1>Hello, {(this.props.firstName === undefined) ? ' friend': (this.props.firstName)}</h1>
 			{this.props.firstName===undefined ? <span>sign in for a better experience</span> : <span>welcome back!</span>}
 			</div>

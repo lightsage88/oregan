@@ -14,7 +14,7 @@ Input} from 'reactstrap';
 
 import {connect} from 'react-redux';
 import {retrieveProducts} from '../actions/index';
-
+import './productCard.css';
 import {putItemInCart2} from '../actions/index';
 import {putItemInCart1} from '../actions/index';
 export class ProductCard extends React.Component{
@@ -135,8 +135,8 @@ export class ProductCard extends React.Component{
 		// let productInfo = this.state.product;
 		// console.log(quantityChoice);
 		return (
-		<div>
-			<Card>
+		<div className='productCardMain'>
+			<Card className='cardInit'>
 				<CardBody>
 					<CardTitle>{this.props.details.productName}</CardTitle>
 					<CardSubtitle>{this.props.details.companyName}</CardSubtitle>

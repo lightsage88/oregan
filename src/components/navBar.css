@@ -1,7 +1,20 @@
 .brandType {
-	font-family: 'Zeichen', serif;
+	font-family: 'Poiret One', serif;
 }
 
 .navClickables {
 	font-family: 'Do Hyeon', sans-serif;
 }
+
+/*.cartImageSection {
+	background-image: url('../uxResources/cart.png');
+}*/
+
+.navBarBody{
+	border:solid #1f363d 1vw;
+	position: fixed;
+	width: 100%;
+	z-index: 1;
+	background: #8cada7;
+}
+

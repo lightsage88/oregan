@@ -29,7 +29,6 @@ import {logOut} from '../actions/index';
 import Login from './login';
 import '../staticAssets/shoppingCart.png';
 import './navBar.css';
-
 export class NavBar extends React.Component {
 	constructor(props) {
 		super(props);
@@ -37,7 +36,8 @@ export class NavBar extends React.Component {
 		this.state = {
 			isOpen: false,
       modal: false,
-      dropdown: false
+      dropdown: false,
+      currentCart: ''
 		};
     this.toggle = this.toggle.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -56,6 +56,18 @@ export class NavBar extends React.Component {
       console.log('no id ');
     }
 
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(this.props);
+    console.log(nextProps);
+  
+    console.log(nextProps.currentCart);
+    let currentCart = nextProps.currentCart;
+    this.setState({
+      currentCart: currentCart
+    });
+    // return currentCart;
   }
 
 	toggle() {
@@ -83,7 +95,8 @@ export class NavBar extends React.Component {
 	render() {
 		return (
       <div>
-        <Navbar color="faded" light expand="md">
+
+        <Navbar className='navBarBody' color="faded" light expand="md">
         <NavbarToggler onClick={this.toggle} className='mr-2'/>
         <NavbarBrand href="/home" className='brandType'>OREGĂN</NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
@@ -140,9 +153,15 @@ export class NavBar extends React.Component {
         </Nav>
         </Collapse>
         </Navbar>
+
+
       </div>
     );
 	}
 }
 
-export default connect()(NavBar);
+const mapStateToProps = state => ({
+  currentCart: state.app.user.cart
+});
+
+export default connect(mapStateToProps)(NavBar);

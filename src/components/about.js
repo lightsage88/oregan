@@ -1,9 +1,9 @@
 import React from 'react';
-
+import './about.css';
 export default function About(props) {
 	return (
-	<div>
-		<h2>About</h2>
+	<div className='aboutMain'>
+		<h2 className='aboutH2'>About</h2>
 		<span>What are we all about?</span>
 		<p> Stuff from Oregon is awesome. The Vietnamese infinitive for 'to eat' is AN. We think
 		that sharing our noms with the Vietnamese would be a tasty and rewarding affair for everyone

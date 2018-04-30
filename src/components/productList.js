@@ -3,7 +3,7 @@ import React from 'react';
 import ProductCard from './productCard';
 import {retrieveProducts} from '../actions/index';
 import {connect} from 'react-redux';
-
+import './productList.css';
 export class ProductList extends React.Component {
 	constructor(props) {
 		super(props);
@@ -32,9 +32,12 @@ export class ProductList extends React.Component {
 	}
 
 	render(){
+		console.log(this.state);
 		console.log(this.props);
 		console.log('facingItems...');
 		// const inventory = this.props.products;
+		const specificType = (this.state.pageType).toUpperCase();
+		console.log(specificType);
 		const inventory = Object.values(this.props.products);
 		console.log(inventory);
 		const items = inventory.map((item, index)=>
@@ -44,8 +47,8 @@ export class ProductList extends React.Component {
 		);
 		
 		return(
-		<div>
-			<h3>Product List page, a dynamic entity, is under construction</h3>
+		<div className='productListContainer'>
+			<h3 className='productListHeader'>PRODUCTS -- {specificType}</h3>
 				{items}
 		</div>
 		);
