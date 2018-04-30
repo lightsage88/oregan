@@ -67,7 +67,6 @@ export class NavBar extends React.Component {
     this.setState({
       currentCart: currentCart
     });
-    // return currentCart;
   }
 
 	toggle() {
@@ -93,6 +92,8 @@ export class NavBar extends React.Component {
   }
 
 	render() {
+        console.log(this.state.currentCart);
+
 		return (
       <div>
 
@@ -132,7 +133,12 @@ export class NavBar extends React.Component {
              null
           }
           <NavItem>
+          {this.state.currentCart.length === 0 ?
             <NavLink className='navClickables' href="/cart">Cart</NavLink>
+            :
+            <NavLink className='navClickables' href="/cart">Cart ({this.state.currentCart.length})</NavLink>
+          }
+          
           </NavItem>
           <NavItem>
             {localStorage.getItem('validLogin') ?

@@ -6,6 +6,7 @@ import {Field, reduxForm} from 'redux-form';
 //need to create an action and reducers etc.
 // import {connect} from 'react-redux';
 import {loginUser} from '../actions/index';
+import './login.css';
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
@@ -30,15 +31,14 @@ class Login extends React.Component {
 
 	render(){
 		return (
-			<div>
-				<h2>Login</h2>
+			<div className='loginMain'>
 					<section>
-						<form onSubmit={(e)=>this.attemptLogin(e)}>
-							<fieldset>
+						<form  className='loginForm' onSubmit={(e)=>this.attemptLogin(e)}>
+							<fieldset className='loginFormFieldSet'>
 								<label htmlFor='username'>Username</label>
 								<Field component='input' className='form-control' type='text' name='username' id='username' required/>
 							</fieldset>
-							<fieldset>
+							<fieldset className='loginFormFieldSet'>
 								<label htmlFor='password'>Password</label>
 								<Field component='input' className='form-control' type='password' name='password' id='password' required/>
 							</fieldset>

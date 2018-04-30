@@ -1,0 +1,18 @@
+h5.modal-title {
+	color: #ACE894;
+}
+
+.modal-content {
+	border: solid #8CADA7;
+	background: #254D32;
+}
+
+.loginFormFieldSet {
+	font-family: 'Do Hyeon', sans-serif;
+	color: #ACE894;
+
+}
+
+.form-control {
+	background: whitesmoke;
+}
