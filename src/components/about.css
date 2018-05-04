@@ -1,6 +1,6 @@
 .aboutMain {
 	position: absolute;
-	top: 10vh;
+	top: 3.5rem;
 	background: #ace894;
 	height: 100vh;
 }
@@ -8,3 +8,4 @@
 .aboutH2 {
 	font-family: 'Poiret One', serif;
 }
+
