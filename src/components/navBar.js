@@ -98,10 +98,13 @@ export class NavBar extends React.Component {
       <div>
 
         <Navbar className='navBarBody' color="faded" light expand="md">
-        <NavbarToggler onClick={this.toggle} className='mr-2'/>
-        <NavbarBrand href="/home" className='brandType'>OREGĂN</NavbarBrand>
+        <NavbarToggler onClick={this.toggle} id="NavbarToggler" className='mr-2'/>
+        <NavbarBrand href="/home" id="brandType" className='brandType'>OREGĂN</NavbarBrand>
         <Collapse isOpen={this.state.isOpen} navbar>
+                                    <img src={require('../uxResources/oregonFlag.png')} alt='https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fb%2Fb9%2FFlag_of_Oregon.svg%2F2000px-Flag_of_Oregon.svg.png&imgrefurl=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFlag_of_Oregon&docid=0_W84AwX19K10M&tbnid=SCRjsfZfCWbVrM%3A&vet=10ahUKEwiSxarKpuraAhUR92MKHQvAAHYQMwg0KAAwAA..i&w=2000&h=1200&client=firefox-b-1-ab&bih=845&biw=1012&q=oregon%20flag&ved=0ahUKEwiSxarKpuraAhUR92MKHQvAAHYQMwg0KAAwAA&iact=mrc&uact=8'/>
+
         <Nav className="ml-auto" navbar>
+
           <NavItem>
             <NavLink className='navClickables' href="/">Home</NavLink>
           </NavItem>
@@ -112,6 +115,7 @@ export class NavBar extends React.Component {
               Products
             </DropdownToggle>
             <DropdownMenu>
+
               <DropdownItem className='navClickables' href='/products/specials'>Specials</DropdownItem>
               <DropdownItem className='navClickables' href='/products/clothing'>Clothing</DropdownItem>
               <DropdownItem className='navClickables' href='/products/food'>Food</DropdownItem>

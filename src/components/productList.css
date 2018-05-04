@@ -1,11 +1,13 @@
 .productListContainer {
 	position: absolute;
-	top: 10vh;
+	top: 3.2rem;
 	background: #3a7d44;
+	
 }
 
 .productListHeader{
 	font-family: 'Poiret One', serif;
 	color: #ace894;
 	text-align: center;
+	padding: 4.5vw;
 }

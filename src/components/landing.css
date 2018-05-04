@@ -1,5 +1,5 @@
 .landingMain {
-	background: #ace894;
+	background: #a8c686;
 	height: 100vh;
 }
 
@@ -11,6 +11,10 @@
 .landingMain span {
 	position: absolute;
 	top: 19%;
+}
+
+.landingImage {
+	background: url('../uxResources/oregonFlag.png');
 }
 
 @media only screen and (min-width: 750px) {

@@ -1,6 +1,33 @@
-.brandType {
+#brandType {
 	font-family: 'Poiret One', serif;
-	font-weight: 800;
+	/*0*/
+	font-size: 1.3rem;
+/*	color: #ffea0f;
+*/
+	color: #002a86;
+;
+}
+
+img {
+	float: right;
+
+clear: left;
+
+width: 8rem;
+
+position: relative;
+
+
+z-index: -1;
+
+text-align: right;
+}
+
+#NavbarToggler span {
+/*	color: #ffea0f;
+*/
+	color: #002a86;
+
 }
 
 .navClickables {
@@ -20,7 +47,9 @@
 	position: fixed;
 	width: 100%;
 	z-index: 1;
-	background: #8cada7;
+/*	background: #002a86;
+*/		background: #ffea0f;
+
 }
 
 .loginRegisterLink {
@@ -32,6 +61,6 @@
 
 .loginRegisterLink:hover{
 	background: #1F363D;
-	color: #8CADA7;
+	color: #002a86;
 }
 
