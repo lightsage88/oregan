@@ -140,7 +140,11 @@ export class ProductCard extends React.Component{
 				<CardBody>
 					<CardTitle>{this.props.details.productName}</CardTitle>
 					<CardSubtitle>{this.props.details.companyName}</CardSubtitle>
-					<CardImg className='pC-primaryImage' src={this.props.details.images[0]||''}/>
+
+					{this.props.details.images ?
+					<CardImg className='pC-primaryImage' src={this.props.details.images[0]}/>
+					: null}
+
 					<CardText>
 						{this.props.details.productDescription}
 					</CardText>
