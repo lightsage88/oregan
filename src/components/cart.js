@@ -39,7 +39,7 @@ export default class Cart extends React.Component {
 		return (
 			<div className='cartMain'>
 				<h3 className='sectionBrand'>Cart</h3>
-				<Button color='primary'>Checkout</Button>
+				<Button color='primary'><a href='/checkout'>Checkout</a></Button>
 
 				{items}
 			</div>

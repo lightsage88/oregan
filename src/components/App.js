@@ -10,6 +10,7 @@ import Register from './register';
 import Account from './account';
 import ProductList from './productList';
 import Cart from './cart';
+import Checkout from './checkout';
 export class App extends Component {
 
 
@@ -25,6 +26,9 @@ export class App extends Component {
           <Route exact path='/account' component={Account}/>
           <Route path='/products/:productId' component={ProductList}/>
           <Route exact path='/cart' render={()=><Cart currentCart={this.props.currentCart}/>}/>
+          <Route exact path='/checkout' component={Checkout}/>
+                <script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>
+
         </main>
       </Router>
     );
