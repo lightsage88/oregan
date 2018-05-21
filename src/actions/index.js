@@ -42,6 +42,11 @@ export const stockShelf = (set) => ({
 	set
 });
 
+export const sendClientToken = (token) =>({
+	type: 'SEND_CLIENT_TOKEN',
+	token
+});
+
 // export const putItemInCart2 = (item) => ({
 // 	type: 'PUT_ITEM_IN_CART2',
 // 	item
@@ -242,3 +247,25 @@ export const putItemInCart2 = (cart, cartLength, pageType, userid, quantityOrder
 	}
 }
 
+export const activateBT =()=> {
+	console.log('activateBT running...');
+	return (dispatch)=>{
+		fetch(`${API_BASE_URL}/api/client_token`,
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type':'application/json'
+				}
+			})
+		.then(response => response.json())
+		.then(json => {
+			let token = json;
+			// console.log(token);
+			dispatch(sendClientToken(token));
+		})
+		.catch(err => {
+			console.log(err);
+			console.error(err);
+		})
+	}
+}

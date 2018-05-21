@@ -8,7 +8,8 @@ const initialState = {
 	_id: '',
 	validLogin: '',
 	cart: [],
-	pastPurchases: []
+	pastPurchases: [],
+	btToken: ''
 }
 
 const user = (state=initialState, action) => {
@@ -34,7 +35,8 @@ const user = (state=initialState, action) => {
 				cellNumber: action.cellNumber ,
 				validLogin: true,
 				cart : action.cart,
-				pastPurchases: action.pastPurchases
+				pastPurchases: action.pastPurchases,
+				btToken: ''
 			})
 
 		case 'PERSIST_USER_DATA':
@@ -48,8 +50,14 @@ const user = (state=initialState, action) => {
 				cellNumber: action.cellNumber ,
 				validLogin: true,
 				cart: action.cart,
-				pastPurchases: action.pastPurchases
+				pastPurchases: action.pastPurchases,
+				btToken: ''
 				
+			})
+
+		case 'SEND_CLIENT_TOKEN':
+			return Object.assign({}, state, {
+				btToken: action.token
 			})
 
 		// case 'PUT_ITEM_IN_CART2':
