@@ -95,7 +95,7 @@ export class NavBar extends React.Component {
         console.log(this.state.currentCart);
         let cartLength = this.state.currentCart.length;
 		return (
-      <div>
+      <div className='navbarMain'>
 
         <Navbar className='navBarBody' color="faded" light expand="md">
         <NavbarToggler onClick={this.toggle} id="NavbarToggler" className='mr-2'/>

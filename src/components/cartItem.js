@@ -31,21 +31,45 @@ export class CartItem extends React.Component{
 			productStock:'',
 			productType: '',
 			id: '',
+			dateToCart: '',
 			quantityUnavailable: false
 
 		}
 	}
 
+	componentDidMount(){
+		console.log('running cDM');
+		console.log(this.props);
+		console.log(this.state);
+		this.setState({
+			companyName: this.props.details.companyName,
+			dateToCart: this.props.details.dateToCart,
+			id:this.props.details.id,
+			productDescription:this.props.details.productDescription,
+			productName:this.props.details.productName,
+			productPrice:this.props.details.productPrice*parseInt(this.props.details.quantityOrdered),
+			productRating:this.props.details.productRating,
+			productStock:this.props.details.productStock,
+			productType:this.props.details.productType,
+			quantityOrdered:parseInt(this.props.details.quantityOrdered),
+			shippingPrice:this.props.details.shippingPrice
+
+
+		})
+	}
+
 	onChange(e){
 		console.log('onChange running');
-		console.log(e.target.value);
+		let quantityOrdered = parseInt(e.target.value);
+		console.log(quantityOrdered);
+		let productPrice = this.props.details.productPrice * quantityOrdered;
 		this.setState({
-			quantityOrdered : e.target.value,
+			quantityOrdered : quantityOrdered,
 			companyName: this.props.details.companyName,
 			id: this.props.details.id,
 			productDescription: this.props.details.productDescription,
 			productName: this.props.details.productName,
-			productPrice: this.props.details.productPrice,
+			productPrice: productPrice,
 			shippingPrice: this.props.details.shippingPrice,
 			productRating: this.props.details.productRating,
 			productStock: this.props.details.productStock,
@@ -150,9 +174,14 @@ removeFromCart(e){
 
 
 	render(){
-		// let quantityChoice = this.state.quantityOrdered;
-		// let productInfo = this.state.product;
-		// console.log(quantityChoice);
+		console.log(this.state);
+		console.log(this.props);
+	let costNumber = this.props.details.productPrice;
+		console.log(costNumber);
+		let quantity = this.props.details.quantityOrdered;
+		console.log(quantity);
+		console.log(costNumber*quantity);
+		let combinedCost = costNumber*quantity;
 		return (
 		<div>
 			<Card>
@@ -161,11 +190,11 @@ removeFromCart(e){
 					<CardSubtitle>{this.props.details.companyName}</CardSubtitle>
 					<CardImg src='../staticAssets/shoppingCard.png'/>
 					<CardText>
-						{this.props.details.productDescription}
+						{this.props.details.productDescription} 
 					</CardText>
 					<ul>
-							<li>COST: <span>{this.props.details.productPrice}</span></li>
-							<li>SHIPPING: <span>{this.props.details.shippingPrice}</span></li>
+							<li>COST: <span>${this.state.productPrice}</span></li>
+						
 						</ul>
 					<Form>
 						<FormGroup>

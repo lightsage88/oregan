@@ -1,24 +1,25 @@
+// checkout2.js
 import React from 'react';
 import {connect} from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {activateBT} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 import Buy from './buy';
-import './checkout.css';
-export default class Checkout extends React.Component {
-    constructor(props){
-        super(props);
+// import './checkout.css';
+// export default class Checkout extends React.Component {
+//     constructor(props){
+//         super(props);
        
-    }
+//     }
 
-    onSubmit(values) {
-        console.log(values);
-    }
+//     onSubmit(values) {
+//         console.log(values);
+//     }
 
 
     render(){
         return(
-            <div className='checkoutMain'>
+            <div>
                 <h3>Shipping Address</h3>
                 <Form>
                     <FormGroup>

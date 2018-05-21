@@ -66,22 +66,9 @@ export class Cart extends React.Component {
 			);
 		return (
 			<div className='cartMain'>
-				<Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-									{/*<DropIn options={{authorization: {clientToken}}}
-											onInstance={instance=>(this.instance= instance)}
-									/>*/}
-									<ModalHeader toggle={this.toggle}>Checkout</ModalHeader>
-									<ModalBody>
-									<Checkout/>
-									</ModalBody>
-									<ModalFooter>
-										<Button>Hi</Button>
-										<Button>Goodbye</Button>
-									</ModalFooter>
 
-				</Modal>
 				<h3 className='sectionBrand'>Cart</h3>
-				<Button color='primary' onClick={this.toggle}>Checkout</Button>
+				<Button color='primary' onClick={this.toggle}><a href='/checkout'>Checkout</a></Button>
 				{items}
 			</div>
 			);
