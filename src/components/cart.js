@@ -70,9 +70,15 @@ export class Cart extends React.Component {
 									{/*<DropIn options={{authorization: {clientToken}}}
 											onInstance={instance=>(this.instance= instance)}
 									/>*/}
+									<ModalHeader toggle={this.toggle}>Checkout</ModalHeader>
 									<ModalBody>
 									<Checkout/>
 									</ModalBody>
+									<ModalFooter>
+										<Button>Hi</Button>
+										<Button>Goodbye</Button>
+									</ModalFooter>
+
 				</Modal>
 				<h3 className='sectionBrand'>Cart</h3>
 				<Button color='primary' onClick={this.toggle}>Checkout</Button>

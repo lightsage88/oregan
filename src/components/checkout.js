@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {activateBT} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 import Buy from './buy';
+import './checkout.css';
 export default class Checkout extends React.Component {
     constructor(props){
         super(props);
