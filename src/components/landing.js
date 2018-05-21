@@ -20,6 +20,13 @@ export class Landing extends Component {
 			<div className='landingMain'>
 			<h1>Hello, {(this.props.firstName === undefined) ? ' friend': (this.props.firstName)}</h1>
 			{this.props.firstName===undefined ? <span>sign in for a better experience</span> : <span>welcome back!</span>}
+			
+			<br/><br/><br/>
+			<section className='demo'>
+				<p>demo</p>
+				<h3>Username: dennis</h3>
+				<h3>pw: Walruses8</h3>
+			</section>
 			</div>
 			);
 
