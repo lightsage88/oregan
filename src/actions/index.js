@@ -271,7 +271,7 @@ export const activateBT =()=> {
 	}
 }
 
-export const addressToShippo = (shippingAddressDetails) => {
+export const addressToShippo = (shippingAddressDetails, parcelDimensions) => {
 	console.log(shippingAddressDetails);
 	console.log('addressToShippo running');
 	return (dispatch)=>{

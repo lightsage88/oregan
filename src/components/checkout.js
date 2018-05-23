@@ -14,7 +14,10 @@ export default class Checkout extends React.Component {
             cityShipping: '',
             sprShipping:'',
             zipShipping: '',
-            countryShipping:''
+            countryShipping:'',
+            widthShipping: '',
+            heightShipping: '',
+            lengthShipping: ''
           }
        
     }
@@ -28,9 +31,7 @@ export default class Checkout extends React.Component {
     }
 
     onChange(e){
-        console.log(e);
-        console.log(e.target.name);
-        console.log(e.target.value);
+        
         let infoPart = e.target.name;
         let value = e.target.value;
         console.log(infoPart);

@@ -46,10 +46,8 @@ export class NavBar extends React.Component {
 
   componentDidMount(){
     if(localStorage.getItem('_id')) {
-      console.log('theres an id here, yo');
       let id = localStorage.getItem('_id');
-      console.log(id);
-      console.log(this.props);
+     
       this.props.dispatch(persistData(id));
 
     } else {
@@ -59,10 +57,7 @@ export class NavBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(this.props);
-    console.log(nextProps);
-  
-    console.log(nextProps.currentCart);
+   
     let currentCart = nextProps.currentCart;
     this.setState({
       currentCart: currentCart
@@ -92,7 +87,6 @@ export class NavBar extends React.Component {
   }
 
 	render() {
-        console.log(this.state.currentCart);
         let cartLength = this.state.currentCart.length;
 		return (
       <div className='navbarMain'>

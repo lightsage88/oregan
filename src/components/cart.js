@@ -15,7 +15,11 @@ export class Cart extends React.Component {
 		let instance;
 		this.state = {
 			currentCart: '',
-			modal: false
+			modal: false,
+			parcelWeight: '',
+			parcelHeight: '',
+			parcelLength: '',
+			parcelWidth:''
 		};
 		this.toggle = this.toggle.bind(this);
 	}
@@ -36,10 +40,7 @@ export class Cart extends React.Component {
 	// }
 
 	componentWillReceiveProps(nextProps){
-		console.log(this.props);
-		console.log(nextProps);
-	
-		console.log(nextProps.currentCart);
+		
 		let currentCart = nextProps.currentCart;
 		let clientToken = nextProps.clientToken;
 		this.setState({
@@ -47,7 +48,27 @@ export class Cart extends React.Component {
 			clientToken: clientToken
 
 		});
+	}
+
+
+
+	componentDidUpdate(){
 		console.log(this.state);
+		let parcelWeightKg=0;
+		let parcelHeight=0;
+		let parcelLength=0;
+		let parcelWidth=0;
+		let currentCart = this.state.currentCart;
+		console.log(currentCart);
+		currentCart.forEach(function(item){
+			console.log(item.productWeightKg);
+			console.log(parcelWeightKg);
+			parcelWeightKg +=item.productWeightKg;
+			console.log(parcelWeightKg);
+			
+		});
+		console.log(this.state);
+
 	}
 
 
@@ -56,7 +77,7 @@ export class Cart extends React.Component {
 	render(){
 		console.log(this.state);
 		console.log(this.props);
-		// let clientToken = this.state.clientToken;
+
 		let currentCart = this.state.currentCart;
 		const inventory = Object.values(currentCart);
 		const items = inventory.map((item,index)=>

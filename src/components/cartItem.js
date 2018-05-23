@@ -15,7 +15,7 @@ Input} from 'reactstrap';
 import {connect} from 'react-redux';
 import {retrieveProducts} from '../actions/index';
 
-import {putItemInCart2} from '../actions/index';
+// import {putItemInCart2} from '../actions/index';
 import {putItemInCart1} from '../actions/index';
 export class CartItem extends React.Component{
 	constructor(props){
@@ -38,9 +38,7 @@ export class CartItem extends React.Component{
 	}
 
 	componentDidMount(){
-		console.log('running cDM');
-		console.log(this.props);
-		console.log(this.state);
+		
 		this.setState({
 			companyName: this.props.details.companyName,
 			dateToCart: this.props.details.dateToCart,
@@ -59,9 +57,7 @@ export class CartItem extends React.Component{
 	}
 
 	onChange(e){
-		console.log('onChange running');
 		let quantityOrdered = parseInt(e.target.value);
-		console.log(quantityOrdered);
 		let productPrice = this.props.details.productPrice * quantityOrdered;
 		this.setState({
 			quantityOrdered : quantityOrdered,
@@ -76,7 +72,6 @@ export class CartItem extends React.Component{
 			productType: this.props.details.productType
 		});
 		if(e.target.value > this.props.details.productStock) {
-			console.log('too much, hooman');
 			this.setState({
 				quantityUnavailable: true
 			});
@@ -120,8 +115,7 @@ export class CartItem extends React.Component{
 			productType
 		};
 
-		console.log(cart);
-		console.log(item);
+		
 		if(cart.length === 0){
 			cart.push(item)
 		}
@@ -131,19 +125,14 @@ export class CartItem extends React.Component{
 		for(let i = 0; i<=cart.length-1; i++){
 			console.log('cycling thru, we dont play');
 			if(cart[i].id === item.id) {
-				console.log(cart[i]);
-				console.log(item);	
+				
 				cart.splice(i, 1);
-				console.log(cart);			
 			}
 		}
 		cart.push(item);
-		console.log('newcart?');
-		console.log(cart);
+		
 	} else {
-		console.log('NEWB');
 		cart.push(item);
-		console.log(cart);
 
 	}
 		
@@ -158,29 +147,22 @@ removeFromCart(e){
 	e.preventDefault();
 	let id = this.props.details.id;
 	let userid = localStorage.getItem('_id');
-	console.log(e.target);
 	let cart = this.props.currentCart;
-	console.log(cart);
-	console.log(id);
 	for(let i=0; i<cart.length; i++){
 		if(cart[i].id===id) {
 			console.log('chopchop');
 			cart.splice(i,1);
 		}
 	}
-	console.log(cart);
 	this.props.dispatch(putItemInCart1(cart,userid));
 }
 
 
 	render(){
-		console.log(this.state);
-		console.log(this.props);
+	
 	let costNumber = this.props.details.productPrice;
-		console.log(costNumber);
 		let quantity = this.props.details.quantityOrdered;
-		console.log(quantity);
-		console.log(costNumber*quantity);
+		
 		let combinedCost = costNumber*quantity;
 		return (
 		<div>

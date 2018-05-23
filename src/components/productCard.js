@@ -15,7 +15,7 @@ Input} from 'reactstrap';
 import {connect} from 'react-redux';
 import {retrieveProducts} from '../actions/index';
 import './productCard.css';
-import {putItemInCart2} from '../actions/index';
+// import {putItemInCart2} from '../actions/index';
 import {putItemInCart1} from '../actions/index';
 export class ProductCard extends React.Component{
 	constructor(props){
@@ -35,7 +35,7 @@ export class ProductCard extends React.Component{
 //need to make sure that dimensions and weight are included for each thing...across all reducers
 //and across all actions that deal with managing products. We are going to have to add up the inches
 //and give a little padding so that we can enter that info on the front end of the checkout thing so that
-//we can make a parcel with the right shipping label, etc.
+//we can make a parcel with the right shipping label,
 		}
 	}
 
@@ -69,6 +69,9 @@ export class ProductCard extends React.Component{
 
 	addToCart(e){
 		e.preventDefault();
+		console.log('trying to see something about the dimensions');
+		console.log(this.props.details);
+		console.log(this.props.currentCart);
 		let cart = this.props.currentCart;
 
 		let dateToCart = new Date;
@@ -85,6 +88,11 @@ export class ProductCard extends React.Component{
 		let productRating= this.props.details.productRating;
 		let productStock= this.props.details.productStock;
 		let productType= this.props.details.productType;
+		let productWeightKg = this.props.details.productWeightKg;
+		let productWidthInches = this.props.details.productWidthInches;
+		let productHeightInches = this.props.details.productHeightInches;
+		let productLengthInches = this.props.details.productLengthInches;
+
 
 		let item = {quantityOrdered,
 			dateToCart, 
@@ -96,7 +104,11 @@ export class ProductCard extends React.Component{
 			shippingPrice,
 			productRating,
 			productStock,
-			productType
+			productType,
+			productWeightKg: productWeightKg * quantityOrdered,
+			productWidthInches: productWidthInches * quantityOrdered,
+			productHeightInches: productHeightInches * quantityOrdered,
+			productLengthInches: productLengthInches * quantityOrdered
 		};
 
 		console.log(cart);
