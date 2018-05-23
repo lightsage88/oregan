@@ -270,3 +270,26 @@ export const activateBT =()=> {
 		})
 	}
 }
+
+export const addressToShippo = (shippingAddressDetails) => {
+	console.log(shippingAddressDetails);
+	console.log('addressToShippo running');
+	return (dispatch)=>{
+		fetch(`${API_BASE_URL}/api/shippo/createShipment`,
+		{
+			method: "POST",
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify(shippingAddressDetails)
+		})
+		.then(response => response.json())
+		.then(json=>{
+			console.log(json);
+		})
+		.catch(err =>{
+			console.log(err);
+			console.error(err);
+		});
+	}
+}

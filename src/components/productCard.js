@@ -32,7 +32,10 @@ export class ProductCard extends React.Component{
 			productType: '',
 			id: '',
 			quantityUnavailable: false
-
+//need to make sure that dimensions and weight are included for each thing...across all reducers
+//and across all actions that deal with managing products. We are going to have to add up the inches
+//and give a little padding so that we can enter that info on the front end of the checkout thing so that
+//we can make a parcel with the right shipping label, etc.
 		}
 	}
 

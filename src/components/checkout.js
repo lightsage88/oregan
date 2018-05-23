@@ -19,11 +19,11 @@ export default class Checkout extends React.Component {
        
     }
 
-    onSubmit(e, values) {
+    onSubmit(e) {
         e.preventDefault();
         console.log('onSubmit running.');
-        console.log(e.target);
-        console.log(values);
+        console.log(this.state);
+
 
     }
 
@@ -78,11 +78,11 @@ export default class Checkout extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for='countryShipping'>Country</Label>
-                        <Input type='text' name='countryShipping' id='countryShipping'
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='countryShipping' id='countryShipping'
                         placeholder='Country'/>
                     </FormGroup>
 
-                    <Button onClick={(e, values)=>this.onSubmit(e, values)}>Submit</Button>
+                    <Button onClick={(e)=>this.onSubmit(e)}>Submit</Button>
                 </Form>
                 <Buy/>
             </div>
