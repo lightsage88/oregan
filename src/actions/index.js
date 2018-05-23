@@ -250,7 +250,7 @@ export const putItemInCart2 = (cart, cartLength, pageType, userid, quantityOrder
 export const activateBT =()=> {
 	console.log('activateBT running...');
 	return (dispatch)=>{
-		fetch(`${API_BASE_URL}/api/client_token`,
+		fetch(`${API_BASE_URL}/api/braintree/client_token`,
 			{
 				method: 'GET',
 				headers: {
@@ -259,6 +259,7 @@ export const activateBT =()=> {
 			})
 		.then(response => response.json())
 		.then(json => {
+			console.log('okay, we should have a json');
 			let token = json;
 			// console.log(token);
 			dispatch(sendClientToken(token));
