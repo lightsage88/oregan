@@ -2,9 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import CartItem from './cartItem';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
-import {activateBT} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
-import {propsToCheckout} from '../actions/index';
+import {propsToCheckout, activateBT, parcelDetailsToShippo} from '../actions/index';
 import Checkout from './checkout';
 import './cart.css';
 
@@ -25,7 +24,9 @@ export class Cart extends React.Component {
 
 	sendToCheckout(e){
 		console.log('sendToCheckout Running');
+		// this.props.dispatch(parcelDetailsToShippo(this.state));
 		this.props.dispatch(propsToCheckout(this.state));
+
 	}
 
 

@@ -11,7 +11,7 @@ export const registerUserFail = ()=> ({
 	type: 'REGISTER_USER_FAIL'
 });
 
-export const loginUserSuccess = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases) => ({
+export const loginUserSuccess = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout) => ({
 	type: 'LOGIN_USER_SUCCESS',
 	_id,
 	authToken,
@@ -21,7 +21,8 @@ export const loginUserSuccess = (_id, authToken, username, emailAddress, firstNa
 	lastName,
 	cellNumber,
 	cart,
-	pastPurchases
+	pastPurchases,
+	checkout
 });
 
 export const propsToCheckout = (cartState) => ({
@@ -29,7 +30,7 @@ export const propsToCheckout = (cartState) => ({
 	cartState
 });
 
-export const persistUserData = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases) => ({
+export const persistUserData = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout) => ({
 	type: 'PERSIST_USER_DATA',
 	_id,
 	authToken,
@@ -39,7 +40,8 @@ export const persistUserData = (_id, authToken, username, emailAddress, firstNam
 	lastName,
 	cellNumber,
 	cart,
-	pastPurchases
+	pastPurchases,
+	checkout
 });
 
 export const stockShelf = (set) => ({
@@ -119,6 +121,7 @@ export const loginUser = (username, password) => {
 			const emailAddress = userData.emailAddress;
 			const _id = userData._id;
 			const cart = userData.cart;
+			const checkout = userData.checkout;
 			const pastPurchases = userData.pastPurchases;
 			localStorage.setItem('authToken', authToken);
 			localStorage.setItem('username', username);
@@ -128,7 +131,7 @@ export const loginUser = (username, password) => {
 			localStorage.setItem('cellNumber', cellNumber);
 			localStorage.setItem('_id', _id);
 			localStorage.setItem('validLogin', true);
-			dispatch(loginUserSuccess(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases));
+			dispatch(loginUserSuccess(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout));
 			window.location = '/';
 		})
 		.catch(error => {
@@ -161,7 +164,8 @@ export const persistData = (_id) => {
 			const username = userData.username;
 			const cart = userData.cart;
 			const pastPurchases = userData.pastPurchases;
-			dispatch(persistUserData(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases));
+			const checkout = userData.checkout;
+			dispatch(persistUserData(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout));
 		})
 		.catch(error => console.log(error));
 	}
@@ -276,8 +280,8 @@ export const activateBT =()=> {
 	}
 }
 
-export const addressToShippo = (shippingAddressDetails, parcelDimensions) => {
-	console.log(shippingAddressDetails);
+export const parcelDetailsToShippo = (parcelDetails) => {
+	console.log(parcelDetails);
 	console.log('addressToShippo running');
 	return (dispatch)=>{
 		fetch(`${API_BASE_URL}/api/shippo/createShipment`,
@@ -286,7 +290,7 @@ export const addressToShippo = (shippingAddressDetails, parcelDimensions) => {
 			headers: {
 				'Content-Type':'application/json'
 			},
-			body: JSON.stringify(shippingAddressDetails)
+			body: JSON.stringify(parcelDetails)
 		})
 		.then(response => response.json())
 		.then(json=>{
@@ -298,3 +302,11 @@ export const addressToShippo = (shippingAddressDetails, parcelDimensions) => {
 		});
 	}
 }
+
+
+// export const parcelDetailsToShippo = (parcelDimensions) => {
+// 	console.log(parcelDimensions);
+// 	return (dispatch)=>{
+
+// 	}
+// }

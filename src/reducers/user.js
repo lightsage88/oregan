@@ -9,7 +9,8 @@ const initialState = {
 	validLogin: '',
 	cart: [],
 	pastPurchases: [],
-	btToken: ''
+	btToken: '',
+	checkout: []
 }
 
 const user = (state=initialState, action) => {
@@ -51,7 +52,8 @@ const user = (state=initialState, action) => {
 				validLogin: true,
 				cart: action.cart,
 				pastPurchases: action.pastPurchases,
-				btToken: ''
+				btToken: '',
+				checkout: action.checkout
 				
 			})
 
@@ -60,6 +62,10 @@ const user = (state=initialState, action) => {
 				btToken: action.token
 			})
 
+		case 'PROPS_TO_CHECKOUT': 
+			return Object.assign({}, state, {
+				checkout:action.cartState
+			})
 		// case 'PUT_ITEM_IN_CART2':
 		// 	return  {...state, cart: this.cart.push(action.item)}
 

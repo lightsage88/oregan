@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
-import {activateBT} from '../actions/index';
+import {activateBT, parcelDetailsToShippo} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 import Buy from './buy';
 import './checkout.css';
-export default class Checkout extends React.Component {
+export class Checkout extends React.Component {
     constructor(props){
         super(props);
         this.state = {
@@ -14,19 +14,65 @@ export default class Checkout extends React.Component {
             cityShipping: '',
             sprShipping:'',
             zipShipping: '',
+            phoneShipping: '',
+            emailShipping: '',
             countryShipping:'',
             widthShipping: '',
             heightShipping: '',
-            lengthShipping: ''
+            lengthShipping: '',
+            weightShipping: ''
           }
        
+    }
+
+    componentDidMount(){
+        console.log('component mounting!');
+        console.log(this.props);
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log('componentWillReceiveProps running...');
+        let currentCart = nextProps.currentCart;
+        let clientToken = nextProps.clientToken;
+        this.setState({
+            currentCart: currentCart,
+            clientToken: clientToken
+        });
+        let parcelWeightKg=0;
+        let parcelHeight=0;
+        let parcelLength=0;
+        let parcelWidth=0;
+        let quantity = 0;
+        let heightArray = [];
+        let lengthArray = [];
+        let weightArray = [];
+        currentCart.forEach(function(item){
+            heightArray.push(item.productHeightInches);
+            lengthArray.push(item.productLengthInches);
+            weightArray.push(Number((item.productWeightKg * item.quantityOrdered).toFixed(2)));
+            parcelWidth +=item.productWidthInches;
+            parcelWeightKg = item.productWeightKg;
+
+            quantity = item.quantityOrdered;
+        });
+
+        let goalWeight = weightArray.reduce((accumulator, currentValue)=>{
+                return accumulator + currentValue;}, 0);
+        this.setState({
+            weightShipping: Number(goalWeight.toFixed(2)),
+            heightShipping: Math.max(...heightArray),
+            lengthShipping: Math.max(...lengthArray),
+            widthShipping: parcelWidth
+        });
+        //need to get the highest of all singular lengths, heights, and the sum of all widths...not sum of ALL categories
     }
 
     onSubmit(e) {
         e.preventDefault();
         console.log('onSubmit running.');
         console.log(this.state);
-
+        let parcelDetails = this.state;
+        this.props.dispatch(parcelDetailsToShippo(parcelDetails));
 
     }
 
@@ -85,8 +131,16 @@ export default class Checkout extends React.Component {
                         <Input onChange={(e)=>this.onChange(e)} type='text' name='countryShipping' id='countryShipping'
                         placeholder='Country'/>
                     </FormGroup>
+                    <FormGroup>
+                        <Label>Phone</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='tel' name='phoneShipping' id='phoneShipping'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Email</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='email' name='emailShipping' id='emailShipping'/>
+                    </FormGroup>
 
-                    <Button onClick={(e)=>this.onSubmit(e)}>Submit</Button>
+                    <Button onClick={(e)=>this.onSubmit(e)}>Estimate Shipping</Button>
                 </Form>
                 <Buy/>
             </div>
@@ -98,5 +152,7 @@ export default class Checkout extends React.Component {
 
 
 const mapStateToProps = state => ({
-    
-})
+    checkout: state.app.checkout
+});
+
+export default connect(mapStateToProps)(Checkout);
