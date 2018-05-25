@@ -190,7 +190,7 @@ removeFromCart(e){
 						{this.props.details.productDescription} 
 					</CardText>
 					<ul>
-							<li>COST: <span>${this.state.productPrice}</span></li>
+							<li>COST: <span>${Math.round(this.state.productPrice*100)/100}</span></li>
 						
 						</ul>
 					<Form>

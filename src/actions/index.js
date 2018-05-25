@@ -24,6 +24,11 @@ export const loginUserSuccess = (_id, authToken, username, emailAddress, firstNa
 	pastPurchases
 });
 
+export const propsToCheckout = (cartState) => ({
+	type: 'PROPS_TO_CHECKOUT',
+	cartState
+});
+
 export const persistUserData = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases) => ({
 	type: 'PERSIST_USER_DATA',
 	_id,

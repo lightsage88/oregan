@@ -4,6 +4,7 @@ import CartItem from './cartItem';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {activateBT} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
+import {propsToCheckout} from '../actions/index';
 import Checkout from './checkout';
 import './cart.css';
 
@@ -15,19 +16,16 @@ export class Cart extends React.Component {
 		let instance;
 		this.state = {
 			currentCart: '',
-			modal: false,
 			parcelWeight: '',
 			parcelHeight: '',
 			parcelLength: '',
 			parcelWidth:''
 		};
-		this.toggle = this.toggle.bind(this);
 	}
 
-	toggle(){
-		this.setState({
-			modal: !this.state.modal
-		});
+	sendToCheckout(e){
+		console.log('sendToCheckout Running');
+		this.props.dispatch(propsToCheckout(this.state));
 	}
 
 
@@ -38,38 +36,29 @@ export class Cart extends React.Component {
 		this.setState({
 			currentCart: currentCart,
 			clientToken: clientToken
-
 		});
-
-
-//simple just multply line 69 by quantity ;)
-
 		let parcelWeightKg=0;
 		let parcelHeight=0;
 		let parcelLength=0;
 		let parcelWidth=0;
 		let quantity = 0;
-		console.log(quantity);
 		let heightArray = [];
 		let lengthArray = [];
-		console.log(currentCart);
+		let weightArray = [];
 		currentCart.forEach(function(item){
-			console.log(item.productWeightKg);
-			console.log(parcelHeight);
-			// parcelWeightKg +=item.productWeightKg;
-			// parcelHeight +=item.productHeightInches;
-			// parcelLength +=item.productLengthInches;
 			heightArray.push(item.productHeightInches);
 			lengthArray.push(item.productLengthInches);
+			weightArray.push(Number((item.productWeightKg * item.quantityOrdered).toFixed(2)));
 			parcelWidth +=item.productWidthInches;
 			parcelWeightKg = item.productWeightKg;
-			console.log(heightArray);
-			console.log(lengthArray);
+
 			quantity = item.quantityOrdered;
 		});
-		console.log(quantity);
+
+		let goalWeight = weightArray.reduce((accumulator, currentValue)=>{
+				return accumulator + currentValue;}, 0);
 		this.setState({
-			parcelWeight: (parcelWeightKg * quantity).toFixed(2),
+			parcelWeight: Number(goalWeight.toFixed(2)),
 			parcelHeight: Math.max(...heightArray),
 			parcelLength: Math.max(...lengthArray),
 			parcelWidth: parcelWidth
@@ -92,7 +81,7 @@ export class Cart extends React.Component {
 			<div className='cartMain'>
 
 				<h3 className='sectionBrand'>Cart</h3>
-				<Button color='primary' onClick={this.toggle}><a href='/checkout'>Checkout</a></Button>
+				<Button color='primary' onClick={(e)=>this.sendToCheckout(e)}><a href='/checkout'>Checkout</a></Button>
 				{items}
 			</div>
 			);

@@ -44,7 +44,10 @@ export default class Checkout extends React.Component {
 
 
     render(){
+        console.log(this.state);
+            console.log(this.props);
         return(
+
             <div className='checkoutMain'>
                 <h3>Shipping Address</h3>
                 <Form>
