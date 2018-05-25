@@ -105,10 +105,10 @@ export class ProductCard extends React.Component{
 			productRating,
 			productStock,
 			productType,
-			productWeightKg: productWeightKg * quantityOrdered,
-			productWidthInches: productWidthInches * quantityOrdered,
-			productHeightInches: productHeightInches * quantityOrdered,
-			productLengthInches: productLengthInches * quantityOrdered
+			productWeightKg: productWeightKg,
+			productWidthInches: productWidthInches,
+			productHeightInches: productHeightInches,
+			productLengthInches: productLengthInches
 		};
 
 		console.log(cart);

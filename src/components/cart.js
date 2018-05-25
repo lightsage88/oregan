@@ -30,14 +30,6 @@ export class Cart extends React.Component {
 		});
 	}
 
-	// async componentDidMount(){
-	// 	this.props.dispatch(activateBT());
-	// }
-
-	// async buy() {
-	// 	const {nonce} = await this.instance.requestPaymentMethod();
-	// 	await fetch(`http://localhost:8080/api/checkout`)	
-	// }
 
 	componentWillReceiveProps(nextProps){
 		
@@ -48,31 +40,42 @@ export class Cart extends React.Component {
 			clientToken: clientToken
 
 		});
-	}
 
 
+//simple just multply line 69 by quantity ;)
 
-	componentDidUpdate(){
-		console.log(this.state);
 		let parcelWeightKg=0;
 		let parcelHeight=0;
 		let parcelLength=0;
 		let parcelWidth=0;
-		let currentCart = this.state.currentCart;
+		let quantity = 0;
+		console.log(quantity);
+		let heightArray = [];
+		let lengthArray = [];
 		console.log(currentCart);
 		currentCart.forEach(function(item){
 			console.log(item.productWeightKg);
-			console.log(parcelWeightKg);
-			parcelWeightKg +=item.productWeightKg;
-			console.log(parcelWeightKg);
-			
+			console.log(parcelHeight);
+			// parcelWeightKg +=item.productWeightKg;
+			// parcelHeight +=item.productHeightInches;
+			// parcelLength +=item.productLengthInches;
+			heightArray.push(item.productHeightInches);
+			lengthArray.push(item.productLengthInches);
+			parcelWidth +=item.productWidthInches;
+			parcelWeightKg = item.productWeightKg;
+			console.log(heightArray);
+			console.log(lengthArray);
+			quantity = item.quantityOrdered;
 		});
-		console.log(this.state);
-
+		console.log(quantity);
+		this.setState({
+			parcelWeight: (parcelWeightKg * quantity).toFixed(2),
+			parcelHeight: Math.max(...heightArray),
+			parcelLength: Math.max(...lengthArray),
+			parcelWidth: parcelWidth
+		});
+		//need to get the highest of all singular lengths, heights, and the sum of all widths...not sum of ALL categories
 	}
-
-
-	
 
 	render(){
 		console.log(this.state);
@@ -96,8 +99,5 @@ export class Cart extends React.Component {
 	}
 }
 
-// const mapStateToProps = state => ({
-// 	clientToken: state.app.user.btToken
-// });
 
 export default connect()(Cart);

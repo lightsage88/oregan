@@ -32,13 +32,17 @@ export class CartItem extends React.Component{
 			productType: '',
 			id: '',
 			dateToCart: '',
-			quantityUnavailable: false
+			quantityUnavailable: false,
+			parcelWeight: '',
+			parcelHeight: '',
+			parcelLength: '',
+			parcelWidth:''
 
 		}
 	}
 
 	componentDidMount(){
-		
+		console.log(this.props);
 		this.setState({
 			companyName: this.props.details.companyName,
 			dateToCart: this.props.details.dateToCart,
@@ -57,6 +61,8 @@ export class CartItem extends React.Component{
 	}
 
 	onChange(e){
+		console.log('onchange running...');
+		console.log(this.props.details);
 		let quantityOrdered = parseInt(e.target.value);
 		let productPrice = this.props.details.productPrice * quantityOrdered;
 		this.setState({
@@ -101,6 +107,11 @@ export class CartItem extends React.Component{
 		let productRating= this.props.details.productRating;
 		let productStock= this.props.details.productStock;
 		let productType= this.props.details.productType;
+		let productWeightKg = this.props.details.productWeightKg;
+		let productWidthInches = this.props.details.productWidthInches;
+		let productHeightInches = this.props.details.productHeightInches;
+		let productLengthInches = this.props.details.productLengthInches;
+
 
 		let item = {quantityOrdered,
 			dateToCart, 
@@ -112,7 +123,11 @@ export class CartItem extends React.Component{
 			shippingPrice,
 			productRating,
 			productStock,
-			productType
+			productType,
+			productWeightKg: productWeightKg,
+			productWidthInches: productWidthInches,
+			productHeightInches: productHeightInches,
+			productLengthInches: productLengthInches
 		};
 
 		
