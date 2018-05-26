@@ -9,18 +9,12 @@ export class Buy extends React.Component {
 	}; 
 
 	async componentWillMount() {
-        // Get a client token for authorization from your server
-        // const response = await fetch("server.test/client_token");
-        // const clientToken = await response.json(); // If returned as JSON string
+        
         await this.props.dispatch(activateBT());
-        // this.setState({
-        //     clientToken
-        // });
-        console.log(this.props);
+       
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         this.setState({
             clientToken: nextProps.clientToken
         });

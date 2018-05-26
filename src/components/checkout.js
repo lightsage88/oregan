@@ -26,13 +26,8 @@ export class Checkout extends React.Component {
        
     }
 
-    componentDidMount(){
-        console.log('component mounting!');
-        console.log(this.props);
-    }
-
+    
     componentWillReceiveProps(nextProps){
-        console.log('componentWillReceiveProps running...');
         let currentCart = nextProps.currentCart;
         let clientToken = nextProps.clientToken;
         this.setState({
@@ -66,22 +61,19 @@ export class Checkout extends React.Component {
             widthShipping: parcelWidth
         });
         //need to get the highest of all singular lengths, heights, and the sum of all widths...not sum of ALL categories
-        console.log(nextProps);
         let shippingOptions = nextProps.shippingOptions;
         if(shippingOptions.length !== 0 ) {
-            console.log('bingo');
-            console.log(shippingOptions);
+            
             this.setState({
-                shippingOptions: shippingOptions
+                shippingOptions: shippingOptions,
+                fadeIn: true
             });
         }
-        console.log(this.state);
     }
 
     async onSubmit(e) {
         e.preventDefault();
-        console.log('onSubmit running.');
-        console.log(this.state);
+        
         let parcelDetails = this.state;
         this.props.dispatch(parcelDetailsToShippo(parcelDetails));
     }
@@ -90,18 +82,42 @@ export class Checkout extends React.Component {
         
         let infoPart = e.target.name;
         let value = e.target.value;
-        console.log(infoPart);
         this.setState({
             [e.target.name]: value
         });
     }
 
     
-
+ //         <FormGroup check>
+ //            <Label check>
+ //              <Input type="radio" name="radio1" />{' '}
+ //              Option one is this and that—be sure to include why it's great
+ //            </Label>
+ //          </FormGroup>
 
     render(){
         console.log(this.state);
-            console.log(this.props);
+        console.log(this.props);
+        let options = this.state.shippingOptions;
+        console.log(options);
+        let shippingChoices = undefined;
+        if(options !== undefined) {
+            shippingChoices = options.map((item, index)=>
+            <div key={index}>
+{/*                < details={item} pageType={this.state.pageType}/>
+*/}
+                <FormGroup check>
+                    <Label check>
+                        <Input type='radio' name='radio1' />{' '}
+                       ${item.amount} - Estimated Delivery Time: {item.estimated_days} Days - Provider: {item.provider}
+                    </Label>
+                </FormGroup>
+            </div>
+        );
+
+
+        }
+        
         return(
 
             <div className='checkoutMain'>
@@ -152,6 +168,19 @@ export class Checkout extends React.Component {
 
                     <Button onClick={(e)=>this.onSubmit(e)}>Estimate Shipping</Button>
                 </Form>
+                
+
+                <Fade in={this.state.fadeIn} tag='h3' className='mt-3'>
+                        Hello, hooman
+                        <Form>
+                            <FormGroup tag='fieldset'><legend>Shipping Option</legend>
+                            {(shippingChoices) ? shippingChoices : null}
+
+                            </FormGroup>
+                        </Form>
+                </Fade>
+                
+
                 <Buy/>
                 
             </div>
