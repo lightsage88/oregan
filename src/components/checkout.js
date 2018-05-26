@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Fade, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {activateBT, parcelDetailsToShippo} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 import Buy from './buy';
@@ -20,7 +20,8 @@ export class Checkout extends React.Component {
             widthShipping: '',
             heightShipping: '',
             lengthShipping: '',
-            weightShipping: ''
+            weightShipping: '',
+            fadeIn: false
           }
        
     }
@@ -65,15 +66,24 @@ export class Checkout extends React.Component {
             widthShipping: parcelWidth
         });
         //need to get the highest of all singular lengths, heights, and the sum of all widths...not sum of ALL categories
+        console.log(nextProps);
+        let shippingOptions = nextProps.shippingOptions;
+        if(shippingOptions.length !== 0 ) {
+            console.log('bingo');
+            console.log(shippingOptions);
+            this.setState({
+                shippingOptions: shippingOptions
+            });
+        }
+        console.log(this.state);
     }
 
-    onSubmit(e) {
+    async onSubmit(e) {
         e.preventDefault();
         console.log('onSubmit running.');
         console.log(this.state);
         let parcelDetails = this.state;
         this.props.dispatch(parcelDetailsToShippo(parcelDetails));
-
     }
 
     onChange(e){
@@ -84,9 +94,9 @@ export class Checkout extends React.Component {
         this.setState({
             [e.target.name]: value
         });
-
-
     }
+
+    
 
 
     render(){
@@ -143,6 +153,7 @@ export class Checkout extends React.Component {
                     <Button onClick={(e)=>this.onSubmit(e)}>Estimate Shipping</Button>
                 </Form>
                 <Buy/>
+                
             </div>
 
             );
@@ -152,7 +163,7 @@ export class Checkout extends React.Component {
 
 
 const mapStateToProps = state => ({
-    checkout: state.app.checkout
+    shippingOptions: state.app.shippingOptions
 });
 
 export default connect(mapStateToProps)(Checkout);

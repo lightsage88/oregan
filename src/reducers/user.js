@@ -68,7 +68,8 @@ const user = (state=initialState, action) => {
 			})
 		// case 'PUT_ITEM_IN_CART2':
 		// 	return  {...state, cart: this.cart.push(action.item)}
-
+		case 'SEND_SHIPPING_OPTIONS_TO_CLIENT':
+			return {...state}
 		case 'STOCK_SHELF':
 			return {...state}
 

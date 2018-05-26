@@ -30,6 +30,11 @@ export const propsToCheckout = (cartState) => ({
 	cartState
 });
 
+export const sendShippingOptionsToClient = (shippingOptions)=> ({
+	type: 'SEND_SHIPPING_OPTIONS_TO_CLIENT',
+	shippingOptions
+});
+
 export const persistUserData = (_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout) => ({
 	type: 'PERSIST_USER_DATA',
 	_id,
@@ -295,6 +300,8 @@ export const parcelDetailsToShippo = (parcelDetails) => {
 		.then(response => response.json())
 		.then(json=>{
 			console.log(json);
+			let shippingOptions = json;
+			dispatch(sendShippingOptionsToClient(shippingOptions));
 		})
 		.catch(err =>{
 			console.log(err);
