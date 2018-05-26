@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Button, Fade, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Fade, Form, FormGroup, Label, Input, FormText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {activateBT, parcelDetailsToShippo} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 import Buy from './buy';
@@ -21,7 +21,8 @@ export class Checkout extends React.Component {
             heightShipping: '',
             lengthShipping: '',
             weightShipping: '',
-            fadeIn: false
+            fadeIn: false,
+            dropdownOpen: false
           }
        
     }
@@ -79,7 +80,9 @@ export class Checkout extends React.Component {
     }
 
     onChange(e){
-        
+        console.log(e);
+        console.log(e.target);
+        console.log(e.target.value);
         let infoPart = e.target.name;
         let value = e.target.value;
         this.setState({
@@ -154,9 +157,24 @@ export class Checkout extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for='countryShipping'>Country</Label>
-                        <Input onChange={(e)=>this.onChange(e)} type='text' name='countryShipping' id='countryShipping'
-                        placeholder='Country'/>
-                    </FormGroup>
+                        <Input onChange={(e)=>this.onChange(e)} type='select' name='countryShipping' id='countryShipping'>
+                            <option value=''>SELECT COUNTRY</option>
+                            <option value='AR'>Argentina</option>
+                            <option value='CA'>Canada</option>
+                            <option value='CN'>China</option>
+                            <option value='ID'>Indonesia</option>
+                            <option value='JP'>Japan</option>
+                            <option value='JM'>Jamaica</option>
+                            <option value='MX'>Mexico</option>
+                            <option value='MM'>Myanmar</option>    
+                            <option value='SP'>Spain</option>
+                            <option value='KR'>South Korea</option>    
+                            <option value='TW'>Taiwan</option>    
+                            <option value='TH'>Thailand</option>                
+                            <option value='US'>United States of America</option>
+                            <option value='VN'>Vietnam</option>
+                        </Input>
+                   </FormGroup>
                     <FormGroup>
                         <Label>Phone</Label>
                         <Input onChange={(e)=>this.onChange(e)} type='tel' name='phoneShipping' id='phoneShipping'/>
