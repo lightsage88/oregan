@@ -111,7 +111,7 @@ export class Checkout extends React.Component {
         });
         let serviceFees;
         let shippingMethodCost = Number(e.target.value);
-        serviceFees = Number(((Number(e.target.value) + this.state.itemCost) * 0.029) + 0.30).toFixed(2);
+        serviceFees = Number(((Number(e.target.value) + this.state.itemCost) * 0.029) + 1.00).toFixed(2);
         console.log(serviceFees);
         this.setState({
             shippingMethodCost: shippingMethodCost,
@@ -247,7 +247,7 @@ export class Checkout extends React.Component {
                 </Fade>
                 
 
-                <Buy/>
+                <Buy totalCost={this.state.totalCost} shippingMethod={}/>
                 
             </div>
 

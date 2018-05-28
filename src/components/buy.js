@@ -1,11 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {activateBT} from '../actions/index';
+import {activateBT, checkoutBT} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 export class Buy extends React.Component {
 	instance;
 	state = {
-		clientToken: null
+		clientToken: null,
+        totalCost: 0
 	}; 
 
 	async componentWillMount() {
@@ -15,20 +16,30 @@ export class Buy extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
         this.setState({
-            clientToken: nextProps.clientToken
+            clientToken: nextProps.clientToken,
+            totalCost: Number(nextProps.totalCost)
+
         });
     }
 
 
  
     async buy() {
+        console.log('async buy running...');
         // Send the nonce to your server
         const { nonce } = await this.instance.requestPaymentMethod();
+        let totalCost = this.state.totalCost;
+        console.log(totalCost);
         await fetch(`server.test/purchase/${nonce}`);
+        console.log(nonce);
+        this.props.dispatch(checkoutBT(nonce, totalCost));
+
     }
  
     render() {
+        console.log(this.props);
     	console.log(this.state);
         if (!this.state.clientToken) {
             return (

@@ -285,6 +285,30 @@ export const activateBT =()=> {
 	}
 }
 
+export const checkoutBT = (nonce, totalCost) => {
+	console.log('checkoutBT running...');
+	console.log(nonce);
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/braintree/checkout`,
+			{
+			 method: 'POST',
+			 headers: {
+				'Content-Type':	'application/json' 	
+			 },
+			 body: JSON.stringify({nonce, totalCost})
+			})
+		.then(response => response.json())
+		.then(json =>{
+			console.log(json);
+		})
+		.catch(err => {
+			console.log(err);
+			console.error(err);
+		});
+	}
+
+}
+
 export const parcelDetailsToShippo = (parcelDetails) => {
 	console.log(parcelDetails);
 	console.log('addressToShippo running');
@@ -309,6 +333,8 @@ export const parcelDetailsToShippo = (parcelDetails) => {
 		});
 	}
 }
+
+
 
 
 // export const parcelDetailsToShippo = (parcelDimensions) => {
