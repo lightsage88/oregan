@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { Button, Fade, Form, FormGroup, Label, Input, FormText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Fade, Table, Form, FormGroup, Label, Input, FormText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {activateBT, parcelDetailsToShippo} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 import Buy from './buy';
@@ -222,6 +222,28 @@ export class Checkout extends React.Component {
 
                             </FormGroup>
                         </Form>
+                        <Table>
+                            <thead>
+                                <tr>
+                                    <th>Item Cost</th>
+                                    <th>Shipping Cost</th>
+                                    <th>Service Fees</th>
+                                    <th>Total Cost</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    
+                                    <td>{this.state.itemCost}</td>
+                                  
+                                    <td>{this.state.shippingMethodCost}</td>
+                                    <td>{this.state.serviceFees}</td>
+                                    <td>{this.state.totalCost}</td>
+                                </tr>
+                            </tbody>    
+                        </Table>
+
+
                 </Fade>
                 
 
