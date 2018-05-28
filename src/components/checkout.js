@@ -24,6 +24,7 @@ export class Checkout extends React.Component {
             shippingMethodCost: '',
             serviceFees: '',
             itemCost: '',
+            shippingID: '',
             fadeIn: false,
             dropdownOpen: false
           }
@@ -104,7 +105,9 @@ export class Checkout extends React.Component {
  //              Option one is this and that—be sure to include why it's great
  //            </Label>
  //          </FormGroup>
-    pickShippingMethod(e){
+    pickShippingMethod(e, shippingMethodID){
+        console.log(e);
+        console.log(shippingMethodID);
         this.setState({
             shippingMethodCost: 0,
             serviceFees:0
@@ -131,21 +134,26 @@ export class Checkout extends React.Component {
         let options = this.state.shippingOptions;
         let shippingChoices = undefined;
         if(options !== undefined) {
-            shippingChoices = options.map((item, index)=>
-            <div key={index}>
+            shippingChoices = options.map((item, index)=> {
+            let shippingMethodID = item.object_id;
+            console.log(shippingMethodID);
+          return (<div key={index}>
 {/*                < details={item} pageType={this.state.pageType}/>
 */}
                 <FormGroup check>
                     <Label check>
-                        <Input onChange={(e)=>this.pickShippingMethod(e)} type='radio' name='radio1' value={item.amount} />
+                        <Input onChange={(e)=>this.pickShippingMethod(e, this.shippingMethodID)} type='radio' name='radio1' shippingid={item.object_id} value={item.amount} />
                        ${item.amount} - Estimated Delivery Time: {item.estimated_days} Days - Provider: {item.provider}
                     </Label>
                 </FormGroup>
             </div>
         );
+    });
+
+         
 
 
-        }
+  }
         
         return(
 
@@ -247,7 +255,7 @@ export class Checkout extends React.Component {
                 </Fade>
                 
 
-                <Buy totalCost={this.state.totalCost} shippingMethod={}/>
+                <Buy totalCost={this.state.totalCost} shippingMethod={'waitforit'}/>
                 
             </div>
 
