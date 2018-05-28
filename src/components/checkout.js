@@ -21,6 +21,9 @@ export class Checkout extends React.Component {
             heightShipping: '',
             lengthShipping: '',
             weightShipping: '',
+            shippingMethodCost: '',
+            serviceFees: '',
+            itemCost: '',
             fadeIn: false,
             dropdownOpen: false
           }
@@ -40,6 +43,7 @@ export class Checkout extends React.Component {
         let parcelLength=0;
         let parcelWidth=0;
         let quantity = 0;
+        let itemPrice = 0;
         let heightArray = [];
         let lengthArray = [];
         let weightArray = [];
@@ -49,17 +53,20 @@ export class Checkout extends React.Component {
             weightArray.push(Number((item.productWeightKg * item.quantityOrdered).toFixed(2)));
             parcelWidth +=item.productWidthInches;
             parcelWeightKg = item.productWeightKg;
-
+            itemPrice += item.productPrice * item.quantityOrdered;
             quantity = item.quantityOrdered;
         });
-
+        console.log(itemPrice.toFixed(2));
         let goalWeight = weightArray.reduce((accumulator, currentValue)=>{
                 return accumulator + currentValue;}, 0);
+        
         this.setState({
             weightShipping: Number(goalWeight.toFixed(2)),
             heightShipping: Math.max(...heightArray),
             lengthShipping: Math.max(...lengthArray),
-            widthShipping: parcelWidth
+            widthShipping: parcelWidth,
+            itemCost: Number(itemPrice.toFixed(2))
+
         });
         //need to get the highest of all singular lengths, heights, and the sum of all widths...not sum of ALL categories
         let shippingOptions = nextProps.shippingOptions;
@@ -97,12 +104,31 @@ export class Checkout extends React.Component {
  //              Option one is this and that—be sure to include why it's great
  //            </Label>
  //          </FormGroup>
+    pickShippingMethod(e){
+        this.setState({
+            shippingMethodCost: 0,
+            serviceFees:0
+        });
+        let serviceFees;
+        let shippingMethodCost = Number(e.target.value);
+        serviceFees = Number(((Number(e.target.value) + this.state.itemCost) * 0.029) + 0.30).toFixed(2);
+        console.log(serviceFees);
+        this.setState({
+            shippingMethodCost: shippingMethodCost,
+            totalCost: this.state.itemCost + shippingMethodCost + Number(serviceFees),
+            serviceFees: serviceFees 
+        });
+        console.log(this.state);
+
+    }
+
+
 
     render(){
         console.log(this.state);
-        console.log(this.props);
+        
+
         let options = this.state.shippingOptions;
-        console.log(options);
         let shippingChoices = undefined;
         if(options !== undefined) {
             shippingChoices = options.map((item, index)=>
@@ -111,7 +137,7 @@ export class Checkout extends React.Component {
 */}
                 <FormGroup check>
                     <Label check>
-                        <Input type='radio' name='radio1' />{' '}
+                        <Input onChange={(e)=>this.pickShippingMethod(e)} type='radio' name='radio1' value={item.amount} />
                        ${item.amount} - Estimated Delivery Time: {item.estimated_days} Days - Provider: {item.provider}
                     </Label>
                 </FormGroup>
