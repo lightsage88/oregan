@@ -299,6 +299,7 @@ export const checkoutBT = (nonce, totalCost) => {
 			})
 		.then(response => response.json())
 		.then(json =>{
+			console.log('braintree transaction');
 			console.log(json);
 		})
 		.catch(err => {
@@ -348,6 +349,7 @@ export const createShippoTransaction = (shippingMethodID) => {
 		})
 		.then(response => response.json())
 		.then(json =>{
+			console.log('shippoTransaction');
 			console.log(json);
 		})
 		.catch(err =>{
