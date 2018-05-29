@@ -334,6 +334,28 @@ export const parcelDetailsToShippo = (parcelDetails) => {
 	}
 }
 
+export const createShippoTransaction = (shippingMethodID) => {
+	console.log('createShippoTransaction action running...');
+	console.log(shippingMethodID);
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/shippo/createTransaction`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({shippingMethodID})
+		})
+		.then(response => response.json())
+		.then(json =>{
+			console.log(json);
+		})
+		.catch(err =>{
+			console.log(err);
+			console.error(err);
+		});
+	}
+}
 
 
 
