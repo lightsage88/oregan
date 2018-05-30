@@ -285,7 +285,7 @@ export const activateBT =()=> {
 	}
 }
 
-export const checkoutBT = (nonce, totalCost) => {
+export const checkoutBT = (nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer) => {
 	console.log('checkoutBT running...');
 	console.log(nonce);
 	return (dispatch) => {
@@ -295,8 +295,8 @@ export const checkoutBT = (nonce, totalCost) => {
 			 headers: {
 				'Content-Type':	'application/json' 	
 			 },
-			 body: JSON.stringify({nonce, totalCost})
-			})
+			body: JSON.stringify({nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer})
+		})
 		.then(response => response.json())
 		.then(json =>{
 			console.log('braintree transaction');
@@ -307,8 +307,9 @@ export const checkoutBT = (nonce, totalCost) => {
 			console.error(err);
 		});
 	}
-
 }
+
+
 
 export const parcelDetailsToShippo = (parcelDetails) => {
 	console.log(parcelDetails);

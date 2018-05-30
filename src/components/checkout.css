@@ -1,3 +1,9 @@
 div.checkoutMain {
 	margin-top: 20%;
 }
+
+.billingSection {
+	background: limegreen;
+	width: 70%;
+	padding: 4rem;
+}

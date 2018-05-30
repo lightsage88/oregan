@@ -21,12 +21,15 @@ export class Checkout extends React.Component {
             heightShipping: '',
             lengthShipping: '',
             weightShipping: '',
+            streetNameShipping:'',
+            streetNameShipping2: '',
             shippingMethodCost: '',
             shippingMethodID: '',
             serviceFees: '',
             itemCost: '',
             shippingID: '',
             fadeIn: false,
+            fadeIn2: false,
             dropdownOpen: false
           }
        
@@ -122,7 +125,8 @@ export class Checkout extends React.Component {
             shippingMethodCost: shippingMethodCost,
             totalCost: (this.state.itemCost + shippingMethodCost + Number(serviceFees)).toFixed(2),
             serviceFees: serviceFees,
-            shippingMethodID: shippingMethodID
+            shippingMethodID: shippingMethodID,
+            fadeIn2: true
         });
         console.log(this.state);
 
@@ -161,8 +165,79 @@ export class Checkout extends React.Component {
         return(
 
             <div className='checkoutMain'>
-                <h3>Shipping Address</h3>
+
+
+
                 <Form>
+                <section className='billingSection'>
+                    <h3>Billing Address</h3>
+                    <FormGroup>
+                        <Label for='firstNameBilling'>First Name</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='firstNameBilling' id='firstNameBilling'
+                        placeholder='First Name'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='lastNameBilling'>Last Name</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='lastNameBilling' id='lastNameBilling'
+                        placeholder='Last Name'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='streetNameBilling'>Street</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='streetNameBilling' id='streetNameBilling'
+                        placeholder='Street'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='streetNameBilling2'>Street (cont.)</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='streetNameBilling2' id='streetNameBilling2'
+                        placeholder='Street Ext.'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='cityBilling'>City</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='cityBilling' id='cityBilling'
+                        placeholder='City'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='state/province/regionBilling'>State/Province/Region</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='sprBilling' id='state/province/regionBilling'
+                        placeholder='State/Province/Region'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='zip'>Zipcode</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='zipBilling' id='zipBilling' placeholder='ZIPCODE'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label for='countryBilling'>Country</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='select' name='countryBilling' id='countryBilling'>
+                            <option value=''>SELECT COUNTRY</option>
+                            <option value='AR'>Argentina</option>
+                            <option value='CA'>Canada</option>
+                            <option value='CN'>China</option>
+                            <option value='ID'>Indonesia</option>
+                            <option value='JP'>Japan</option>
+                            <option value='JM'>Jamaica</option>
+                            <option value='MX'>Mexico</option>
+                            <option value='MM'>Myanmar</option>    
+                            <option value='SP'>Spain</option>
+                            <option value='KR'>South Korea</option>    
+                            <option value='TW'>Taiwan</option>    
+                            <option value='TH'>Thailand</option>                
+                            <option value='US'>United States of America</option>
+                            <option value='VN'>Vietnam</option>
+                        </Input>
+                   </FormGroup>
+                    <FormGroup>
+                        <Label>Phone</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='tel' name='phoneBilling' id='phoneBilling'/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Email</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='email' name='emailBilling' id='emailBilling'/>
+                    </FormGroup>
+                </section>
+
+                <section className='shippingSection'>
+                    <h3>Shipping Address</h3>
+
                     <FormGroup>
                         <Label for='firstNameShipping'>First Name</Label>
                         <Input onChange={(e)=>this.onChange(e)} type='text' name='firstNameShipping' id='firstNameShipping'
@@ -179,6 +254,11 @@ export class Checkout extends React.Component {
                         placeholder='Street'/>
                     </FormGroup>
                     <FormGroup>
+                        <Label for='streetNameShipping2'>Street (cont.)</Label>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='streetNameShipping2' id='streetNameShipping2'
+                        placeholder='Street Ext.'/>
+                    </FormGroup>
+                    <FormGroup>
                         <Label for='cityShipping'>City</Label>
                         <Input onChange={(e)=>this.onChange(e)} type='text' name='cityShipping' id='cityShipping'
                         placeholder='City'/>
@@ -190,7 +270,7 @@ export class Checkout extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <Label for='zip'>Zipcode</Label>
-                        <Input onChange={(e)=>this.onChange(e)} type='text' name='zipShipping' id='zip' placeholder='ZIPCODE'/>
+                        <Input onChange={(e)=>this.onChange(e)} type='text' name='zipShipping' id='zipShipping' placeholder='ZIPCODE'/>
                     </FormGroup>
                     <FormGroup>
                         <Label for='countryShipping'>Country</Label>
@@ -222,9 +302,6 @@ export class Checkout extends React.Component {
                     </FormGroup>
 
                     <Button onClick={(e)=>this.onSubmit(e)}>Estimate Shipping</Button>
-                </Form>
-                
-
                 <Fade in={this.state.fadeIn} tag='h3' className='mt-3'>
                         Hello, hooman
                         <Form>
@@ -256,9 +333,53 @@ export class Checkout extends React.Component {
 
 
                 </Fade>
+                </section>
+
+                </Form>
+                                <Fade in={this.state.fadeIn2} tag='h3' className='mt-3'>
+                                    <Buy totalCost={this.state.totalCost} 
+                                         shippingMethod={this.state.shippingMethodID}
+                                         //User Account/Customer Props//
+
+                                         id={localStorage.getItem('_id')}
+                                         firstNameCustomer={localStorage.getItem('firstName')}
+                                         lastNameCustomer={localStorage.getItem('lastName')}
+                                         emailCustomer={localStorage.getItem('emailAddress')}
+                                         phoneCustomer={localStorage.getItem('cellNumber')}
+
+                                         //Billing Props//
+                                         firstNameBilling={this.state.firstNameBilling}
+                                         lastNameBilling={this.state.lastNameBilling}
+                                         streetNameBilling={this.state.streetNameBilling}
+                                         extendedStreetBilling={this.state.streetNameBilling2}
+                                         localityBilling={this.state.cityBilling}
+                                         regionBilling={this.state.sprBilling}
+                                         postalCodeBilling={this.state.zipBilling}
+                                         countryNameBilling={this.state.countryBilling}
+                                         emailBilling={this.state.emailBilling}
+                                         phoneBilling={this.state.phoneBilling}
+                                         //Shipping Props//
+                                         firstNameShipping={this.state.firstNameShipping}
+                                         lastNameShipping={this.state.lastNameShipping}
+                                         streetNameShipping={this.state.streetNameShipping}
+                                         extendedStreetShipping={this.state.streetNameShipping2}
+                                         localityShipping={this.state.cityShipping}
+                                         regionShipping={this.state.sprShipping}
+                                         postalCodeShipping={this.state.zipShipping}
+                                         countryNameShipping={this.state.countryShipping}
+                                         emailShipping={this.state.emailShipping}
+                                         phoneShipping={this.state.phoneShipping}
+                                         
+
+
+                                    />
+                                </Fade>
+
                 
 
-                <Buy totalCost={this.state.totalCost} shippingMethod={this.state.shippingMethodID}/>
+                
+                
+
                 
             </div>
 

@@ -7,7 +7,30 @@ export class Buy extends React.Component {
 	state = {
 		clientToken: null,
         totalCost: 0,
-        shippingMethodID: ''
+        shippingMethodID: '',
+        countryNameBilling: '',
+        countryNameShipping: '',
+        emailBilling:'',
+        emailShipping:'',
+        extendedStreetBilling:'',
+        extendedStreetShipping:'',
+        firstNameBilling:'',
+        firstNameShipping: '',
+        lastNameBilling:'',
+        lastNameShipping:'',
+        id: '',
+        localityShipping:'',
+        localityBilling:'',
+        phoneBilling:'',
+        phoneShipping:'',
+        postalCodeBilling:'',
+        postalCodeShipping:'',
+        regionBilling:'',
+        regionShipping:'',
+        streetNameBilling:'',
+        streetNameShipping:'',
+
+
 	}; 
 
 	async componentWillMount() {
@@ -21,7 +44,32 @@ export class Buy extends React.Component {
         this.setState({
             clientToken: nextProps.clientToken,
             totalCost: Number(nextProps.totalCost),
-            shippingMethodID: nextProps.shippingMethod
+            shippingMethodID: nextProps.shippingMethod,
+            countryNameBilling: nextProps.countryNameBilling,
+            countryNameShipping: nextProps.countryNameShipping,
+            emailBilling:nextProps.emailBilling,
+            emailShipping:nextProps.emailShipping,
+            extendedStreetBilling:nextProps.extendedStreetBilling,
+            extendedStreetShipping:nextProps.extendedStreetShipping,
+            firstNameBilling:nextProps.firstNameBilling,
+            firstNameShipping: nextProps.firstNameShipping,
+            lastNameBilling:nextProps.lastNameBilling,
+            lastNameShipping:nextProps.lastNameShipping,
+            id: nextProps.id,
+            localityShipping:nextProps.localityShipping,
+            localityBilling:nextProps.localityBilling,
+            phoneBilling:nextProps.phoneBilling,
+            phoneShipping:nextProps.phoneShipping,
+            postalCodeBilling:nextProps.postalCodeBilling,
+            postalCodeShipping:nextProps.postalCodeShipping,
+            regionBilling:nextProps.regionBilling,
+            regionShipping:nextProps.regionShipping,
+            streetNameBilling:nextProps.streetNameBilling,
+            streetNameShipping:nextProps.streetNameShipping,
+            firstNameCustomer: nextProps.firstNameCustomer,
+            lastNameCustomer: nextProps.lastNameCustomer,
+            emailCustomer: nextProps.emailCustomer,
+            phoneCustomer: nextProps.phoneCustomer
 
 
         });
@@ -35,13 +83,36 @@ export class Buy extends React.Component {
         // Send the nonce to your server
         const { nonce } = await this.instance.requestPaymentMethod();
         let totalCost = this.state.totalCost;
+        let firstNameCustomer=this.state.firstNameCustomer;
+                                         let lastNameCustomer= this.state.lastNameCustomer;
+                                         let emailCustomer=this.state.emailCustomer;;
+                                         let phoneCustomer=this.state.phoneCustomer;
         let shippingMethodID= this.state.shippingMethodID;
-        console.log(shippingMethodID);
-        console.log(totalCost);
+            let countryNameBilling= this.state.countryNameBilling;
+            let countryNameShipping= this.state.countryNameShipping;
+            let emailBilling=this.state.emailBilling;
+            let emailShipping=this.state.emailShipping;
+            let extendedStreetBilling=this.state.extendedStreetBilling;
+            let extendedStreetShipping=this.state.extendedStreetShipping;
+            let firstNameBilling=this.state.firstNameBilling;
+            let firstNameShipping= this.state.firstNameShipping;
+            let lastNameBilling=this.state.lastNameBilling;
+            let lastNameShipping=this.state.lastNameShipping;
+            let id= this.state.id;
+            let localityShipping=this.state.localityShipping;
+            let localityBilling=this.state.localityBilling;
+            let phoneBilling=this.state.phoneBilling;
+            let phoneShipping=this.state.phoneShipping;
+            let postalCodeBilling=this.state.postalCodeBilling;
+            let postalCodeShipping=this.state.postalCodeShipping;
+            let regionBilling=this.state.regionBilling;
+            let regionShipping=this.state.regionShipping;
+            let streetNameBilling=this.state.streetNameBilling;
+            let streetNameShipping=this.state.streetNameShipping;
+       
         await fetch(`server.test/purchase/${nonce}`);
-        console.log(nonce);
         this.props.dispatch(createShippoTransaction(shippingMethodID));
-        this.props.dispatch(checkoutBT(nonce, totalCost));
+        this.props.dispatch(checkoutBT(nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer ));
 
     }
  
