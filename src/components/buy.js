@@ -29,6 +29,9 @@ export class Buy extends React.Component {
         regionShipping:'',
         streetNameBilling:'',
         streetNameShipping:'',
+        itemCost:'',
+        serviceFees:'',
+        shippingMethodCost:''
 
 
 	}; 
@@ -69,8 +72,10 @@ export class Buy extends React.Component {
             firstNameCustomer: nextProps.firstNameCustomer,
             lastNameCustomer: nextProps.lastNameCustomer,
             emailCustomer: nextProps.emailCustomer,
-            phoneCustomer: nextProps.phoneCustomer
-
+            phoneCustomer: nextProps.phoneCustomer,
+            itemCost:nextProps.itemCost,
+            serviceFees: nextProps.serviceFees,
+            shippingMethodCost: nextProps.shippingMethodCost
 
         });
     }
@@ -109,10 +114,17 @@ export class Buy extends React.Component {
             let regionShipping=this.state.regionShipping;
             let streetNameBilling=this.state.streetNameBilling;
             let streetNameShipping=this.state.streetNameShipping;
+        let itemCost = this.state.itemCost;
+        let serviceFees = this.state.serviceFees;
+        let shippingMethodCost = this.state.shippingMethodCost;
+
+
+
+
        
         await fetch(`server.test/purchase/${nonce}`);
         this.props.dispatch(createShippoTransaction(shippingMethodID));
-        this.props.dispatch(checkoutBT(nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer ));
+        this.props.dispatch(checkoutBT(nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, shippingMethodCost, serviceFees));
 
     }
  

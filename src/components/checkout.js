@@ -369,6 +369,10 @@ export class Checkout extends React.Component {
                                          countryNameShipping={this.state.countryShipping}
                                          emailShipping={this.state.emailShipping}
                                          phoneShipping={this.state.phoneShipping}
+                                         //Custom Field Props//
+                                         itemCost={this.state.itemCost}
+                                         serviceFees={this.state.serviceFees}
+                                         shippingMethodCost={this.state.shippingMethodCost}
                                          
 
 

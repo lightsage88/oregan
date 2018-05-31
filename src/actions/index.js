@@ -1,5 +1,12 @@
 require('es6-promise').polyfill();
 const {API_BASE_URL} = require('../config');
+let transactionObject = {
+	braintreeReceipt:'',
+	shippoReceipt:'',
+	cart: ''
+};
+
+let transactionRecord = Object.create(transactionObject);
 
 
 export const registerUserSuccess = (user) => ({
@@ -171,6 +178,7 @@ export const persistData = (_id) => {
 			const pastPurchases = userData.pastPurchases;
 			const checkout = userData.checkout;
 			dispatch(persistUserData(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout));
+			transactionRecord.cart =cart;
 		})
 		.catch(error => console.log(error));
 	}
@@ -285,7 +293,7 @@ export const activateBT =()=> {
 	}
 }
 
-export const checkoutBT = (nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer) => {
+export const checkoutBT = (nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, serviceFees, shippingMethodCost) => {
 	console.log('checkoutBT running...');
 	console.log(nonce);
 	return (dispatch) => {
@@ -295,12 +303,15 @@ export const checkoutBT = (nonce, totalCost, countryNameShipping, countryNameBil
 			 headers: {
 				'Content-Type':	'application/json' 	
 			 },
-			body: JSON.stringify({nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer})
+			body: JSON.stringify({nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, serviceFees, shippingMethodCost})
 		})
 		.then(response => response.json())
 		.then(json =>{
 			console.log('braintree transaction');
 			console.log(json);
+			let btObject = json;
+			transactionRecord.braintreeReceipt = btObject;
+
 		})
 		.catch(err => {
 			console.log(err);
@@ -352,6 +363,9 @@ export const createShippoTransaction = (shippingMethodID) => {
 		.then(json =>{
 			console.log('shippoTransaction');
 			console.log(json);
+			let shippoObject = json;
+			transactionRecord.shippoReceipt = shippoObject;
+			console.log(transactionRecord);
 		})
 		.catch(err =>{
 			console.log(err);
