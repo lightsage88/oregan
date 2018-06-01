@@ -66,10 +66,12 @@ export const sendClientToken = (token) =>({
 	token
 });
 
-// export const putItemInCart2 = (item) => ({
-// 	type: 'PUT_ITEM_IN_CART2',
-// 	item
-// });
+export const addShippoTransactionToState = (shippoObject) => ({
+	type: 'ADD_SHIPPO_TRANSACTION_TO_STATE',
+	shippoObject
+});
+
+
 
 
 export const logOut = () => ({
@@ -293,32 +295,7 @@ export const activateBT =()=> {
 	}
 }
 
-export const checkoutBT = (nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, serviceFees, shippingMethodCost) => {
-	console.log('checkoutBT running...');
-	console.log(nonce);
-	return (dispatch) => {
-		fetch(`${API_BASE_URL}/api/braintree/checkout`,
-			{
-			 method: 'POST',
-			 headers: {
-				'Content-Type':	'application/json' 	
-			 },
-			body: JSON.stringify({nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, serviceFees, shippingMethodCost})
-		})
-		.then(response => response.json())
-		.then(json =>{
-			console.log('braintree transaction');
-			console.log(json);
-			let btObject = json;
-			transactionRecord.braintreeReceipt = btObject;
 
-		})
-		.catch(err => {
-			console.log(err);
-			console.error(err);
-		});
-	}
-}
 
 
 
@@ -365,7 +342,8 @@ export const createShippoTransaction = (shippingMethodID) => {
 			console.log(json);
 			let shippoObject = json;
 			transactionRecord.shippoReceipt = shippoObject;
-			console.log(transactionRecord);
+			// console.log(transactionRecord);
+			dispatch(addShippoTransactionToState(shippoObject));
 		})
 		.catch(err =>{
 			console.log(err);
@@ -375,10 +353,55 @@ export const createShippoTransaction = (shippingMethodID) => {
 }
 
 
+export const checkoutBT = (cart, nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, serviceFees, shippingMethodCost, shippingMethodID) => {
+	console.log('checkoutBT running...');
+	console.log(nonce);
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/braintree/checkout`,
+			{
+			 method: 'POST',
+			 headers: {
+				'Content-Type':	'application/json' 	
+			 },
+			body: JSON.stringify({cart, nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, serviceFees, shippingMethodCost, shippingMethodID})
+		})
+		.then(response => response.json())
+		.then(json =>{
+			console.log('braintree transaction');
+			console.log(json);
+			let btObject = json;
+			transactionRecord.braintreeReceipt = btObject;
+			dispatch(sendTransactionRecordToDataBase(btObject));
+		})
+		//now we try a fetch to the user router
+		.catch(err => {
+			console.log(err);
+			console.error(err);
+		});
+	}
+}
 
-// export const parcelDetailsToShippo = (parcelDimensions) => {
-// 	console.log(parcelDimensions);
-// 	return (dispatch)=>{
+export const sendTransactionRecordToDataBase = (receipt) => {
+	console.log('sendTransactionRecordToDataBase running...');
+	console.log(receipt);
+	return(dispatch)=> {
+		fetch(`${API_BASE_URL}/api/users/finishTransaction`,
+				{
+				method: 'PUT',
+				headers: {
+						'Content-Type':'application/json'
+					},
+				body: JSON.stringify({receipt})	
+			})
+		.then(response => response.json())
+		.then(json =>{
+			console.log(json);
+		})
+		.catch(err=>{
+			console.log(err);
+			console.error(err);
+		});
+	}
 
-// 	}
-// }
+}
+

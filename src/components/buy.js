@@ -5,6 +5,7 @@ import DropIn from 'braintree-web-drop-in-react';
 export class Buy extends React.Component {
 	instance;
 	state = {
+        cart:'',
 		clientToken: null,
         totalCost: 0,
         shippingMethodID: '',
@@ -31,7 +32,8 @@ export class Buy extends React.Component {
         streetNameShipping:'',
         itemCost:'',
         serviceFees:'',
-        shippingMethodCost:''
+        shippingMethodCost:'',
+        shippoTransaction: ''
 
 
 	}; 
@@ -45,6 +47,7 @@ export class Buy extends React.Component {
     componentWillReceiveProps(nextProps) {
         console.log(nextProps);
         this.setState({
+            cart: nextProps.cart,
             clientToken: nextProps.clientToken,
             totalCost: Number(nextProps.totalCost),
             shippingMethodID: nextProps.shippingMethod,
@@ -75,7 +78,8 @@ export class Buy extends React.Component {
             phoneCustomer: nextProps.phoneCustomer,
             itemCost:nextProps.itemCost,
             serviceFees: nextProps.serviceFees,
-            shippingMethodCost: nextProps.shippingMethodCost
+            shippingMethodCost: nextProps.shippingMethodCost,
+            shippoTransaction: nextProps.shippoTransaction
 
         });
     }
@@ -87,6 +91,7 @@ export class Buy extends React.Component {
         console.log('async buy running...');
         // Send the nonce to your server
         const { nonce } = await this.instance.requestPaymentMethod();
+        let cart = this.state.cart;
         let totalCost = this.state.totalCost;
         let firstNameCustomer=this.state.firstNameCustomer;
                                          let lastNameCustomer= this.state.lastNameCustomer;
@@ -117,16 +122,25 @@ export class Buy extends React.Component {
         let itemCost = this.state.itemCost;
         let serviceFees = this.state.serviceFees;
         let shippingMethodCost = this.state.shippingMethodCost;
+        let shippoTransaction = this.state.shippoTransaction;
 
 
 
 
        
         await fetch(`server.test/purchase/${nonce}`);
-        this.props.dispatch(createShippoTransaction(shippingMethodID));
-        this.props.dispatch(checkoutBT(nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, shippingMethodCost, serviceFees));
+        await this.props.dispatch(createShippoTransaction(shippingMethodID));
+        console.log('thanks for waiting');
+        console.log(this.state.shippoTransaction);
+        console.log(this.state.cart);
+        //get the id of the shippoTransaction as well as specific bits of the cart and pass them into checkoutBT, which we can then parlay into 
+        //passing that as pastPurchases
+            this.props.dispatch(checkoutBT(cart, nonce, totalCost, countryNameShipping, countryNameBilling, emailShipping, emailBilling, extendedStreetShipping, extendedStreetBilling,firstNameShipping,firstNameBilling,lastNameShipping,lastNameBilling,id,localityBilling, localityShipping,phoneShipping,phoneBilling,postalCodeShipping,postalCodeBilling,regionShipping,regionBilling, streetNameShipping, streetNameBilling, firstNameCustomer, lastNameCustomer, emailCustomer, phoneCustomer, itemCost, shippingMethodCost, serviceFees, shippingMethodID));
+        
 
     }
+
+
  
     render() {
         console.log(this.props);
@@ -153,7 +167,8 @@ export class Buy extends React.Component {
 }
 
 const mapStateToProps = state => ({
-    clientToken : state.app.user.btToken
+    clientToken : state.app.user.btToken,
+    cart: state.app.user.cart
 });
 
 export default connect(mapStateToProps)(Buy);

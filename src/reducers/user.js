@@ -10,7 +10,8 @@ const initialState = {
 	cart: [],
 	pastPurchases: [],
 	btToken: '',
-	checkout: []
+	checkout: [],
+	shippoTransaction: ''
 }
 
 const user = (state=initialState, action) => {
@@ -60,6 +61,11 @@ const user = (state=initialState, action) => {
 		case 'SEND_CLIENT_TOKEN':
 			return Object.assign({}, state, {
 				btToken: action.token
+			})
+
+		case 'ADD_SHIPPO_TRANSACTION_TO_STATE':
+			return Object.assign({}, state, {
+				shippoTransaction: action.shippoObject
 			})
 
 		case 'PROPS_TO_CHECKOUT': 
