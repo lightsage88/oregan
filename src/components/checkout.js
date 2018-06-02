@@ -87,6 +87,9 @@ export class Checkout extends React.Component {
     async onSubmit(e) {
         e.preventDefault();
         
+
+
+
         let parcelDetails = this.state;
         this.props.dispatch(parcelDetailsToShippo(parcelDetails));
     }
@@ -231,7 +234,7 @@ export class Checkout extends React.Component {
                     </FormGroup>
                     <FormGroup>
                         <Label>Email</Label>
-                        <Input onChange={(e)=>this.onChange(e)} type='email' name='emailBilling' id='emailBilling'/>
+                        <Input required onChange={(e)=>this.onChange(e)} type='email' name='emailBilling' id='emailBilling'/>
                     </FormGroup>
                 </section>
 
@@ -300,8 +303,28 @@ export class Checkout extends React.Component {
                         <Label>Email</Label>
                         <Input onChange={(e)=>this.onChange(e)} type='email' name='emailShipping' id='emailShipping'/>
                     </FormGroup>
-
-                    <Button onClick={(e)=>this.onSubmit(e)}>Estimate Shipping</Button>
+                    {(this.state.firstNameBilling) &&
+                    (this.state.lastNameBilling) &&
+                    (this.state.streetNameBilling) &&
+                    (this.state.cityBilling) &&
+                    (this.state.sprBilling) &&
+                    (this.state.zipBilling) &&
+                    (this.state.countryBilling) &&
+                    (this.state.emailBilling) &&
+                    (this.state.firstNameShipping) &&
+                    (this.state.lastNameShipping) &&
+                    (this.state.streetNameShipping) &&
+                    (this.state.cityShipping) &&
+                    (this.state.sprShipping) &&
+                    (this.state.zipShipping) &&
+                    (this.state.countryShipping) ?
+                      <Button color='warning' onClick={(e)=>this.onSubmit(e)}>Estimate Shipping</Button>
+                      :
+                    <div>
+                      <Button disabled onClick={(e)=>this.onSubmit(e)}>Estimate Shipping</Button>
+                      <aside>You're missing something in the form!</aside>
+                    </div>
+                    }
                 <Fade in={this.state.fadeIn} tag='h3' className='mt-3'>
                         Hello, hooman
                         <Form>
@@ -330,11 +353,8 @@ export class Checkout extends React.Component {
                                 </tr>
                             </tbody>    
                         </Table>
-
-
                 </Fade>
                 </section>
-
                 </Form>
                                 <Fade in={this.state.fadeIn2} tag='h3' className='mt-3'>
                                     <Buy totalCost={this.state.totalCost} 

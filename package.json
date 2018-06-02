@@ -6,6 +6,7 @@
     "@babel/preset-react": "^7.0.0-beta.47",
     "@noderize/runtime": "^0.6.0",
     "@noderize/scripts": "^0.6.0",
+    "availity-reactstrap-validation": "^2.0.2",
     "bootstrap": "^4.1.0",
     "braintree-react": "^3.3.0",
     "braintree-web": "^3.34.0",

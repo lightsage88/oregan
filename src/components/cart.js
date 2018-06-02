@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import CartItem from './cartItem';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter, NavLink} from 'reactstrap';
 import DropIn from 'braintree-web-drop-in-react';
 import {propsToCheckout, activateBT, parcelDetailsToShippo} from '../actions/index';
 import Checkout from './checkout';
@@ -82,12 +82,20 @@ export class Cart extends React.Component {
 			<div className='cartMain'>
 
 				<h3 className='sectionBrand'>Cart</h3>
-				<Button color='primary' onClick={(e)=>this.sendToCheckout(e)}><a href='/checkout'>Checkout</a></Button>
+				{currentCart.length == 0 ?
+				<Button disabled color='warning' onClick={(e)=>this.sendToCheckout(e)}><NavLink disabled href='/checkout'>Checkout</NavLink></Button>
+				:
+				<Button color='warning' onClick={(e)=>this.sendToCheckout(e)}><NavLink href='/checkout'>Checkout</NavLink></Button>
+				}
 				{items}
 			</div>
 			);
 	}
 }
+
+// const mapStateToProps = state => ({
+
+// })
 
 
 export default connect()(Cart);
