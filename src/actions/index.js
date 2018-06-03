@@ -6,7 +6,6 @@ let transactionObject = {
 	cart: ''
 };
 
-let transactionRecord = Object.create(transactionObject);
 
 
 export const registerUserSuccess = (user) => ({
@@ -69,6 +68,11 @@ export const sendClientToken = (token) =>({
 export const addShippoTransactionToState = (shippoObject) => ({
 	type: 'ADD_SHIPPO_TRANSACTION_TO_STATE',
 	shippoObject
+});
+
+export const addBTTransactionToState = (btObject) => ({
+	type: 'ADD_BT_TRANSACTION_TO_STATE',
+	btObject
 });
 
 
@@ -180,7 +184,6 @@ export const persistData = (_id) => {
 			const pastPurchases = userData.pastPurchases;
 			const checkout = userData.checkout;
 			dispatch(persistUserData(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout));
-			transactionRecord.cart =cart;
 		})
 		.catch(error => console.log(error));
 	}
@@ -341,8 +344,6 @@ export const createShippoTransaction = (shippingMethodID) => {
 			console.log('shippoTransaction');
 			console.log(json);
 			let shippoObject = json;
-			transactionRecord.shippoReceipt = shippoObject;
-			// console.log(transactionRecord);
 			dispatch(addShippoTransactionToState(shippoObject));
 		})
 		.catch(err =>{
@@ -370,8 +371,21 @@ export const checkoutBT = (cart, nonce, totalCost, countryNameShipping, countryN
 			console.log('braintree transaction');
 			console.log(json);
 			let btObject = json;
-			transactionRecord.braintreeReceipt = btObject;
 			dispatch(sendTransactionRecordToDataBase(btObject));
+			let objecto = {};
+			objecto.id = btObject.transaction.id;
+			objecto.status = btObject.transaction.status;
+			objecto.type = btObject.transaction.type;
+			objecto.currencyIsoCode = btObject.transaction.currencyIsoCode;
+			objecto.amount = btObject.transaction.amount;
+			objecto.createdAt = btObject.transaction.createdAt;
+			objecto.updatedAt = btObject.transaction.updatedAt;
+			objecto.billing = btObject.transaction.billing;
+			objecto.shipping = btObject.transaction.shipping;
+			objecto.customFields = btObject.transaction.customFields;
+			console.log(objecto);
+			console.log(objecto.id);
+			dispatch(addBTTransactionToState(objecto));
 		})
 		//now we try a fetch to the user router
 		.catch(err => {

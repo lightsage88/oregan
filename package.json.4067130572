@@ -1,0 +1,37 @@
+{
+  "name": "oregan-shop",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@babel/preset-react": "^7.0.0-beta.47",
+    "@noderize/runtime": "^0.6.0",
+    "@noderize/scripts": "^0.6.0",
+    "availity-reactstrap-validation": "^2.0.2",
+    "bootstrap": "^4.1.0",
+    "braintree-react": "^3.3.0",
+    "braintree-web": "^3.34.0",
+    "braintree-web-drop-in": "^1.11.0",
+    "braintree-web-drop-in-react": "^1.0.3",
+    "nodemailer": "^4.6.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-braintree-fields": "^1.1.0",
+    "react-dom": "^16.3.1",
+    "react-load-script": "0.0.6",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.4",
+    "react-test-renderer": "^16.3.2",
+    "reactstrap": "^5.0.0",
+    "redux": "^3.7.2",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-form": "^7.3.0",
+    "redux-thunk": "^2.2.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  }
+}

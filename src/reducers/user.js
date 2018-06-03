@@ -11,7 +11,8 @@ const initialState = {
 	pastPurchases: [],
 	btToken: '',
 	checkout: [],
-	shippoTransaction: ''
+	shippoTransaction: '',
+	btTransaction: ''
 }
 
 const user = (state=initialState, action) => {
@@ -66,6 +67,11 @@ const user = (state=initialState, action) => {
 		case 'ADD_SHIPPO_TRANSACTION_TO_STATE':
 			return Object.assign({}, state, {
 				shippoTransaction: action.shippoObject
+			})
+
+		case 'ADD_BT_TRANSACTION_TO_STATE':
+			return Object.assign({}, state, {
+				btTransaction: action.btObject
 			})
 
 		case 'PROPS_TO_CHECKOUT': 
