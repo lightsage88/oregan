@@ -82,7 +82,7 @@ export class Cart extends React.Component {
 		if(this.state.buttonClick){
 			return(
 				<div>
-					<Checkout />
+					<Checkout currentCart={currentCart}/>
 				</div>
 				);
 		}

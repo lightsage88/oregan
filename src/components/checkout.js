@@ -42,7 +42,61 @@ export class Checkout extends React.Component {
     }
 
     
+    //         troubleFix(){
+    //     let currentCart = this.props.currentCart;
+    //     let clientToken = this.props.clientToken;
+    //     this.setState({
+    //         currentCart: currentCart,
+    //         clientToken: clientToken
+    //     });
+    //     let parcelWeightKg=0;
+    //     let parcelHeight=0;
+    //     let parcelLength=0;
+    //     let parcelWidth=0;
+    //     let quantity = 0;
+    //     let itemPrice = 0;
+    //     let heightArray = [];
+    //     let lengthArray = [];
+    //     let weightArray = [];
+    //    currentCart.forEach(function(item){
+    //         heightArray.push(item.productHeightInches);
+    //         lengthArray.push(item.productLengthInches);
+    //         weightArray.push(Number((item.productWeightKg * item.quantityOrdered).toFixed(2)));
+    //         parcelWidth +=item.productWidthInches;
+    //         parcelWeightKg = item.productWeightKg;
+    //         itemPrice += item.productPrice * item.quantityOrdered;
+    //         quantity = item.quantityOrdered;
+    //     });
+    //     console.log(itemPrice.toFixed(2));
+    //     let goalWeight = weightArray.reduce((accumulator, currentValue)=>{
+    //             return accumulator + currentValue;}, 0);
+        
+    //     this.setState({
+    //         weightShipping: Number(goalWeight.toFixed(2)),
+    //         heightShipping: Math.max(...heightArray),
+    //         lengthShipping: Math.max(...lengthArray),
+    //         widthShipping: parcelWidth,
+    //         itemCost: Number(itemPrice.toFixed(2))
+
+    //     });
+    //     //need to get the highest of all singular lengths, heights, and the sum of all widths...not sum of ALL categories
+    //     let shippingOptions = this.props.shippingOptions;
+    //     if(shippingOptions.length !== 0 ) {
+            
+    //         this.setState({
+    //             shippingOptions: shippingOptions,
+    //             fadeIn: true
+    //         });
+    //     }
+    // }
+
+
     componentWillReceiveProps(nextProps){
+        if(this.props.currentCart !== nextProps.currentCart){
+
+
+
+        
         let currentCart = nextProps.currentCart;
         let clientToken = nextProps.clientToken;
         this.setState({
@@ -79,7 +133,9 @@ export class Checkout extends React.Component {
             itemCost: Number(itemPrice.toFixed(2))
 
         });
+    }
         //need to get the highest of all singular lengths, heights, and the sum of all widths...not sum of ALL categories
+        if(this.props.shippingOptions !== nextProps.shippingOptions){
         let shippingOptions = nextProps.shippingOptions;
         if(shippingOptions.length !== 0 ) {
             
@@ -88,6 +144,8 @@ export class Checkout extends React.Component {
                 fadeIn: true
             });
         }
+    }
+    
     }
 
     async onSubmit(e) {
@@ -111,13 +169,7 @@ export class Checkout extends React.Component {
         });
     }
 
-    
- //         <FormGroup check>
- //            <Label check>
- //              <Input type="radio" name="radio1" />{' '}
- //              Option one is this and that—be sure to include why it's great
- //            </Label>
- //          </FormGroup>
+ 
     pickShippingMethod(e){
         console.log(e);
         let shippingMethodID = e.target.getAttribute('shippingid');
@@ -141,21 +193,15 @@ export class Checkout extends React.Component {
 
     }
 
-    // resolution(){
-    //     console.log('resolution running...')
-    //     console.log(this.props);
-    //     render(){
-    //     return (
-    //         <Thanks shippo={this.props.shippoTransaction}
-    //         bT={this.props.btTransaction}/>
-    //     );
-    //   }
-    // }
+    
 
 
     render(){
         console.log(this.state);
         console.log(this.props);
+        // if(this.props.currentCart !== undefined) {
+        //     this.troubleFix();
+        // }
         //if this.props.shippoTransaction.status == "SUCCESS"
         //&& this.props.btTransaction.success == true
         //run a function that will send us to a new page
@@ -443,7 +489,8 @@ export class Checkout extends React.Component {
 const mapStateToProps = state => ({
     shippingOptions: state.app.shippingOptions,
     btTransaction: state.app.user.btTransaction,
-    shippoTransaction: state.app.user.shippoTransaction
+    shippoTransaction: state.app.user.shippoTransaction,
+    currentCart: state.app.user.cart
 });
 
 export default connect(mapStateToProps)(Checkout);
