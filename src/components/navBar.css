@@ -44,7 +44,7 @@ text-align: right;
 
 .navbarMain{
 	position: fixed;
-	overflow:hidden;
+	overflow:initial;
 	top:0;
 		width: 100%;
 		z-index: 2;
