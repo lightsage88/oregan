@@ -27,7 +27,7 @@ export class App extends Component {
           <Route exact path='/account' component={Account}/>
           <Route path='/products/:productId' component={ProductList}/>
           <Route exact path='/cart' render={()=><Cart currentCart={this.props.currentCart}/>}/>
-          <Route exact path='/checkout' render={()=><Checkout parcelGame={this.state} currentCart={this.props.currentCart}/>}/>
+          <Route exact path='/checkout' render={()=><Checkout currentCart={this.props.currentCart}/>}/>
           <Route exact path='/thanks' render={()=><Thanks btObject={this.props.btTransaction} shippoObject={this.props.shippoTransaction}/>}/>          
                 <script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>
 

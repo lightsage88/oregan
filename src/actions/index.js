@@ -420,9 +420,10 @@ export const sendTransactionRecordToDataBase = (receipt) => {
 
 }
 
-export const emailCustomer = (payload) =>{
+export const emailCustomer = (bT, shippo) =>{
 	console.log('emailCustomer running...');
-	console.log(payload);
+	console.log(bT);
+	console.log(shippo);
 	return(dispatch)=>{
 		fetch(`${API_BASE_URL}/api/nodemailer/emailCustomer`,
 		{
@@ -430,22 +431,23 @@ export const emailCustomer = (payload) =>{
 			headers: {
 				'Content-Type':'application/json'
 			},
-			body: JSON.stringify({payload})
+			body: JSON.stringify({bT, shippo})
 		})
 		.then(response => response.json())
 		.then(json => {
 			console.log(json);
 		})
-		catch(err=>{
+		.catch(err=>{
 			console.log(err);
 			console.error(err);
 		});
 	}
 }
 
-export const emailAdmin = (payload) =>{
+export const emailAdmin = (bT, shippo) =>{
 	console.log('emailAdmin running...');
-	console.log(payload);
+	console.log(bT);
+	console.log(shippo);
 	return(dispatch)=>{
 		fetch(`${API_BASE_URL}/api/nodemailer/emailAdmin`,
 		{
@@ -453,13 +455,13 @@ export const emailAdmin = (payload) =>{
 			headers: {
 				'Content-Type':'application/json'
 			},
-			body: JSON.stringify({payload})
+			body: JSON.stringify({bT, shippo})
 		})
 		.then(response => response.json())
 		.then(json => {
 			console.log(json);
 		})
-		catch(err=>{
+		.catch(err=>{
 			console.log(err);
 			console.error(err);
 		});

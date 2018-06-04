@@ -37,6 +37,10 @@ export class Checkout extends React.Component {
        
     }
 
+    componentDidMount(){
+        console.log(this.props);
+    }
+
     
     componentWillReceiveProps(nextProps){
         let currentCart = nextProps.currentCart;
@@ -54,7 +58,7 @@ export class Checkout extends React.Component {
         let heightArray = [];
         let lengthArray = [];
         let weightArray = [];
-        currentCart.forEach(function(item){
+       currentCart.forEach(function(item){
             heightArray.push(item.productHeightInches);
             lengthArray.push(item.productLengthInches);
             weightArray.push(Number((item.productWeightKg * item.quantityOrdered).toFixed(2)));

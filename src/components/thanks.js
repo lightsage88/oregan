@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {emailAdmin, emailCustomer} from '../actions/index';
 
-export default class Thanks extends React.Component{
+export class Thanks extends React.Component{
 	constructor(props){
 		super(props);
 
@@ -26,15 +27,28 @@ export default class Thanks extends React.Component{
 
 	componentDidMount(){
 		console.log(this.props);
+		let bT = this.props.bT;
+		let shippo = this.props.shippo;
+		this.emailCustomer(bT, shippo);
+		this.emailAdmin(bT, shippo);
+
 	}
 
 	//need to create two email functions: one for the admin (me and chinh) and one for the customer.
-	emailCustomer(){
-		console.log('emailCustomer running...')''
+	emailCustomer(bT, shippo){
+		console.log('emailCustomer running...');
+		console.log(bT);
+		console.log(shippo);
+		this.props.dispatch(emailCustomer(bT, shippo));
+
 	}
 
-	emailAdmin(){
+	emailAdmin(bT, shippo){
 		console.log('emailAdmin running...');
+		console.log(bT);
+		console.log(shippo);
+		this.props.dispatch(emailAdmin(bT, shippo));
+
 
 	}
 
@@ -78,4 +92,6 @@ export default class Thanks extends React.Component{
 		);
 	}
 }
+
+export default connect()(Thanks);
 

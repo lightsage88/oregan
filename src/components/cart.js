@@ -18,14 +18,18 @@ export class Cart extends React.Component {
 			parcelWeight: '',
 			parcelHeight: '',
 			parcelLength: '',
-			parcelWidth:''
+			parcelWidth:'',
+			buttonClick: false
 		};
 	}
 
 	sendToCheckout(e){
 		console.log('sendToCheckout Running');
-		// this.props.dispatch(parcelDetailsToShippo(this.state));
-		this.props.dispatch(propsToCheckout(this.state));
+		// // this.props.dispatch(parcelDetailsToShippo(this.state));
+		// this.props.dispatch(propsToCheckout(this.state));
+		this.setState({
+			buttonClick: true
+		});
 
 	}
 
@@ -73,6 +77,17 @@ export class Cart extends React.Component {
 
 		let currentCart = this.state.currentCart;
 		const inventory = Object.values(currentCart);
+
+
+		if(this.state.buttonClick){
+			return(
+				<div>
+					<Checkout />
+				</div>
+				);
+		}
+
+
 		const items = inventory.map((item,index)=>
 			<div key={index}>
 				<CartItem details={item}/>
@@ -93,9 +108,9 @@ export class Cart extends React.Component {
 	}
 }
 
-// const mapStateToProps = state => ({
+const mapStateToProps = state => ({
+	currentCart: state.app.user.cart
+});
 
-// })
 
-
-export default connect()(Cart);
+export default connect(mapStateToProps)(Cart);
