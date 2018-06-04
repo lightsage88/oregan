@@ -373,6 +373,7 @@ export const checkoutBT = (cart, nonce, totalCost, countryNameShipping, countryN
 			let btObject = json;
 			dispatch(sendTransactionRecordToDataBase(btObject));
 			let objecto = {};
+			objecto.success = btObject.success;
 			objecto.id = btObject.transaction.id;
 			objecto.status = btObject.transaction.status;
 			objecto.type = btObject.transaction.type;
@@ -419,3 +420,48 @@ export const sendTransactionRecordToDataBase = (receipt) => {
 
 }
 
+export const emailCustomer = (payload) =>{
+	console.log('emailCustomer running...');
+	console.log(payload);
+	return(dispatch)=>{
+		fetch(`${API_BASE_URL}/api/nodemailer/emailCustomer`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({payload})
+		})
+		.then(response => response.json())
+		.then(json => {
+			console.log(json);
+		})
+		catch(err=>{
+			console.log(err);
+			console.error(err);
+		});
+	}
+}
+
+export const emailAdmin = (payload) =>{
+	console.log('emailAdmin running...');
+	console.log(payload);
+	return(dispatch)=>{
+		fetch(`${API_BASE_URL}/api/nodemailer/emailAdmin`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify({payload})
+		})
+		.then(response => response.json())
+		.then(json => {
+			console.log(json);
+		})
+		catch(err=>{
+			console.log(err);
+			console.error(err);
+		});
+	}
+}

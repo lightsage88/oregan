@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { Button, Fade, Table, Form, FormGroup, Label, Input, FormText, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import {activateBT, parcelDetailsToShippo} from '../actions/index';
 import DropIn from 'braintree-web-drop-in-react';
 import Buy from './buy';
+import Thanks from './thanks';
 import './checkout.css';
 export class Checkout extends React.Component {
     constructor(props){
@@ -135,11 +137,32 @@ export class Checkout extends React.Component {
 
     }
 
+    // resolution(){
+    //     console.log('resolution running...')
+    //     console.log(this.props);
+    //     render(){
+    //     return (
+    //         <Thanks shippo={this.props.shippoTransaction}
+    //         bT={this.props.btTransaction}/>
+    //     );
+    //   }
+    // }
 
 
     render(){
         console.log(this.state);
-        
+        console.log(this.props);
+        //if this.props.shippoTransaction.status == "SUCCESS"
+        //&& this.props.btTransaction.success == true
+        //run a function that will send us to a new page
+        if( (this.props.shippoTransaction !== undefined) &&
+            (this.props.shippoTransaction.status == "SUCCESS") &&
+            (this.props.btTransaction !== undefined) && 
+            (this.props.btTransaction.success == true) ) {
+            return (<Thanks shippo={this.props.shippoTransaction}
+            bT={this.props.btTransaction}/>);
+        }
+
 
         let options = this.state.shippingOptions;
         let shippingChoices = undefined;
@@ -414,7 +437,9 @@ export class Checkout extends React.Component {
 
 
 const mapStateToProps = state => ({
-    shippingOptions: state.app.shippingOptions
+    shippingOptions: state.app.shippingOptions,
+    btTransaction: state.app.user.btTransaction,
+    shippoTransaction: state.app.user.shippoTransaction
 });
 
 export default connect(mapStateToProps)(Checkout);
