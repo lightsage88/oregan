@@ -145,7 +145,8 @@ export class Buy extends React.Component {
     render() {
         console.log(this.props);
     	console.log(this.state);
-        if (!this.state.clientToken) {
+        let token = localStorage.getItem(braintreeToken);
+        if (!token) {
             return (
                 <div>
                     <h1>Loading...</h1>

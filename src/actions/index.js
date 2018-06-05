@@ -289,6 +289,7 @@ export const activateBT =()=> {
 			console.log('okay, we should have a json');
 			let token = json;
 			// console.log(token);
+			localStorage.setItem('braintreeToken', token);
 			dispatch(sendClientToken(token));
 		})
 		.catch(err => {
