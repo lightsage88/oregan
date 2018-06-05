@@ -156,7 +156,7 @@ export class Buy extends React.Component {
             return (
                 <div>
                     <DropIn
-                        options={{ authorization: this.state.clientToken }}
+                        options={{ authorization: token }}
                         onInstance={instance => (this.instance = instance)}
                     />
                     <button onClick={this.buy.bind(this)}>Buy</button>
