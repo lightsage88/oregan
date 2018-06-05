@@ -145,7 +145,7 @@ export class Buy extends React.Component {
     render() {
         console.log(this.props);
     	console.log(this.state);
-        let token = localStorage.getItem(braintreeToken);
+        let token = localStorage.getItem('braintreeToken');
         if (!token) {
             return (
                 <div>
