@@ -50,8 +50,13 @@ export class NavBar extends React.Component {
      
       this.props.dispatch(persistData(id));
 
+    } else if(localStorage.getItem('unknownUser')){
+      console.log('unknownUser at play!');
+      console.log(localStorage);
     } else {
-      console.log('no id ');
+      console.log('no id');
+      localStorage.setItem('unknownUser', true);
+      localStorage.setItem('cart', '[]');
     }
 
   }

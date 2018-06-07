@@ -39,6 +39,13 @@ export class ProductCard extends React.Component{
 		}
 	}
 
+	componentWillMount(){
+		console.log('cwm running');
+		if(localStorage.getItem('unknownUser')){
+			let cart = localStorage.getItem('cart');
+		}
+	}
+
 	onChange(e){
 		console.log('onChange running');
 		console.log(e.target.value);
@@ -72,7 +79,11 @@ export class ProductCard extends React.Component{
 		console.log('trying to see something about the dimensions');
 		console.log(this.props.details);
 		console.log(this.props.currentCart);
-		let cart = this.props.currentCart;
+		
+		
+			let cart = this.props.currentCart;
+		
+
 
 		let dateToCart = new Date;
 		let cartLength = cart.length;
