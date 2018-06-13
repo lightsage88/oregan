@@ -14,18 +14,16 @@ import {
 	Nav,
 	NavItem,
 	NavLink,
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Dropdown, 
   DropdownToggle, 
   DropdownMenu, 
   DropdownItem
 } from 'reactstrap';
-import {persistData, tempAccount, loginUser} from '../actions/index';
-import {logOut} from '../actions/index';
+import {persistData, loginUser} from '../actions/index';
+// import {logOut} from '../actions/index';
 import Login from './login';
 import '../staticAssets/shoppingCart.png';
 import './navBar.css';

@@ -122,7 +122,6 @@ export class Buy extends React.Component {
         let itemCost = this.state.itemCost;
         let serviceFees = this.state.serviceFees;
         let shippingMethodCost = this.state.shippingMethodCost;
-        let shippoTransaction = this.state.shippoTransaction;
 
 
 

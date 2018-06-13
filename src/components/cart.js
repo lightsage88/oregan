@@ -1,9 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import CartItem from './cartItem';
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter, NavLink} from 'reactstrap';
-import DropIn from 'braintree-web-drop-in-react';
-import {propsToCheckout, activateBT, parcelDetailsToShippo} from '../actions/index';
+import {Button, NavLink} from 'reactstrap';
 import Checkout from './checkout';
 import './cart.css';
 
@@ -12,7 +10,6 @@ export class Cart extends React.Component {
 	constructor(props){ 
 
 		super(props);
-		let instance;
 		this.state = {
 			currentCart: '',
 			parcelWeight: '',

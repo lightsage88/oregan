@@ -5,7 +5,6 @@ import {Field, reduxForm} from 'redux-form';
 // import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 //need to create an action and reducers etc.
 // import {connect} from 'react-redux';
-import {loginUser} from '../actions/index';
 import './login.css';
 class Login extends React.Component {
 	constructor(props) {

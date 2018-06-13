@@ -5,7 +5,6 @@ import {Card,
 	CardBody,
   CardTitle, 
   CardSubtitle, 
-  CardLink, 
   Button,
 Form,
 FormGroup,
@@ -13,7 +12,7 @@ Label,
 Input} from 'reactstrap';
 
 import {connect} from 'react-redux';
-import {retrieveProducts} from '../actions/index';
+// import {retrieveProducts} from '../actions/index';
 
 // import {putItemInCart2} from '../actions/index';
 import {putItemInCart1} from '../actions/index';
