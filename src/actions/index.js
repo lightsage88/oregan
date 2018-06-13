@@ -117,6 +117,8 @@ export const registerUser = (username, emailAddress, password, firstName, lastNa
 
 
 export const loginUser = (username, password) => {
+	console.log(username);
+	console.log(password);
 	return (dispatch) => {
 		fetch(`${API_BASE_URL}/api/auth/login`,
 		{
@@ -149,12 +151,72 @@ export const loginUser = (username, password) => {
 			localStorage.setItem('cellNumber', cellNumber);
 			localStorage.setItem('_id', _id);
 			localStorage.setItem('validLogin', true);
+			localStorage.setItem('cart', cart);
 			dispatch(loginUserSuccess(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout));
-			window.location = '/';
+			// window.location = '/';
 		})
 		.catch(error => {
 			console.error(error);
 			console.log(error);
+		});
+	}
+}
+
+export const tempAccount = () => {
+	console.log('tempAccount running...');
+	return (dispatch) => {
+		fetch(`${API_BASE_URL}/api/users/unknownUser`,
+		{
+			method:'POST',
+			headers: {
+				'Content-Type':'application/json'
+			}
+		})
+		.then(response => response.json())
+		.then(json => {
+						dispatch(registerUserSuccess(json));
+
+			console.log('introducing our temporary account!');
+			console.log(json);
+			const userData = json;
+			console.log(userData);
+			const username = userData.username;
+			console.log(username);
+			const password = 'password';
+			// localStorage.setItem('tempAccount', true);
+
+			dispatch(loginUser(username, password));
+
+
+		})
+			// const {authToken} = json;
+			// const userData = json;
+			// console.log(userData);
+			// const username = userData.username;
+			// const firstName = userData.firstName;
+			// const lastName = userData.lastName;
+			// const cellNumber = userData.cellNumber;
+			// const emailAddress = userData.emailAddress;
+			// const _id = userData._id;
+			// const cart = userData.cart;
+			// const checkout = userData.checkout; 
+			// const pastPurchases = userData.pastPurchases;
+			// localStorage.setItem('authToken', authToken);
+			// localStorage.setItem('username', username);
+			// localStorage.setItem('firstName', firstName);
+			// localStorage.setItem('lastName', lastName);
+			// localStorage.setItem('emailAddress', emailAddress);
+			// localStorage.setItem('cellNumber', cellNumber);
+			// localStorage.setItem('_id', _id);
+			// localStorage.setItem('validLogin', true);
+			// localStorage.setItem('cart', cart);
+			// dispatch(loginUserSuccess(_id, authToken, username, emailAddress, firstName, lastName, cellNumber, cart, pastPurchases, checkout));
+			
+			// window.location = '/';
+	
+		.catch(error => {
+			console.log(error);
+			console.error(error);
 		});
 	}
 }

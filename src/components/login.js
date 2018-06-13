@@ -15,12 +15,16 @@ class Login extends React.Component {
 
 	attemptLogin(e){
 		e.preventDefault();
+		console.log(this.props.onSubmit);
 		console.log('submit');
 		let username = e.target.username.value;
 		let password = e.target.password.value;
 		console.log(username);
 		console.log(password);
-		this.props.dispatch(loginUser(username, password));
+		
+			this.props.onSubmit(e, username, password)
+		
+		// this.props.dispatch(loginUser(username, password));
 		//we need to create an action to be dispatched here
 		//that will get information from a database and populate
 		//our reduxState so the user can have a more personalized 

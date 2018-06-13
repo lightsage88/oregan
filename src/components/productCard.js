@@ -74,7 +74,90 @@ export class ProductCard extends React.Component{
 
 	}
 
+	addToBasket(e){
+		console.log(localStorage)
+		e.preventDefault();
+		console.log('trying to see something about the dimensions');
+		console.log(this.props.details);
+		console.log(this.props.currentCart);
+		
+		
+			let cart = this.props.currentCart;
+		
+
+
+		let dateToCart = new Date;
+		let cartLength = cart.length;
+		let pageType = this.props.pageType;
+		let userid= localStorage.getItem('_id');
+		let quantityOrdered = this.state.quantityOrdered;
+		let companyName = this.props.details.companyName;
+		let id = this.props.details.id;
+		let productDescription= this.props.details.productDescription;
+		let productName= this.props.details.productName;
+		let productPrice= this.props.details.productPrice;
+		let shippingPrice= this.props.details.shippingPrice;
+		let productRating= this.props.details.productRating;
+		let productStock= this.props.details.productStock;
+		let productType= this.props.details.productType;
+		let productWeightKg = this.props.details.productWeightKg;
+		let productWidthInches = this.props.details.productWidthInches;
+		let productHeightInches = this.props.details.productHeightInches;
+		let productLengthInches = this.props.details.productLengthInches;
+
+
+		let item = {quantityOrdered,
+			dateToCart, 
+			companyName,
+			id,
+			productDescription,
+			productName,
+			productPrice,
+			shippingPrice,
+			productRating,
+			productStock,
+			productType,
+			productWeightKg: productWeightKg,
+			productWidthInches: productWidthInches,
+			productHeightInches: productHeightInches,
+			productLengthInches: productLengthInches
+		};
+
+		console.log(cart);
+		console.log(item);
+		if(cart.length === 0){
+			cart.push(item)
+		}
+
+
+	if(cart.length > 0) {
+		for(let i = 0; i<=cart.length-1; i++){
+			console.log('cycling thru, we dont play');
+			if(cart[i].id === item.id) {
+				console.log(cart[i]);
+				console.log(item);	
+				cart.splice(i, 1);
+				console.log(cart);			
+			}
+		}
+		cart.push(item);
+		console.log('newcart?');
+		console.log(cart);
+	} else {
+		console.log('NEWB');
+		cart.push(item);
+		console.log(cart);
+
+	}
+		
+
+	// this.props.dispatch(putItemInCart1(cart, cartLength, pageType, userid, quantityOrdered, companyName, id, productDescription,productName,productPrice, shippingPrice, productRating, productStock, productType));
+	this.props.dispatch(putItemInCart1(cart, userid, pageType));
+
+	}
+
 	addToCart(e){
+		console.log(localStorage)
 		e.preventDefault();
 		console.log('trying to see something about the dimensions');
 		console.log(this.props.details);
@@ -157,9 +240,7 @@ export class ProductCard extends React.Component{
 
 
 	render(){
-		// let quantityChoice = this.state.quantityOrdered;
-		// let productInfo = this.state.product;
-		// console.log(quantityChoice);
+		
 		return (
 		<div className='productCardMain'>
 			<Card className='cardInit'>
@@ -187,8 +268,10 @@ export class ProductCard extends React.Component{
 						
 						</FormGroup>
 						{
+						!this.state.quantityUnavailable && this.props.currentCart !== undefined ? 
+						(<Button onClick={(e)=>this.addToCart(e)}>add to cart</Button>) :
 						!this.state.quantityUnavailable ? 
-						(<Button onClick={(e)=>this.addToCart(e)}>add to cart</Button>)
+						(<Button onClick={(e)=>this.addToBasket(e)}>add to BASKET</Button>)
 						:
 						(<Button disabled>unavailable</Button>)
 						}

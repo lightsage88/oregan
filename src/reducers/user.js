@@ -85,6 +85,9 @@ const user = (state=initialState, action) => {
 		case 'STOCK_SHELF':
 			return {...state}
 
+		case '@@redux-form/DESTROY':
+			return {...state}
+
 		case 'LOG_OUT':
 			return {}
 

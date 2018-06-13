@@ -24,7 +24,7 @@ import {
   DropdownMenu, 
   DropdownItem
 } from 'reactstrap';
-import {persistData} from '../actions/index';
+import {persistData, tempAccount, loginUser} from '../actions/index';
 import {logOut} from '../actions/index';
 import Login from './login';
 import '../staticAssets/shoppingCart.png';
@@ -44,7 +44,7 @@ export class NavBar extends React.Component {
     this.toggleDropdown = this.toggleDropdown.bind(this);
 	}
 
-  componentDidMount(){
+  componentWillMount(){
     if(localStorage.getItem('_id')) {
       let id = localStorage.getItem('_id');
      
@@ -56,17 +56,19 @@ export class NavBar extends React.Component {
     } else {
       console.log('no id');
       localStorage.setItem('unknownUser', true);
-      localStorage.setItem('cart', '[]');
+      localStorage.setItem('cart', JSON.stringify([]));
     }
 
   }
 
   componentWillReceiveProps(nextProps){
+    if(this.props !== nextProps){
    
     let currentCart = nextProps.currentCart;
     this.setState({
       currentCart: currentCart
     });
+  }
   }
 
 	toggle() {
@@ -91,8 +93,23 @@ export class NavBar extends React.Component {
     localStorage.clear();
   }
 
+  loginSubmit(e, username, password){
+    console.log('loginSubmit running');
+    console.log(e);
+    console.log(username);
+    console.log(password);
+     this.props.dispatch(loginUser(username, password));
+  }
+
 	render() {
-        let cartLength = this.state.currentCart.length;
+    console.log(this.props);
+    console.log(this.state);
+
+    // if(localStorage.getItem('unknownUser')){
+    //   this.props.dispatch(tempAccount());
+    // }
+            let cartLength = this.state.currentCart.length;
+
 		return (
       <div className='navbarMain'>
 
@@ -151,7 +168,7 @@ export class NavBar extends React.Component {
               <Modal isOpen={this.state.modal}>
                 <ModalHeader className='navClickables' toggle={this.toggleModal}>Log In</ModalHeader>
                   <ModalBody>
-                    <Login/>
+                    <Login onSubmit={(e, username, password)=>this.loginSubmit(e, username, password)}/>
                     <NavLink href='/register'><button className='loginRegisterLink'>Register</button></NavLink>
                   </ModalBody>
               </Modal>

@@ -14,7 +14,11 @@ import Thanks from './thanks';
 import Checkout from './checkout';
 export class App extends Component {
 
-
+//TODO:
+//1. Establish an algorithm that will make sure that once we have an
+//anonymous account we are locked into that. we can do this with the localStorage
+//2. Make an action that will delete the new account while routing the purchase to the DB somewhere
+//3. set up action patterns that will delete the guest account at the right time and will time it out to deletion in 30 minutes if left alone.
 
  render() {
     return (
