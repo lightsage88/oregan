@@ -1,9 +1,19 @@
 language: node_js
 node_js: node
+cache:
+  directories:
+    - node_modules
+script:
+    - npm test
+env:
+  - CI=true
+
+before_deploy:
+  - npm install netlify-cli -g
+  - npm run build
 deploy:
-  provider: heroku
-  api_key:
-    secure: 1d3439cc-0634-4b97-be9a-a3e053b03b76
-  app: afternoon-thicket-53540
+  provider: script
+  script: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -P ./build
+  skip_cleanup: true
   on:
-    repo: lightsage88/oregan
+    branch: master
