@@ -237,14 +237,19 @@ export class ProductCard extends React.Component{
 	this.props.dispatch(putItemInCart1(cart, userid, pageType));		
 
 }
+    clickProduct(e){
+        console.log('running clickProduct');
+        console.log(e);
+    }
 
 
 	render(){
+        
 		
 		return (
-		<div className='productCardMain'>
+		<div onClick={(e)=>this.clickProduct(e)} className='productCardMain'>
 			<Card className='cardInit'>
-				<CardBody>
+				<CardBody className='cardBody'>
 					<CardTitle>{this.props.details.productName}</CardTitle>
 					<CardSubtitle>{this.props.details.companyName}</CardSubtitle>
 
@@ -252,30 +257,11 @@ export class ProductCard extends React.Component{
 					<CardImg className='pC-primaryImage' src={this.props.details.images[0]}/>
 					: null}
 
-					<CardText>
-						{this.props.details.productDescription}
-					</CardText>
 					<ul>
 							<li>COST: <span>{this.props.details.productPrice}</span></li>
-							<li>SHIPPING: <span>{this.props.details.shippingPrice}</span></li>
-							<li>STOCK: <span>{this.props.details.productStock}</span></li>
+							
 						</ul>
-					<Form>
-						<FormGroup>
-						<Label for='quantity'>Qty: </Label>
-						<Input onChange={(e)=>this.onChange(e)} id='quantity' name='quantity' placeholder='1' min=
-						'1' max={this.props.details.productStock} type='number'></Input>
-						
-						</FormGroup>
-						{
-						!this.state.quantityUnavailable && this.props.currentCart !== undefined ? 
-						(<Button onClick={(e)=>this.addToCart(e)}>add to cart</Button>) :
-						!this.state.quantityUnavailable ? 
-						(<Button onClick={(e)=>this.addToBasket(e)}>add to BASKET</Button>)
-						:
-						(<Button disabled>unavailable</Button>)
-						}
-					</Form>
+					
 				</CardBody>
 			</Card>
 		</div>

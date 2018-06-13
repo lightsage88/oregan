@@ -1,6 +1,18 @@
 .productCardMain {
 	font-family: 'Do Hyeon', sans-serif;
 	margin: 6vw;
+    
+}
+
+
+
+.cardBody {
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+}
+
+.cardBody:hover {
+    background: red;
 }
 
 .cardInit {

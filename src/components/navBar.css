@@ -1,7 +1,7 @@
 #brandType {
-	font-family: 'Poiret One', serif;
+	font-family: 'Tiza', serif;
 	/*0*/
-	font-size: 1.3rem;
+	font-size: .8rem;
 /*	color: #ffea0f;
 */
 	color: #002a86;
@@ -55,8 +55,13 @@ text-align: right;
 	border:solid #1f363d 1vw;
 	
 	z-index: 1;
-/*	background: #002a86;
-*/		background: #ffea0f;
+/*		background: #ffea0f;*/
+    background: linear-gradient(
+      rgba(255, 234, 15, 0.5), 
+      rgba(255, 234, 15, 0.5)
+    ),
+    /* bottom, image */
+    url(../uxResources/upwardPDXSign.jpg);
 
 }
 

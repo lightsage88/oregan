@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Fugaz+One|Gugi|Poiret+One');
 
+body {
+    background: #f9fbf8;
+}
+
 .App {
   text-align: center;
 }
@@ -27,6 +31,11 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@font-face {
+    font-family: 'Tiza';
+    src: url(../uxResources/TTF/tiza.ttf) format('truetype');
 }
 
 @font-face {
