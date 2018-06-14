@@ -22,8 +22,9 @@ export class App extends Component {
  render() {
     return (
       <Router> 
-        <main>
+        <main className='main'>
           <NavBar/>
+        <section className='siteContents'>
           <Route exact path='/' component={Landing} />
           <Route exact path='/about' component={About} />
           <Route exact path='/register' component={Register}/>
@@ -33,7 +34,7 @@ export class App extends Component {
           <Route exact path='/checkout' component={Checkout}/>
           <Route exact path='/thanks' render={()=><Thanks btObject={this.props.btTransaction} shippoObject={this.props.shippoTransaction}/>}/>          
                 <script src="https://js.braintreegateway.com/js/braintree-2.32.1.min.js"></script>
-
+        </section>
         </main>
       </Router>
     );

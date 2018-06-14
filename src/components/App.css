@@ -1,3 +1,15 @@
+/*
+.main {
+    display:grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 2fr auto;
+}
+*/
+
+.siteContents {
+    padding-top:17vh;
+}
+
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Fugaz+One|Gugi|Poiret+One');
 
 body {

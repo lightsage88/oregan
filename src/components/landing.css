@@ -28,11 +28,7 @@ background: inherit;
 	background: url('../uxResources/oregonFlag.png');
 }
 
-.demo{
-	position: absolute;
-	left: 50%;
-	top: 50%;
-}
+
 
 @media only screen and (min-width: 750px) {
 	.landingMain h1 {
