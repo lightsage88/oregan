@@ -14,18 +14,12 @@ background: inherit;
 	height: 100vh;
 }
 
-.landingMain h1{
-	position: absolute;
-	top: 12%;
-}
-
-.landingMain span {
-	position: absolute;
-	top: 19%;
-}
-
 .landingImage {
 	background: url('../uxResources/oregonFlag.png');
+}
+
+.landingInfo, .greeting, .demo {
+    font-family: 'Montserrat', sans-serif;
 }
 
 

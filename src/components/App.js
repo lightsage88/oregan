@@ -23,7 +23,7 @@ export class App extends Component {
     return (
       <Router> 
         <main className='main'>
-          <NavBar/>
+          <NavBar />
         <section className='siteContents'>
           <Route exact path='/' component={Landing} />
           <Route exact path='/about' component={About} />

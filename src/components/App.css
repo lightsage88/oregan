@@ -1,16 +1,18 @@
-/*
 .main {
-    display:grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: 2fr auto;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
-*/
+
+.navbarMain {
+    flex-grow: 2;
+}
 
 .siteContents {
-    padding-top:17vh;
+    
 }
 
-@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Fugaz+One|Gugi|Poiret+One');
+@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Fugaz+One|Gugi|Poiret+One|Montserrat');
 
 body {
     background: #f9fbf8;
