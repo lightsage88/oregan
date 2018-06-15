@@ -47,8 +47,8 @@ export class ProductList extends React.Component {
 		);
 		
 		return(
-		<div className='productListContainer'>
-			<h3 className='productListHeader'>PRODUCTS -- {specificType}</h3>
+		<div className={'productListContainer ' + specificType}>
+			<h3 className='productListHeader'>{specificType}</h3>
 				{items}
 		</div>
 		);

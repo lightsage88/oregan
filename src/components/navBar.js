@@ -137,8 +137,9 @@ closeDropDown(){
           </NavItem>
           
           <Dropdown isOpen={this.state.dropdown}
-          onMouseEnter={()=>this.openDropDown()}
-          onMouseLeave={()=>this.closeDropDown()}>
+                    onMouseEnter={()=>this.openDropDown()}
+                    onMouseLeave={()=>this.closeDropDown()}
+                    >
             <DropdownToggle className='navClickables' caret>
               Products
             </DropdownToggle>

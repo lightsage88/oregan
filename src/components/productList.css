@@ -1,4 +1,4 @@
-.productListContainer {
+/*.productListContainer {
 	
 
 	position: absolute;
@@ -12,4 +12,61 @@
 	color: #ace894;
 	text-align: center;
 	padding: 4.5vw;
+}*/
+
+
+.productListContainer {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	background: #3a7d44;
+	min-height: 100vh;
+	width:100vw;
+
+	
+}
+
+.FOOD {
+	background: linear-gradient(
+      rgba(224, 58, 62, 0.5), 
+      rgba(224, 58, 62, 0.5)
+    ),
+    /* bottom, image */
+    url(../uxResources/Portland-food-carts.jpg);
+    background-size: cover;
+    background-position: right;
+}
+
+.CLOTHING {
+	background: linear-gradient(
+      rgba(21, 122, 110, 0.5), 
+      rgba(21, 122, 110, 0.5)
+    ),
+    /* bottom, image */
+    url(../uxResources/pdxFashion.jpg);
+    background-size: cover;
+}
+
+.ALCOHOL {
+	background: linear-gradient(
+      rgba(0, 42, 134, 0.5), 
+      rgba(0, 42, 134, 0.5)
+    ),
+    /* bottom, image */
+    url(../uxResources/pdxAlcohol.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.productListHeader{
+	font-family: 'Montserrat', serif;
+	color: #ace894;
+	text-align: center;
+}
+
+
+
+
+.productCardMain{
+	
 }
