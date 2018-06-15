@@ -1,7 +1,9 @@
+
+
 .landingMain{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(minmax(3,auto),minmax(200px, 1fr));
+    grid-template-rows: repeat(3, minmax(200px,auto));
     grid-gap: 5vw;
     background: linear-gradient(
       rgba(21, 122, 110, 0.5), 
@@ -9,30 +11,36 @@
     ),
     /* bottom, image */
     url(../uxResources/pdxMallDT.jpeg);
+    background-size: cover;
+    width: 100vw;
     
 }
 
-.greeting, .landingInfo, .demo {
-    border-radius: 2vw;
-    background:rgba(255,255,255, 0.7);
-    margin: .5rem;
-}
+
 
 .landingInfo {
-    grid-column-start: 1;
-    grid-column-end: 4;
-    grid-row-start: 2;
-    grid-row-end: 4;
+    grid-column: 1/3;
+    grid-row: 2/3;
 }
 
 .greeting {
-    grid-column: 3 / -1;
-    
+    grid-column: 1 / 2;
 }
 
 .demo {
-    grid-column: 2 / 4;
+    grid-column: 2;
+    grid-row: 3/-1;
 }
+
+
+
+@media screen and (min-width: 750px) {
+        .landingInfo {
+            grid-column: 3/-1;
+        }        
+
+}
+
 
 
 

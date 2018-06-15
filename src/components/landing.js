@@ -25,7 +25,7 @@ export class Landing extends Component {
                 </div>
             
                 <div className='greeting'>
-                    <span>Greetings!, {(this.props.firstName === undefined) ? ' friend, sign in to shop!': 
+                    <span>Greetings, {(this.props.firstName === undefined) ? ' friend, sign in to shop!': 
                     (this.props.firstName)}</span>
                    
                 </div>{/*greeting*/}

@@ -99,6 +99,19 @@ export class NavBar extends React.Component {
      this.props.dispatch(loginUser(username, password));
   }
 
+openDropDown(){
+  this.setState({
+      dropdown: true
+    });
+}
+
+closeDropDown(){
+  this.setState({
+    dropdown: false
+  });
+}
+
+
 	render() {
     console.log(this.props);
     console.log(this.state);
@@ -124,7 +137,8 @@ export class NavBar extends React.Component {
           </NavItem>
           
           <Dropdown isOpen={this.state.dropdown}
-                    toggle={this.toggleDropdown}>
+          onMouseEnter={()=>this.openDropDown()}
+          onMouseLeave={()=>this.closeDropDown()}>
             <DropdownToggle className='navClickables' caret>
               Products
             </DropdownToggle>

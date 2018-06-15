@@ -1,33 +1,21 @@
 #brandType {
 	font-family: 'Tiza', serif;
-	/*0*/
 	font-size: .8rem;
-/*	color: #ffea0f;
-*/
 	color: #002a86;
-;
+
 }
 
 img {
 	float: right;
-
-clear: left;
-
-width: 8rem;
-
-position: relative;
-
-
-z-index: -1;
-
-text-align: right;
+	clear: left;
+	width: 8rem;
+	position: relative;
+	z-index: -1;
+	text-align: right;
 }
 
 #NavbarToggler span {
-/*	color: #ffea0f;
-*/
 	color: #002a86;
-
 }
 
 .navClickables {
@@ -37,10 +25,6 @@ text-align: right;
 .navClickables:hover {
 	color: #ACE894;
 }
-
-/*.cartImageSection {
-	background-image: url('../uxResources/cart.png');
-}*/
 
 .navbarMain{
 	
@@ -61,6 +45,7 @@ text-align: right;
     ),
     /* bottom, image */
     url(../uxResources/upwardPDXSign.jpg);
+    background-size: cover;
 
 }
 
